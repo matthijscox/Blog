@@ -50,7 +50,7 @@ content to avoid any CSS collisions with our real content. -->
 <p>This is a blog about math, code, physics and other things that interest me.</p>
 <p>It&#39;s written with Franklin, a great thing about that is that I can easily write code on it:</p>
 <pre><code class="language-julia">abstract type AbstractPoint end
-struct XYPoint&#123;T&lt;:Real&#125; &lt;: Point
+struct XYPoint&#123;T&lt;:Real&#125; &lt;: AbstractPoint
     x::T
     y::T
 end</code></pre>
