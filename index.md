@@ -8,7 +8,7 @@ This is a blog about math, code, physics and other things that interest me.
 It's written with Franklin, a great thing about that is that I can easily write code on it:
 ```julia
 abstract type AbstractPoint end
-struct XYPoint{T<:Real} <: Point
+struct XYPoint{T<:Real} <: AbstractPoint
     x::T
     y::T
 end
