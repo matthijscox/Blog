@@ -18,4 +18,6 @@ end
 
 Just need to figure out how to automatically add recent posts here.
 
+{{ blogposts }}
+
 See e.g. [cormullion's blog](https://github.com/cormullion/cormullion.github.io)
