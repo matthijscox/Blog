@@ -38,3 +38,10 @@ html {
     display: block;
     padding-bottom: 0.5em;
 }
+
+.figure > p {
+    font-size: 80%;
+    font-style: italic;
+    margin-top: 0;
+    padding-left: 15%;
+}
