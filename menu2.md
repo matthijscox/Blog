@@ -18,7 +18,7 @@ Blogs that I read and maybe inspire my writing.
 
 ## Putanumonit
 
-[Put A Number On It!](https://putanumonit.com/) is a blog that started about math and jokes regarding things people normally don't try to assign numbers to, like dating and life advice.
+[Put A Number On It!](https://putanumonit.com/) is a blog with math and jokes about things people normally don't try to assign numbers to, like dating and life advice.
 
 ## More to be added
 
