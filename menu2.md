@@ -20,7 +20,23 @@ Blogs that I read and maybe inspire my writing.
 
 [Put A Number On It!](https://putanumonit.com/) is a blog with math and jokes about things people normally don't try to assign numbers to, like dating and life advice.
 
-## More to be added
+## Overcoming Bias
+
+[Overcoming Bias](overcomingbias.com) a blog from Robin Hanson. Author of "The Elephant in the Brain" (that's how I found him at first).
+
+## Alexey Guzey
+
+[guzey.com](https://guzey.com/) is a blog of Alexey Guzey about biology and self-improvement.
+
+## Cerebra Lab
+
+[cerebralab](cerebralab.com) is a blog primarily about code and software development.
+
+## Brain Lui
+
+[Brain Lui](https://brianlui.dog/) has a blog I once discovered accidentally. We exchange emails occasionally.
+
+
 
 
 

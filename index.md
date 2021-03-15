@@ -3,7 +3,7 @@
 
 # Welcome
 
-This is a blog about math, code, physics, data, machine learning, neuroscience and other things that interest me.
+This is a blog about math, code, physics, data, machine learning and other things that interest me.
 
 ## Posts
 
