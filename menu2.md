@@ -22,7 +22,11 @@ Blogs that I read and maybe inspire my writing.
 
 ## Overcoming Bias
 
-[Overcoming Bias](overcomingbias.com) a blog from Robin Hanson. Author of "The Elephant in the Brain" (that's how I found him at first).
+[Overcoming Bias](overcomingbias.com) a blog from Robin Hanson. Author of the book "The Elephant in the Brain" (that's how I found him at first).
+
+## Melting Asphalt
+
+[Melting Asphalt](https://meltingasphalt.com/) is written by Kevin Simler, another author of the book "The Elephant in the Brain".
 
 ## Alexey Guzey
 
