@@ -4,8 +4,8 @@ website.
 The website_* must be defined for the RSS to work
 -->
 @def website_title = "Functional Noise"
-@def website_descr = "A somewhat useful, somewhat nebulous blog"
-@def website_url   = "https://tlienart.github.io/FranklinTemplates.jl/"
+@def website_descr = "Maybe it's useful, maybe not"
+@def website_url   = "https://www.functionalnoise.com"
 
 @def author = "Matthijs Cox"
 
