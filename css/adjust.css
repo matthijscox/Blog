@@ -22,3 +22,19 @@ html {
         padding-left: 6%;
         padding-right: 6%; }
     }
+
+.postlink {
+    display: block;
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+
+.postlink > p {
+    font-size: 0.9em;
+    font-family: Open Sans, sans-serif;
+    font-weight: 600;
+}
+
+.postlink > p a {
+    display: block;
+    padding-bottom: 0.5em;
+}
