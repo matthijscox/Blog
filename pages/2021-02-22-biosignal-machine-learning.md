@@ -2,6 +2,7 @@
 @def hascode = true
 @def title = "Biosignal Machine Learning"
 @def authors = """Matthijs"""
+@def rss = "blog post about biosignal machine learning project"
 
 # Biosignal Machine Learning
 
