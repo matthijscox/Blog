@@ -1,7 +1,6 @@
 @def title = "About"
 @def hascode = true
 @def date = Date(2019, 3, 22)
-@def rss = "About Functional Noise"
 
 @def tags = ["about", "blog"]
 

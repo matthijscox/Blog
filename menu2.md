@@ -1,8 +1,5 @@
 @def title = "Blogroll"
 @def hascode = true
-@def rss = "Other blogs"
-@def rss_title = "Noise"
-@def rss_pubdate = Date(2020, 5, 1)
 
 @def tags = ["blogs", "stuff"]
 
