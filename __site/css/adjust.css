@@ -25,16 +25,20 @@ html {
 
 .postlink {
     display: block;
-    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    padding: 1.5rem 0.5rem 0.0rem 0.5rem;
+    border-bottom: 1px double lightgrey;
 }
 
 .postlink > p {
+    color: #808080;
     font-size: 0.9em;
     font-family: Open Sans, sans-serif;
     font-weight: 600;
 }
 
 .postlink > p a {
+    color: #303030;
+    font-family: Open Sans, sans-serif;
     display: block;
     padding-bottom: 0.5em;
 }
