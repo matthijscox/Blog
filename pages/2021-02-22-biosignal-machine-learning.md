@@ -3,6 +3,7 @@
 @def title = "Biosignal Machine Learning"
 @def authors = """Matthijs"""
 @def rss = "blog post about biosignal machine learning project"
+@def tags = ["code", "machine learning", "neurotechnology"]
 
 # Biosignal Machine Learning
 

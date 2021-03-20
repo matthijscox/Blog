@@ -9,8 +9,8 @@ function hfun_blogposts()
       post_link = "<p><a href=\"/pages/$(info.pagename)/\">$(info.title)</a> $(info.date) </p>"
       post_div = "<div class=postlink>\n $post_link\n </div>\n"
       post_section *= post_div
-      post_section *= "</div>\n"
     end
+    post_section *= "</div>\n"
     return post_section
 end
 
