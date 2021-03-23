@@ -214,3 +214,5 @@ This means I have only a 3 millisecond delay. Some people commented that if you 
 ## Ruling the world
 
 Now you’ve seen how to detect gestures with your own biosignals. Next you can control any physical or digital object, like a video game as I’ve shown in the top of the blog. That one is trivial, just make the code press a button instead of printing text. Controlling a bionic arm (my original ambition) is a bit more involved, but these sensing concepts are the same. The sky is the limit! What would you build with this technology?
+
+{{ addcomments }}
