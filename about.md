@@ -16,3 +16,5 @@ If you want, you can follow me on:
 * [Github](https://github.com/matthijscox)
 * [Medium](https://medium.com/@matthijs.cox), for my past blogs
 * [DeviantArt](https://www.deviantart.com/art4science/gallery), long ago I made art
+
+The website code is hosted on [Github](https://github.com/matthijscox/Blog).
