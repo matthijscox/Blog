@@ -14,6 +14,26 @@ function hfun_blogposts()
     return post_section
 end
 
+"""
+    {{ addcomments }}
+
+Add a comment widget, managed by utterances <https://utteranc.es>.
+Set up according to https://franklinjl.org/extras/utterances/
+"""
+function hfun_addcomments()
+    html_str = """
+        <script src="https://utteranc.es/client.js"
+            repo="matthijscox/Blog"
+            issue-term="pathname"
+            label="Comment"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+        </script>
+    """
+    return html_str
+end
+
 function hfun_bar(vname)
   val = Meta.parse(vname[1])
   return round(sqrt(val), digits=2)
