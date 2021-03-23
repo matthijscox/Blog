@@ -7,7 +7,7 @@
 
 # Julia Developer Tips
 
-I'm giving quite some Julia trainings at my current employer. One recurring question is to share some tips about development tooling and functions. Just a few things that make your life easier, but that I always forget to explain explicitly. All these things can be Googled and read in the Julia documentation, but I'll write them down here for later reference.
+I'm teaching quite some Julia trainings at my current employer. One recurring question is to share some tips about development tooling and functions. Just a few things that make your life easier, but that I always forget to explain explicitly. All these things can be Googled and read in the Julia documentation, but I'll write them down here for later reference.
 
 ## How to get started with Julia
 
@@ -20,16 +20,17 @@ What I used for teaching so far:
 - Like to start hands-on work with Jupyter notebooks? Find them on [Github](https://github.com/JuliaAcademy/JuliaTutorials/tree/main/introductory-tutorials/intro-to-julia).
 - Like reading academic papers? Start with the [paper](https://arxiv.org/pdf/1411.1607.pdf) from the founders.
 
-## Which IDE?
+### Which IDE?
 
-I use Visual Study Code with the Julia extension. But please use whatever you like, I have a colleague who raves about [Neovim](https://neovim.io/) and their Julia plugin.
+I use [Visual Study Code](https://code.visualstudio.com/) with the [Julia extension](https://www.julia-vscode.org/). But please use whatever you like, I have a colleague who raves about [Neovim](https://neovim.io/) and corresponding Julia plugin.
 
-## Julia packages
+### Julia package creation
 
 After learning the Julia language basics, the next thing you should do is learn how to create Julia packages. It's the one and only way to distribute your code to others in a standard manner.
 
-I taught myself via this [Youtube Video](https://www.youtube.com/watch?v=QVmU29rCjaA) from Chris Rackauckas, a prominent Julia contributor.
+I taught myself via this [Youtube Video](https://www.youtube.com/watch?v=QVmU29rCjaA). Created by Chris Rackauckas, a prominent Julia contributor.
 
 I recently discovered this [Blog Post - How to create packages with Julia](https://jaantollander.com/post/how-to-create-software-packages-with-julia-language/), which also gives a good overview.
 
 ## The tips
+
