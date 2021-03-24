@@ -7,7 +7,7 @@
 
 # Julia Developer Tips
 
-I'm teaching quite some Julia trainings at my current employer. One recurring question is to share some tips about development tooling and functions. Just a few things that make your life easier, but that I always forget to explain explicitly. All these things can be Googled and read in the Julia documentation, but I'll write them down here for later reference.
+I'm teaching quite some Julia trainings at my current employer. One recurring question is to share my tips for Julia development, specifically tooling and utility functions. Things that make your work easier, but that I always forget to explain explicitly. All these tips can be Googled and read in the Julia documentation, but I'll write them down here for later reference.
 
 ## How to get started with Julia
 
@@ -22,7 +22,7 @@ What I used for teaching so far:
 
 ### Which IDE?
 
-I use [Visual Study Code](https://code.visualstudio.com/) with the [Julia extension](https://www.julia-vscode.org/). But please use whatever you like, I have a colleague who raves about [Neovim](https://neovim.io/) and corresponding Julia plugin.
+I use [Visual Study Code](https://code.visualstudio.com/) with the [Julia extension](https://www.julia-vscode.org/). But please use whatever you like. For example, I have a colleague who raves about [Neovim](https://neovim.io/) and corresponding Julia plugin.
 
 ### Julia package creation
 
@@ -34,3 +34,35 @@ I recently discovered this [Blog Post - How to create packages with Julia](https
 
 ## The tips
 
+The Julia manual already includes quite some tips:
+* [Julia Manual - Performance Tips](https://docs.julialang.org/en/v1/manual/performance-tips/)
+* [Julia Manual - Workflow Tips](https://docs.julialang.org/en/v1/manual/workflow-tips/)
+* [Julia Manual - Styleguide](https://docs.julialang.org/en/v1/manual/style-guide/)
+
+### Interactive Utilities
+
+Julia has interactive utilities to help you make some more sense of Julia code. When I accidentally use one of these functions in a training, people often tell me "I wish you would spend more time explaining these". So here it goes.
+
+https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#Interactive-Utilities
+
+### Unit Testing
+
+What do you want me to say about unit testing? It's almost trivial
+
+```Julia
+using Test
+@testset "name your testset" begin
+    # just test anything that evaluates to a Boolean
+    @test 1==2
+end
+```
+
+### Profiling
+
+### Debugging
+
+Too be honest I hardly ever use the debugger.
+
+Debugging works out of the box in Visual Studio Code, you can see the [Julia-VSCode debugging guide](https://www.julia-vscode.org/docs/stable/userguide/debugging/) for more information.
+
+Julia has debugging capabilities embedded which you can use from the command line. I liked [this blog post](https://opensourc.es/blog/basics-debugging/) which compares multiple debugging alternatives.
