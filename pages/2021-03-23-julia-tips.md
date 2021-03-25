@@ -39,15 +39,31 @@ The Julia manual already includes quite some tips:
 * [Julia Manual - Workflow Tips](https://docs.julialang.org/en/v1/manual/workflow-tips/)
 * [Julia Manual - Styleguide](https://docs.julialang.org/en/v1/manual/style-guide/)
 
-### Interactive Utilities
+### Julia Utilities
 
-Julia has interactive utilities to help you make some more sense of Julia code. When I accidentally use one of these functions in a training, people often tell me "I wish you would spend more time explaining these". So here it goes.
+Julia has plenty of (interactive) utilities to help you make some more sense of Julia code. When I accidentally use one of these functions in a training, people often tell me "I wish you would spend more time explaining these". So here it goes.
 
 https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#Interactive-Utilities
 
+Things to explain
+* recap of typeof/supertype/isa etc. See Types and Dispatch notebook.
+
+Quickly make a Number subtype tree with AbstractTrees
+
+InteractiveUtils.jl, be default loaded in your Julia REPL. Note: don't use them in your packages if you can avoid it, they are tools for developers.
+* methods
+* methodswith
+* @which
+* @edit
+* @code_native, etc
+* Test.@inferred
+
+
 ### Unit Testing
 
-What do you want me to say about unit testing? It's almost trivial
+Every Julia package developer is doing test driven development. It's the defacto standard nowadays.
+
+What do you want me to say about unit testing? It's almost trivial and already explained in the blog post ["How to create packages with Julia"](https://jaantollander.com/post/how-to-create-software-packages-with-julia-language/).
 
 ```Julia
 using Test
@@ -57,7 +73,11 @@ using Test
 end
 ```
 
+If you do test driven development, you should have good code coverage pretty much by default. But you'll want to brag about your code coverage, so you can use [Coverage.jl](https://github.com/JuliaCI/Coverage.jl)
+
 ### Profiling
+
+Julia has a [profiler](https://docs.julialang.org/en/v1/manual/profile/). To make a quick overview I love [ProfileView.jl](https://github.com/timholy/ProfileView.jl).
 
 ### Debugging
 
