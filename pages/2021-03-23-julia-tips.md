@@ -43,20 +43,19 @@ The Julia manual already includes quite some tips:
 
 Julia has plenty of (interactive) utilities to help you make some more sense of Julia code. When I accidentally use one of these functions in a training, people often tell me "I wish you would spend more time explaining these". So here it goes.
 
-https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#Interactive-Utilities
-
-Things to explain
+The most basic 'utilities' are all functions to get type information. These should be covered in all Julia teaching material, but let's recap.
 * recap of typeof/supertype/isa etc. See Types and Dispatch notebook.
 
-Quickly make a Number subtype tree with AbstractTrees
-
-InteractiveUtils.jl, be default loaded in your Julia REPL. Note: don't use them in your packages if you can avoid it, they are tools for developers.
+[InteractiveUtils.jl](https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#Interactive-Utilities), be default loaded in your Julia REPL. Note: don't use them in your packages if you can avoid it, they are tools for developers.
+* subtypes
 * methods
 * methodswith
 * @which
 * @edit
 * @code_native, etc
 * Test.@inferred
+
+Quickly make a Number subtype tree with AbstractTrees
 
 
 ### Unit Testing
