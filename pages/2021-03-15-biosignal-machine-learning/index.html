@@ -1,160 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  
-   <link rel="stylesheet" href="/libs/highlight/github.min.css">
-   
-  <link rel="stylesheet" href="/css/franklin.css">
-<link rel="stylesheet" href="/css/poole_lanyon.css">
-<link rel="stylesheet" href="/css/adjust.css">
-<link rel="icon" href="/assets/favicon.png">
-
-   <title>Functional Noise</title>  
-</head>
-<body>
-<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
-
-<!-- Toggleable sidebar -->
-<div class="sidebar" id="sidebar">
-  <div class="sidebar-item">
-    <p>Functional Noise</p>
-  </div>
-  <nav class="sidebar-nav">
-    <a class="sidebar-nav-item " href="/">Home</a>
-    <a class="sidebar-nav-item " href="/menu1/">About</a>
-    <a class="sidebar-nav-item " href="/menu2/">Blogroll</a>
-  </nav>
-  <div class="sidebar-item">
-    <p>&copy; Matthijs Cox.</p>
-  </div>
-</div>
-
-<!-- Wrap is the content to shift when toggling the sidebar. We wrap the
-content to avoid any CSS collisions with our real content. -->
-<div class="wrap">
-  <div class="masthead">
-    <div class="container">
-      <h3 class="masthead-title">
-        <a href="/" title="Home">Functional Noise</a>
-        <small>Maybe it's useful, or maybe not</small>
-      </h3>
-    </div>
-  </div>
-
-  <div class="container content">
-
-<!-- Content appended here -->
-<div class="franklin-content"><h1 id="biosignal_machine_learning"><a href="#biosignal_machine_learning">Biosignal Machine Learning</a></h1>
-<p>In a <a href="https://medium.com/symbionic-project">previous entrepreneurial project</a> I’ve spend more than a year struggling to build an affordable gesture detection application. The idea was to help amputees get more affordable bionic arms and rehabilitation. I restarted the project from scratch in a fraction of the time by switching the software stack to Julia and <a href="https://github.com/brainflow-dev/brainflow">BrainFlow</a>.</p>
-<p>In essence, this side-project is all about using non-conventional body signals to control the physical and digital world. It fascinates me and many others. The easiest thing to control is a video game on your laptop. So that’s what I am aiming for. Here’s what the end result looks like:</p>
-<p><a href="https://www.youtube.com/watch?v&#61;TrT4GV7CDhw"><img src="/img/EMGgamingYoutube.jpg" alt="Live EMG data video" /></a></p>
-<p>I estimate it took me about 40 hours, because I spend a month working on it with only 30-60 minutes per evening. I admit that if you try it yourself, then it may take longer. I already did all the work before in Python, so I didn&#39;t have to research anything. I could reuse all my past experience and just copy the work to another implementation.</p>
-<h2 id="the_system"><a href="#the_system">The System</a></h2>
-<p>I’ve got a simple overview of the entire system drawn below. I’ll go into the details in the remainder of the article, but the ‘system architecture’ can be divided into two main streams.</p>
-<p>The upper stream consists of:</p>
-<ul>
-<li><p>Collect and save data for a bunch of gestures. This is the data required for the machine learning.</p>
-</li>
-<li><p>Load the data for all gestures in your favorite programming language. I’ll be using Julia for this.</p>
-</li>
-<li><p>Process the data and split it into training samples.</p>
-</li>
-<li><p>Fit some nice ML model.</p>
-</li>
-<li><p>Optionally; do some cool data visualization.</p>
-</li>
-</ul>
-<p><img src="/img/SymbionicSystem.png" alt="System" /></p>
-<p>Then later during the realtime prediction:</p>
-<ul>
-<li><p>Acquire a single sample of data.</p>
-</li>
-<li><p>Process it exactly as during training.</p>
-</li>
-<li><p>Predict a gesture on the data with your model.</p>
-</li>
-<li><p>Do something, in this case; visualize some text, or press a button.</p>
-</li>
-<li><p>Repeat quickly on the next data sample.</p>
-</li>
-</ul>
-<p>&#40;Pro tip: use a high performance language for this second part.&#41;</p>
-<h2 id="the_device"><a href="#the_device">The Device</a></h2>
-<p>Getting a good bio-sensor to measure your EMG &#40;electromyography&#41; muscle signals is actually the hard and expensive part. In the past Thalmic Lab’s Myo armband was popular, but they went away unfortunately. It’s left a bit of a vacuum for DIY EMG hackers like me. Personally I have access to the OYMotion gForce Pro armband, but unfortunately they don’t have good logistics yet outside China, so it’s not super easy to acquire. You can browse <a href="https://brainflow.org/get_started/?">BrainFlow’s Get Started guide</a> to see all EEG, EMG and other biosensing devices that are integrated and make a choice yourself.</p>
-<h2 id="the_code"><a href="#the_code">The code</a></h2>
-<p>Before BrainFlow we had to write custom c code to get the armband data, connect it to Python and do all signal processing there. The code of my previous project is <a href="https://github.com/matthijscox/symbionic">here</a>. I replaced the custom c code with BrainFlow and converted all my old Python code into Julia, to see if I could reproduce the results and finally gain enough performance for real time predictions. You can see it all in <a href="https://github.com/matthijscox/BrainFlowML.jl">BrainFlowML.jl</a></p>
-<h2 id="data_acquisition"><a href="#data_acquisition">Data Acquisition</a></h2>
-<p>Acquiring data from the bio-sensor is a few lines of trivial code with BrainFlow. Make sure your device is on, then just start streaming and get some board data:</p>
-<pre><code class="language-Julia">using BrainFlow
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_lanyon.css"> <link rel=stylesheet  href="/css/adjust.css"> <link rel=icon  href="/assets/favicon.png"> <title>Functional Noise</title> <input type=checkbox  class=sidebar-checkbox  id=sidebar-checkbox > <div class=sidebar  id=sidebar > <div class=sidebar-item > <p>Functional Noise</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/menu1/">About</a> <a class="sidebar-nav-item " href="/menu2/">Blogroll</a> </nav> <div class=sidebar-item > <p>&copy; Matthijs Cox.</p> </div> </div> <!-- Wrap is the content to shift when toggling the sidebar. We wrap the content to avoid any CSS collisions with our real content. --> <div class=wrap > <div class=masthead > <div class=container > <h3 class=masthead-title > <a href="/" title=Home >Functional Noise</a> <small>Maybe it's useful, or maybe not</small> </h3> </div> </div> <div class="container content"> <div class=franklin-content ><h1 id=biosignal_machine_learning ><a href="#biosignal_machine_learning">Biosignal Machine Learning</a></h1> <p>In a <a href="https://medium.com/symbionic-project">previous entrepreneurial project</a> I’ve spend more than a year struggling to build an affordable gesture detection application. The idea was to help amputees get more affordable bionic arms and rehabilitation. I restarted the project from scratch in a fraction of the time by switching the software stack to Julia and <a href="https://github.com/brainflow-dev/brainflow">BrainFlow</a>.</p> <p>In essence, this side-project is all about using non-conventional body signals to control the physical and digital world. It fascinates me and many others. The easiest thing to control is a video game on your laptop. So that’s what I am aiming for. Here’s what the end result looks like:</p> <p><a href="https://www.youtube.com/watch?v&#61;TrT4GV7CDhw"><img src="/img/EMGgamingYoutube.jpg" alt="Live EMG data video" /></a></p> <p>I estimate it took me about 40 hours, because I spend a month working on it with only 30-60 minutes per evening. I admit that if you try it yourself, then it may take longer. I already did all the work before in Python, so I didn&#39;t have to research anything. I could reuse all my past experience and just copy the work to another implementation.</p> <h2 id=the_system ><a href="#the_system">The System</a></h2> <p>I’ve got a simple overview of the entire system drawn below. I’ll go into the details in the remainder of the article, but the ‘system architecture’ can be divided into two main streams.</p> <p>The upper stream consists of:</p> <ul> <li><p>Collect and save data for a bunch of gestures. This is the data required for the machine learning.</p> <li><p>Load the data for all gestures in your favorite programming language. I’ll be using Julia for this.</p> <li><p>Process the data and split it into training samples.</p> <li><p>Fit some nice ML model.</p> <li><p>Optionally; do some cool data visualization.</p> </ul> <p><img src="/img/SymbionicSystem.png" alt=System  /></p> <p>Then later during the realtime prediction:</p> <ul> <li><p>Acquire a single sample of data.</p> <li><p>Process it exactly as during training.</p> <li><p>Predict a gesture on the data with your model.</p> <li><p>Do something, in this case; visualize some text, or press a button.</p> <li><p>Repeat quickly on the next data sample.</p> </ul> <p>&#40;Pro tip: use a high performance language for this second part.&#41;</p> <h2 id=the_device ><a href="#the_device">The Device</a></h2> <p>Getting a good bio-sensor to measure your EMG &#40;electromyography&#41; muscle signals is actually the hard and expensive part. In the past Thalmic Lab’s Myo armband was popular, but they went away unfortunately. It’s left a bit of a vacuum for DIY EMG hackers like me. Personally I have access to the OYMotion gForce Pro armband, but unfortunately they don’t have good logistics yet outside China, so it’s not super easy to acquire. You can browse <a href="https://brainflow.org/get_started/?">BrainFlow’s Get Started guide</a> to see all EEG, EMG and other biosensing devices that are integrated and make a choice yourself.</p> <h2 id=the_code ><a href="#the_code">The code</a></h2> <p>Before BrainFlow we had to write custom c code to get the armband data, connect it to Python and do all signal processing there. The code of my previous project is <a href="https://github.com/matthijscox/symbionic">here</a>. I replaced the custom c code with BrainFlow and converted all my old Python code into Julia, to see if I could reproduce the results and finally gain enough performance for real time predictions. You can see it all in <a href="https://github.com/matthijscox/BrainFlowML.jl">BrainFlowML.jl</a></p> <h2 id=data_acquisition ><a href="#data_acquisition">Data Acquisition</a></h2> <p>Acquiring data from the bio-sensor is a few lines of trivial code with BrainFlow. Make sure your device is on, then just start streaming and get some board data:</p> <pre><code class=language-Julia >using BrainFlow
 board_id &#61; BrainFlow.GFORCE_PRO_BOARD
 params &#61; BrainFlowInputParams&#40;&#41;
 board_shim &#61; BrainFlow.BoardShim&#40;board_id, params&#41;
 BrainFlow.prepare_session&#40;board_shim&#41;
 BrainFlow.start_stream&#40;board_shim&#41;
 num_samples &#61; 256
-data &#61; BrainFlow.get_current_board_data&#40;num_samples, board_shim&#41;</code></pre>
-<h2 id="data_visualization"><a href="#data_visualization">Data Visualization</a></h2>
-<p>Before going into all the machine learning, it’s important to eyeball the data. You can do that by capturing some sample data, store it and then plot it. That works alright. But for bio-sensors nothing works quite as magically as just streaming the data live. However, we are talking 8 channels streaming at 600Hz here, no way a simple plotting package can handle that kind of data rate?</p>
-<p>I did encounter that problem in the past. Most plotting packages are for static data or simple animations. But no worries, Julia has its own high performance plotting and animation package: <a href="https://github.com/JuliaPlots/Makie.jl">Makie.jl</a>.</p>
-<p>I’ve described in my realtime biosignal <a href="https://brainflow.org/2021-01-04-data-visualization/">data visualization blog post</a> how to set this up. But the result is amazing&#33; I’ve just got to show you:</p>
-<p><a href="https://www.youtube.com/watch?v&#61;L7NXYZ5EDdw"><img src="/img/EMGdataYoutube.jpg" alt="Live EMG data video" /></a></p>
-<p>Seeing your own biosignals in realtime remain magical to me&#33; With this setup I can now visualize any bio-sensor data. I am busy investigating my own brain waves with other devices, but that’s for another blog post.</p>
-<p>I continue to use my own biosignal visualization package to quickly check if the biosensor device is operating decently and the signals are good. If one of the sensors is not touching my skin enough, or the conduction is too low, I see it back in the realtime signals. I can then adjust the device accordingly, or excercise a bit to create some sweat for better conduction ;&#41;</p>
-<h2 id="machine_learning_library"><a href="#machine_learning_library">Machine Learning Library</a></h2>
-<p>Before diving deeper into the signal processing, let me briefly walk you through my current exploration of Julia machine learning packages.</p>
-<p>There is <a href="https://github.com/FluxML/Flux.jl">Flux.jl</a>, which is like TensorFlow and PyTorch, except it’s written in pure Julia with relatively little lines of code. It’s absolutely awesome and elegant, but I don’t need deep learning to get the job done, so I won’t use it here. There’s also <a href="https://github.com/malmaud/TensorFlow.jl">TensorFlow.jl</a> if you really still want it in Julia.</p>
-<p>Then there is <a href="https://github.com/alan-turing-institute/MLJ.jl">MLJ.jl</a>. It’s an automated machine learning package that can incorporate all Julia ML/DL algorithms out there, including Flux. It’s absolutely amazing, but I don’t need it right now.</p>
-<p>Because in the past we already investigated different algorithms in Python. Turns out with some good preprocessing, most classification algorithms work just fine on this data. I tested this <a href="https://medium.com/symbionic-project/how-to-train-an-invisible-limb-57127b381b4c">in the past</a> together with a student:</p>
-<p><img src="/img/SymbionicAlgorithmResults.png" alt="AlgoResults" /></p>
-<p>So for now I’ll just choose a simple random forest from DecisionTrees.jl. When I need to compare and tune algorithms to squeeze the last percentages of accuracy, I will definitely go back to MLJ and Flux.</p>
-<h2 id="data_pipeline"><a href="#data_pipeline">Data Pipeline</a></h2>
-<p>Any experienced data engineer can tell you that most AI/ML work is involved in all the data processing, not in the machine learning.</p>
-<p>Actually we will have two data pipelines, one for collecting and training the model and one for doing the realtime classification. But they should both use the same signal processing. For that we will use the digital signal processing package <a href="https://github.com/JuliaDSP/DSP.jl">DSP.jl</a>. BrainFlow itself also has data filtering functions, so those can also be used.</p>
-<p>The OYMotion armband comes with onboard filtering, so the raw signals are pretty good. All I did was detrend the data, in other words remove a constant offset. If you have another device with less electronic filtering and shielding, you may want to apply a bandstop filter around 50 or 60 Hz &#40;depending on your geographic location&#41; and perhaps a bandpass to remove low and high frequency noise.</p>
-<p><img src="/img/EMGsignal.png" alt="EMGsignal" /></p>
-<p>In another blog post I explained how we used a Hilbert transform to capture the envelope function of the EMG signals. That one is available in DSP.jl. I also smoothened it a bit with a savgol filter. Both steps help in detecting the actual gesture and separating it from background noise. There are far more complex strategies available in the literature, but I’ll stick to what I know for now.</p>
-<h2 id="collecting_data"><a href="#collecting_data">Collecting data</a></h2>
-<p>I don’t have any database available with data from this bio-sensor, so I have to collect my own. Fortunately we don’t need too much data. I collected 30 seconds of data per gesture; left move, right move, fist and spread. It’s pretty boring, I just make roughly the same gesture multiple times with some variation, sometimes a quick fist, sometimes holding the fist, then a powerful strong fist, then a weaker version.</p>
-<p>You can find a simple script to collect data in my BrainFlowML repo called <a href="https://github.com/matthijscox/BrainFlowML.jl/blob/main/test/testdata/brainflow_data_gathering.jl">brainflow<em>data</em>gathering.jl</a>. The main part is the loop that asks you to make some gestures:</p>
-<pre><code class="language-julia">so_many_gestures &#61; 4
+data &#61; BrainFlow.get_current_board_data&#40;num_samples, board_shim&#41;</code></pre> <h2 id=data_visualization ><a href="#data_visualization">Data Visualization</a></h2> <p>Before going into all the machine learning, it’s important to eyeball the data. You can do that by capturing some sample data, store it and then plot it. That works alright. But for bio-sensors nothing works quite as magically as just streaming the data live. However, we are talking 8 channels streaming at 600Hz here, no way a simple plotting package can handle that kind of data rate?</p> <p>I did encounter that problem in the past. Most plotting packages are for static data or simple animations. But no worries, Julia has its own high performance plotting and animation package: <a href="https://github.com/JuliaPlots/Makie.jl">Makie.jl</a>.</p> <p>I’ve described in my realtime biosignal <a href="https://brainflow.org/2021-01-04-data-visualization/">data visualization blog post</a> how to set this up. But the result is amazing&#33; I’ve just got to show you:</p> <p><a href="https://www.youtube.com/watch?v&#61;L7NXYZ5EDdw"><img src="/img/EMGdataYoutube.jpg" alt="Live EMG data video" /></a></p> <p>Seeing your own biosignals in realtime remain magical to me&#33; With this setup I can now visualize any bio-sensor data. I am busy investigating my own brain waves with other devices, but that’s for another blog post.</p> <p>I continue to use my own biosignal visualization package to quickly check if the biosensor device is operating decently and the signals are good. If one of the sensors is not touching my skin enough, or the conduction is too low, I see it back in the realtime signals. I can then adjust the device accordingly, or excercise a bit to create some sweat for better conduction ;&#41;</p> <h2 id=machine_learning_library ><a href="#machine_learning_library">Machine Learning Library</a></h2> <p>Before diving deeper into the signal processing, let me briefly walk you through my current exploration of Julia machine learning packages.</p> <p>There is <a href="https://github.com/FluxML/Flux.jl">Flux.jl</a>, which is like TensorFlow and PyTorch, except it’s written in pure Julia with relatively little lines of code. It’s absolutely awesome and elegant, but I don’t need deep learning to get the job done, so I won’t use it here. There’s also <a href="https://github.com/malmaud/TensorFlow.jl">TensorFlow.jl</a> if you really still want it in Julia.</p> <p>Then there is <a href="https://github.com/alan-turing-institute/MLJ.jl">MLJ.jl</a>. It’s an automated machine learning package that can incorporate all Julia ML/DL algorithms out there, including Flux. It’s absolutely amazing, but I don’t need it right now.</p> <p>Because in the past we already investigated different algorithms in Python. Turns out with some good preprocessing, most classification algorithms work just fine on this data. I tested this <a href="https://medium.com/symbionic-project/how-to-train-an-invisible-limb-57127b381b4c">in the past</a> together with a student:</p> <p><img src="/img/SymbionicAlgorithmResults.png" alt=AlgoResults  /></p> <p>So for now I’ll just choose a simple random forest from DecisionTrees.jl. When I need to compare and tune algorithms to squeeze the last percentages of accuracy, I will definitely go back to MLJ and Flux.</p> <h2 id=data_pipeline ><a href="#data_pipeline">Data Pipeline</a></h2> <p>Any experienced data engineer can tell you that most AI/ML work is involved in all the data processing, not in the machine learning.</p> <p>Actually we will have two data pipelines, one for collecting and training the model and one for doing the realtime classification. But they should both use the same signal processing. For that we will use the digital signal processing package <a href="https://github.com/JuliaDSP/DSP.jl">DSP.jl</a>. BrainFlow itself also has data filtering functions, so those can also be used.</p> <p>The OYMotion armband comes with onboard filtering, so the raw signals are pretty good. All I did was detrend the data, in other words remove a constant offset. If you have another device with less electronic filtering and shielding, you may want to apply a bandstop filter around 50 or 60 Hz &#40;depending on your geographic location&#41; and perhaps a bandpass to remove low and high frequency noise.</p> <p><img src="/img/EMGsignal.png" alt=EMGsignal  /></p> <p>In another blog post I explained how we used a Hilbert transform to capture the envelope function of the EMG signals. That one is available in DSP.jl. I also smoothened it a bit with a savgol filter. Both steps help in detecting the actual gesture and separating it from background noise. There are far more complex strategies available in the literature, but I’ll stick to what I know for now.</p> <h2 id=collecting_data ><a href="#collecting_data">Collecting data</a></h2> <p>I don’t have any database available with data from this bio-sensor, so I have to collect my own. Fortunately we don’t need too much data. I collected 30 seconds of data per gesture; left move, right move, fist and spread. It’s pretty boring, I just make roughly the same gesture multiple times with some variation, sometimes a quick fist, sometimes holding the fist, then a powerful strong fist, then a weaker version.</p> <p>You can find a simple script to collect data in my BrainFlowML repo called <a href="https://github.com/matthijscox/BrainFlowML.jl/blob/main/test/testdata/brainflow_data_gathering.jl">brainflow<em>data</em>gathering.jl</a>. The main part is the loop that asks you to make some gestures:</p> <pre><code class=language-julia >so_many_gestures &#61; 4
 for n &#61; 1:so_many_gestures
     println&#40;&quot;Press enter to start recording gesture &#36;&#40;n&#41;&quot;&#41;
     readline&#40;&#41;
     data &#61; record_gesture&#40;board_shim&#41;
     df &#61; emg_data_to_dataframe&#40;data, board_id&#41;
     CSV.write&#40;&quot;gesture_&#36;&#40;n&#41;_data.csv&quot;, df&#41;
-end</code></pre>
-<p>It’s pretty straightforward:</p>
-<ul>
-<li><p>record_gesture connects to BrainFlow and shows a progress bar.</p>
-</li>
-<li><p>then convert the data to a dataframe.</p>
-</li>
-<li><p>Store the data in a csv file.</p>
-</li>
-</ul>
-<p>I stored each 30 seconds of data for several gestures in .csv files, you can also find examples in my github repo. Here’s some example plot from 6 different gestures, with the signals per channel in the armband.</p>
-<p><img src="/img/SymbionicGestureData.png" alt="EMGsignal" /></p>
-<p>The only downside of this simple approach is that the predictions will only work while I keep wearing the device. If I move it or take it off and wear it again the accuracy will drop significantly. For this demonstration it’s fine, but for a real application you’d need something a lot more robust by training on many more samples of data collected under various conditions.</p>
-<h2 id="training_the_algorithm"><a href="#training_the_algorithm">Training the algorithm</a></h2>
-<p>Anyway, so I collect data, immediately process it and fit a random forest model on it. During this time I make sure not to change the device position on my arm.</p>
-<p>The most complicated part in the training process is labeling the data, to indicate where the gesture starts and where my arm is in resting position. For this I use some empirical threshold on the smooth envelope function. It works decently enough, but is not perfect.</p>
-<p>Next to that I have to slice the data into samples that are of equal time length as we will use in the final prediction.</p>
-<p>Before passing the data to random forest algorithm, I thus:</p>
-<ul>
-<li><p>Label the data with each corresponding gesture.</p>
-</li>
-<li><p>Partition the data into a bunch of samples.</p>
-</li>
-<li><p>Process each sample &#40;just detrend and smoothen&#41;.</p>
-</li>
-<li><p>Make the fit</p>
-</li>
-</ul>
-<p>For more information see my data science article where I already did all these steps in Python. You can also see my example Julia script. In case you like to see some code, here’s how I roughly did it:</p>
-<pre><code class="language-Julia">using DecisionTree
+end</code></pre> <p>It’s pretty straightforward:</p> <ul> <li><p>record_gesture connects to BrainFlow and shows a progress bar.</p> <li><p>then convert the data to a dataframe.</p> <li><p>Store the data in a csv file.</p> </ul> <p>I stored each 30 seconds of data for several gestures in .csv files, you can also find examples in my github repo. Here’s some example plot from 6 different gestures, with the signals per channel in the armband.</p> <p><img src="/img/SymbionicGestureData.png" alt=EMGsignal  /></p> <p>The only downside of this simple approach is that the predictions will only work while I keep wearing the device. If I move it or take it off and wear it again the accuracy will drop significantly. For this demonstration it’s fine, but for a real application you’d need something a lot more robust by training on many more samples of data collected under various conditions.</p> <h2 id=training_the_algorithm ><a href="#training_the_algorithm">Training the algorithm</a></h2> <p>Anyway, so I collect data, immediately process it and fit a random forest model on it. During this time I make sure not to change the device position on my arm.</p> <p>The most complicated part in the training process is labeling the data, to indicate where the gesture starts and where my arm is in resting position. For this I use some empirical threshold on the smooth envelope function. It works decently enough, but is not perfect.</p> <p>Next to that I have to slice the data into samples that are of equal time length as we will use in the final prediction.</p> <p>Before passing the data to random forest algorithm, I thus:</p> <ul> <li><p>Label the data with each corresponding gesture.</p> <li><p>Partition the data into a bunch of samples.</p> <li><p>Process each sample &#40;just detrend and smoothen&#41;.</p> <li><p>Make the fit</p> </ul> <p>For more information see my data science article where I already did all these steps in Python. You can also see my example Julia script. In case you like to see some code, here’s how I roughly did it:</p> <pre><code class=language-Julia >using DecisionTree
 using BrainFlowML
 
 # my own function to load a bunch of pre-labeled gestures
@@ -188,47 +46,4 @@ max_depth &#61; 6
 partial_sampling &#61; 0.7
 model &#61; build_forest&#40;y, X_train, n_subfeatures, n_trees, partial_sampling, max_depth&#41;
 predictions &#61; apply_forest&#40;model, X_train&#41;
-confusion_matrix&#40;y, predictions&#41;</code></pre>
-<p>As a final check you can look at the accuracy and make a confusion matrix. And instead of a single fit you can also do a cross validation and check the accuracy that way. Both options were available in DecisionTrees.jl. For optimizing the hyperparameters you’d need to move to MLJ.jl, but I found accuracies of more than 85&#37;, which is sufficient for this demo.</p>
-<p>The confusion matrix can help you to see if there are any serious misclassifications happening. You can see an example below. The first column is the prediction of ‘no gesture’. You can see these are the most common ones, 1191 times it classifies a ‘no gesture’ correctly, occasionally it classifies a ‘no gesture’ incorrectly as another gesture. For example, 29 times it classifies it as the 1st gesture &#40;a left move of my hand&#41;. The ones where the &#39;no gesture&#39; is predicted too often are not worrisome, they are probably artifacts of my automatic labeling method.</p>
-
-<div class=figure>
-  <img src="/img/ConfusionMatrix.jpg" style="width:50%;padding-left:20%;margin-bottom:0">
-  <p>Example confusion matrix printed in the Julia REPL</p>
-</div>
-
-<p>Finally, I store the trained model on disk so it’s not accidentally lost. I do this with <a href="https://github.com/JuliaIO/JLD2.jl">JLD2.jl</a> which can directly save Julia types. There are other methods, but this works fine.</p>
-<p>This is the part where I never succeeded in the past, to easily classify gestures in realtime by making predictions with the trained model. But it’s actually quite trivial if you have a high performance language. You can see my example script realtime_predict.jl. All it does is:</p>
-<ul>
-<li><p>Load the trained model.</p>
-</li>
-<li><p>Connect via BrainFlow.</p>
-</li>
-<li><p>Make a plot with some text.</p>
-</li>
-<li><p>Predict gestures in a continuous loop. Update the text based on the prediction.</p>
-</li>
-</ul>
-<p>The result look like this:</p>
-<p><a href="https://www.youtube.com/watch?v&#61;n5D3Q-fBmXE"><img src="/img/EMGpredictionYoutube.jpg" alt="Live EMG data video" /></a></p>
-<p>I timed the entire data processing pipeline. It took less than 3 milliseconds. Three whole milliseconds to collect the BrainFlow streaming data, smoothing the data and do the classification. Actually most time is lost in the savgol filter because I didn’t try to optimize that piece of code.</p>
-<p>This means I have only a 3 millisecond delay. Some people commented that if you watch the video closely, you can see it detects the gestures before my own hand moves&#33; I could never expect such performance with handwritten Python code.</p>
-<h2 id="ruling_the_world"><a href="#ruling_the_world">Ruling the world</a></h2>
-<p>Now you’ve seen how to detect gestures with your own biosignals. Next you can control any physical or digital object, like a video game as I’ve shown in the top of the blog. That one is trivial, just make the code press a button instead of printing text. Controlling a bionic arm &#40;my original ambition&#41; is a bit more involved, but these sensing concepts are the same. The sky is the limit&#33; What would you build with this technology?</p>
-<div class="page-foot">
-  <div class="copyright">
-    &copy; Matthijs Cox. Last modified: March 15, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
-  </div>
-</div>
-</div><!-- CONTENT ENDS HERE -->
-      </div>  <!-- div: content container -->
-    </div> <!-- wrap -->
-    
-    
-        <script src="/libs/highlight/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
-
-    
-    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
-  </body>
-</html>
+confusion_matrix&#40;y, predictions&#41;</code></pre> <p>As a final check you can look at the accuracy and make a confusion matrix. And instead of a single fit you can also do a cross validation and check the accuracy that way. Both options were available in DecisionTrees.jl. For optimizing the hyperparameters you’d need to move to MLJ.jl, but I found accuracies of more than 85&#37;, which is sufficient for this demo.</p> <p>The confusion matrix can help you to see if there are any serious misclassifications happening. You can see an example below. The first column is the prediction of ‘no gesture’. You can see these are the most common ones, 1191 times it classifies a ‘no gesture’ correctly, occasionally it classifies a ‘no gesture’ incorrectly as another gesture. For example, 29 times it classifies it as the 1st gesture &#40;a left move of my hand&#41;. The ones where the &#39;no gesture&#39; is predicted too often are not worrisome, they are probably artifacts of my automatic labeling method.</p> <div class=figure> <img src="/img/ConfusionMatrix.jpg" style="width:50%;padding-left:20%;margin-bottom:0"> <p>Example confusion matrix printed in the Julia REPL</p> </div> <p>Finally, I store the trained model on disk so it’s not accidentally lost. I do this with <a href="https://github.com/JuliaIO/JLD2.jl">JLD2.jl</a> which can directly save Julia types. There are other methods, but this works fine.</p> <p>This is the part where I never succeeded in the past, to easily classify gestures in realtime by making predictions with the trained model. But it’s actually quite trivial if you have a high performance language. You can see my example script realtime_predict.jl. All it does is:</p> <ul> <li><p>Load the trained model.</p> <li><p>Connect via BrainFlow.</p> <li><p>Make a plot with some text.</p> <li><p>Predict gestures in a continuous loop. Update the text based on the prediction.</p> </ul> <p>The result look like this:</p> <p><a href="https://www.youtube.com/watch?v&#61;n5D3Q-fBmXE"><img src="/img/EMGpredictionYoutube.jpg" alt="Live EMG data video" /></a></p> <p>I timed the entire data processing pipeline. It took less than 3 milliseconds. Three whole milliseconds to collect the BrainFlow streaming data, smoothing the data and do the classification. Actually most time is lost in the savgol filter because I didn’t try to optimize that piece of code.</p> <p>This means I have only a 3 millisecond delay. Some people commented that if you watch the video closely, you can see it detects the gestures before my own hand moves&#33; I could never expect such performance with handwritten Python code.</p> <h2 id=ruling_the_world ><a href="#ruling_the_world">Ruling the world</a></h2> <p>Now you’ve seen how to detect gestures with your own biosignals. Next you can control any physical or digital object, like a video game as I’ve shown in the top of the blog. That one is trivial, just make the code press a button instead of printing text. Controlling a bionic arm &#40;my original ambition&#41; is a bit more involved, but these sensing concepts are the same. The sky is the limit&#33; What would you build with this technology?</p> <div class=page-foot > <div class=copyright > &copy; Matthijs Cox. Last modified: March 15, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>. </div> </div> </div> </div> </div> <script src="/libs/highlight/highlight.pack.js"></script> <script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: ' '});</script> <label for=sidebar-checkbox  class=sidebar-toggle ></label>
