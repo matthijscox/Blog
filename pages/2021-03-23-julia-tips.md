@@ -131,7 +131,7 @@ That's actually all I ever used for profiling.
 
 ### Debugging
 
-Too be honest I hardly ever use the debugger.
+To be honest I hardly ever use the debugger.
 
 Debugging works out of the box in Visual Studio Code, you can see the [Julia-VSCode debugging guide](https://www.julia-vscode.org/docs/stable/userguide/debugging/) for more information.
 
