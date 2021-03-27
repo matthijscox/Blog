@@ -1,17 +1,18 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
 <channel>
-  <title>Functional Noise</title>
+  <title><![CDATA[Functional Noise]]></title>
   <description><![CDATA[Maybe it&#39;s useful, or maybe not
 ]]></description>
   <link>https://www.functionalnoise.com/</link>
   <atom:link href="https://www.functionalnoise.com/tag/neurotechnology/feed.xml" rel="self" type="application/rss+xml" />
   <item>
-    <title>Biosignal Machine Learning</title>
+    <title><![CDATA[Biosignal Machine Learning]]></title>
     <link>https://www.functionalnoise.com/pages/2021-02-22-biosignal-machine-learning/</link>
     <description><![CDATA[blog post about biosignal machine learning project
 <br><a href="https://www.functionalnoise.com/pages/2021-02-22-biosignal-machine-learning/">Read more</a>]]></description>
+    
     <guid>https://www.functionalnoise.com/pages/2021-02-22-biosignal-machine-learning/</guid>
-    <pubDate>Tue, 23 Mar 2021 00:00:00 UT</pubDate>
+    <pubDate>Sat, 27 Mar 2021 00:00:00 UT</pubDate>
   </item>
 </channel>
 </rss>
