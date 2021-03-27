@@ -136,3 +136,5 @@ To be honest I hardly ever use the debugger.
 Debugging works out of the box in Visual Studio Code, you can see the [Julia-VSCode debugging guide](https://www.julia-vscode.org/docs/stable/userguide/debugging/) for more information.
 
 Julia has debugging capabilities embedded which you can use from the command line. I liked [this blog post](https://opensourc.es/blog/basics-debugging/) which compares multiple debugging alternatives.
+
+{{ addcomments }}
