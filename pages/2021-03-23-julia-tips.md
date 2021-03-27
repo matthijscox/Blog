@@ -105,7 +105,7 @@ Integer
    └─ UInt8
 ```
 
-As you grow in Julia experience, you'll find yourself wanting more utilities. Like `Test.@inferred` which is useful to check for type instability. I can advice the book [Julia Hands-on Design Patterns book](https://www.packtpub.com/product/hands-on-design-patterns-and-best-practices-with-julia/9781838648817).
+As you grow in Julia experience, you'll find yourself wanting more utilities. Like `Test.@inferred` which is useful to check for type instability. I can advice the book [Julia Hands-on Design Patterns book](https://www.packtpub.com/product/hands-on-design-patterns-and-best-practices-with-julia/9781838648817) for more goodies.
 
 ### Unit Testing
 
