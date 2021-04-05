@@ -97,6 +97,7 @@ What are my paths to continue from here?
 * Or become more focused, removing all other distractions.
 * Or become less risk averse. 
 * Ask for help. 
+* Edit: Do quick market size estimate. Is a startup worth it?
 
 I'm out of ideas. Most of these ideas are about finding more time and money and influence and knowledge. Or balancing more optimally between them. Some of the options above I am already pursuing. Some are totally not an option. Can you guess which? 
 
