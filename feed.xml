@@ -6,13 +6,22 @@
   <link>https://www.functionalnoise.com/</link>
   <atom:link href="https://www.functionalnoise.com/feed.xml" rel="self" type="application/rss+xml" />
   <item>
+    <title><![CDATA[Weekly Noise]]></title>
+    <link>https://www.functionalnoise.com/pages/2021-04-18-weekly-noise/</link>
+    <description><![CDATA[Weekly Noise - blurting out some thoughts
+<br><a href="https://www.functionalnoise.com/pages/2021-04-18-weekly-noise/">Read more</a>]]></description>
+    
+    <guid>https://www.functionalnoise.com/pages/2021-04-18-weekly-noise/</guid>
+    <pubDate>Sun, 18 Apr 2021 00:00:00 UT</pubDate>
+  </item>
+  <item>
     <title><![CDATA[Defense against the dark arts]]></title>
     <link>https://www.functionalnoise.com/pages/2021-04-11-dark-defense/</link>
     <description><![CDATA[Defense against the dark arts - dealing with my politics aversion
 <br><a href="https://www.functionalnoise.com/pages/2021-04-11-dark-defense/">Read more</a>]]></description>
     
     <guid>https://www.functionalnoise.com/pages/2021-04-11-dark-defense/</guid>
-    <pubDate>Sun, 11 Apr 2021 00:00:00 UT</pubDate>
+    <pubDate>Sun, 18 Apr 2021 00:00:00 UT</pubDate>
   </item>
   <item>
     <title><![CDATA[The Original Biosensor Goal]]></title>
@@ -24,12 +33,12 @@
     <pubDate>Mon, 5 Apr 2021 00:00:00 UT</pubDate>
   </item>
   <item>
-    <title><![CDATA[Unnecessary Boredom Bias]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-03-20-boredom/</link>
-    <description><![CDATA[Changing my mind about the use of boredom
-<br><a href="https://www.functionalnoise.com/pages/2021-03-20-boredom/">Read more</a>]]></description>
+    <title><![CDATA[Julia Developer Tips]]></title>
+    <link>https://www.functionalnoise.com/pages/2021-03-23-julia-tips/</link>
+    <description><![CDATA[Tips and tricks for new Julia developers
+<br><a href="https://www.functionalnoise.com/pages/2021-03-23-julia-tips/">Read more</a>]]></description>
     
-    <guid>https://www.functionalnoise.com/pages/2021-03-20-boredom/</guid>
+    <guid>https://www.functionalnoise.com/pages/2021-03-23-julia-tips/</guid>
     <pubDate>Sat, 27 Mar 2021 00:00:00 UT</pubDate>
   </item>
   <item>
@@ -42,12 +51,12 @@
     <pubDate>Sat, 27 Mar 2021 00:00:00 UT</pubDate>
   </item>
   <item>
-    <title><![CDATA[Julia Developer Tips]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-03-23-julia-tips/</link>
-    <description><![CDATA[Tips and tricks for new Julia developers
-<br><a href="https://www.functionalnoise.com/pages/2021-03-23-julia-tips/">Read more</a>]]></description>
+    <title><![CDATA[Unnecessary Boredom Bias]]></title>
+    <link>https://www.functionalnoise.com/pages/2021-03-20-boredom/</link>
+    <description><![CDATA[Changing my mind about the use of boredom
+<br><a href="https://www.functionalnoise.com/pages/2021-03-20-boredom/">Read more</a>]]></description>
     
-    <guid>https://www.functionalnoise.com/pages/2021-03-23-julia-tips/</guid>
+    <guid>https://www.functionalnoise.com/pages/2021-03-20-boredom/</guid>
     <pubDate>Sat, 27 Mar 2021 00:00:00 UT</pubDate>
   </item>
   <item>
