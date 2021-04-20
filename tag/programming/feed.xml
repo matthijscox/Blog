@@ -1,0 +1,18 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel>
+  <title><![CDATA[Functional Noise]]></title>
+  <description><![CDATA[Maybe it&#39;s useful, or maybe not
+]]></description>
+  <link>https://www.functionalnoise.com/</link>
+  <atom:link href="https://www.functionalnoise.com/tag/programming/feed.xml" rel="self" type="application/rss+xml" />
+  <item>
+    <title><![CDATA[C++ Array Printing]]></title>
+    <link>https://www.functionalnoise.com/pages/2021-04-20-cplusplus-array-printing/</link>
+    <description><![CDATA[C&#43;&#43; Array Printing - exploring how to print vector arrays in c&#43;&#43;
+<br><a href="https://www.functionalnoise.com/pages/2021-04-20-cplusplus-array-printing/">Read more</a>]]></description>
+    
+    <guid>https://www.functionalnoise.com/pages/2021-04-20-cplusplus-array-printing/</guid>
+    <pubDate>Tue, 20 Apr 2021 00:00:00 UT</pubDate>
+  </item>
+</channel>
+</rss>
