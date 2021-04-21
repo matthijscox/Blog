@@ -24,7 +24,7 @@ As Scott explains, taking the meta-contrarian viewpoint is fun, but not necessar
 
 
 ## What do I mean with politics?
-Lot's of people hate politics, in their family / friends circle and at work in the office. You know some people that are scheming and gossiping in order to undermine others or try other tactics to get their way. Worstcase, it feels like a game of thrones episode with lots of asskissing and backstabbing. I'm not even going to discuss national politicians here. It's that kind of manipulative, self serving behavior that gives politics a bad name. When I talk about politics here, I am pointing at it's worst forms.
+Lot's of people hate politics, in their family / friends circle and at work in the office. You know some people that are scheming and gossiping in order to undermine others or try other tactics to get their way. Worstcase, it feels like a Game of Thrones episode with lots of asskissing and backstabbing. I'm not even going to discuss national politicians here. It's that kind of manipulative, self serving behavior that gives politics a bad name. When I talk about politics here, I am pointing at its worst form.
 
 
 For a somewhat depressing, yet somewhat humorous, read on workplace politics, you can read [The Gervais Principle](https://www.ribbonfarm.com/the-gervais-principle/). According to the author, a company is made up of losers, clueless middle managers and sociopaths. The growing layer of middle managers with their clueless politics lead to the eventual demise of an organization. He argues there is no way out of this system, you have to either accept it and become a loser at the bottom, or fully embrace politics like a true sociopath and rise to the top. 
