@@ -6,6 +6,15 @@
   <link>https://www.functionalnoise.com/</link>
   <atom:link href="https://www.functionalnoise.com/feed.xml" rel="self" type="application/rss+xml" />
   <item>
+    <title><![CDATA[Developer Freedom]]></title>
+    <link>https://www.functionalnoise.com/pages/2021-05-04-developer-freedom/</link>
+    <description><![CDATA[Developer Freedom
+<br><a href="https://www.functionalnoise.com/pages/2021-05-04-developer-freedom/">Read more</a>]]></description>
+    
+    <guid>https://www.functionalnoise.com/pages/2021-05-04-developer-freedom/</guid>
+    <pubDate>Tue, 4 May 2021 00:00:00 UT</pubDate>
+  </item>
+  <item>
     <title><![CDATA[C++ Array Printing]]></title>
     <link>https://www.functionalnoise.com/pages/2021-04-20-cplusplus-array-printing/</link>
     <description><![CDATA[C&#43;&#43; Array Printing - exploring how to print vector arrays in c&#43;&#43;

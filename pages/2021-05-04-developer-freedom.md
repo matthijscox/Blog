@@ -2,7 +2,7 @@
 @def hascode = false
 @def title = "Developer Freedom"
 @def authors = """Matthijs"""
-@def rss = "Developer Freedom"
+@def rss = "How better stories may liberate corporate software developers."
 @def tags = ["story"]
 
 # Developer Freedom
@@ -13,7 +13,14 @@ People tell each other a lot of stories. The concept of money is one common stor
 Other powerful stories are the concept of nation states and corporations, which are virtual entities that help people coordinate together. Religions are also stories that fill the function of coordination, except they require some absolute belief and have a tendency to break down once people realize they are mere stories. Money and nations keep functioning fine even if people know they are not real. The most powerful stories of our time are those that people share willingly.
 
 
-We continuously have emerging stories in our society, like bitcoin as alternative currency, but here I'd like to focus on the story of open source development and how it may relate to corporate entities. If you are a software developer, there is something in it for you.
+We continuously have emerging stories in our society, like bitcoin as alternative currency, but here I'd like to focus on the story of software developers in corporate technology entities. I'll talk about how knowing your story can liberate you. If you are doing something else for a living, maybe you'll learn more about corporate storytelling.
+
+~~~
+<div class=figure>
+  <img src="/img/entities.png" style="width:80%;padding-left:20%;margin-bottom:0">
+  <p>The actors in this story, standing upon the virtual entities. The corporation provides a platform for the developers. The corporation is maintained by the managers. An entrepreneur builds a new platform. A freelancer works without a corporate platform, supported only by the nation state. </p>
+</div>
+~~~
 
 
 ## Closed Source
@@ -68,17 +75,6 @@ Another consequence of this world view is that you don't have to listen to wrong
 Also please have a look at your own darker motives. You never yell? You never try to manipulate? You never want status and promotions? Build defenses against the excesses of your own dark side.
 
 
-Add a figure showing my large scale view:
-Freelancer/consultant; free FTE in society/nation
-Entrepreneur; investing their FTE in platform/entity building
-Software developer; free FTE in tech corporation
-Intrapreneur; investing their FTE to build internal platform
-Unallocated free FTE
-Managers and politicians; fabric of virtual entities.
-Founder/CEO: platform/entity operator
-(Local waterline, due to rent seeking?)
-
-
 ## How to free yourself?
 Now what if you want to become a free intrapreneurial developer in a corporation that doesn't really support this adventure? First of all you'll have to forget about promotions. Career paths center around existing narratives in your corporation. This may suck, because the story you told society was that you were going to follow a successful career path at ACME corp. You'll have to change that story as well I'm afraid.
 
@@ -107,7 +103,7 @@ If you cannot convince the engineers you need, tough luck, being free does not m
 Note that if some non-free engineers join your cause, they may not fully understand your story since they are bound by other stories. This means they will not be so useful or need a lot of guidance. If you somehow got the engineers fulltime, it's worth the effort to complete subvert them to your story, maybe even turn them into free FTEs. This works best by [building a world](https://alexdanco.com/2021/04/10/world-building/) for them in which they can start their own stories. Don't feel bad if it doesn't work, conformists prefer to follow the dominant narrative.
 
 
-Currently am in the process of finding the engineers in the corporation that want to free themselves and create a kind of innersourcing community. This is a big story. I also make it difficult on myself, because I refuse to become a fulltime story teller, I still want to create valuable products myself. But the innersourcing world would be wonderful to work in. Imagine a world where when you find a valuable proposition, instead of having to convince a thousand managers, you just convince one or two great people to join you. (Note: finding great people will then be the bottleneck.)
+Currently am in the process of finding the engineers in our corporation that want to free themselves and create a kind of innersourcing community. This is a big story. I also make it difficult on myself, because I refuse to become a fulltime story teller. I still want to create valuable products myself and the innersourcing world would be wonderful to work in. Imagine a world where when you find a valuable proposition, instead of having to convince a thousand managers, you just convince one or two great people to join you. (Note: finding those great people will then be the new bottleneck.)
 
 
 A final word of warning, if you tell a big story yourself, try to make it resonate with the primary corporate platform story tellers (senior management). If it does not, they may turn the dominant narratives against you. Small stories can be about boosting your productivity, but big stories must boost the platform. If your story does become successfully integrated in the dominant narratives, then don't expect too much credit for it. A good story will look obvious in hindsight and people will believe that they always believed it.

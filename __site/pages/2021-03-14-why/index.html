@@ -1,5 +1,100 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_lanyon.css"> <link rel=stylesheet  href="/css/adjust.css"> <link rel=icon  href="/assets/favicon.png"> <title>Functional Noise</title> <input type=checkbox  class=sidebar-checkbox  id=sidebar-checkbox > <div class=sidebar  id=sidebar > <div class=sidebar-item > <p>Functional Noise</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/about/">About</a> <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a> </nav> <div class=sidebar-item > <p>&copy; Matthijs Cox.</p> </div> </div> <!-- Wrap is the content to shift when toggling the sidebar. We wrap the content to avoid any CSS collisions with our real content. --> <div class=wrap > <div class=masthead > <div class=container > <h3 class=masthead-title > <a href="/" title=Home >Functional Noise</a> <small>Maybe it's useful, or maybe not</small> </h3> </div> </div> <div class="container content"> <div class=franklin-content ><h1 id=why_a_blog ><a href="#why_a_blog" class=header-anchor >Why a blog?</a></h1> <p>Writing a blog is good for clearing my thoughts. I&#39;d like to get those ideas out of my mental pipeline, before it clogs up. A public website will generate just enough anxiety for me to write my ideas down more clearly. This may help me reflect on my thoughts, observe changes in my beliefs and habits and thereby hopefully improve myself over time.</p> <p>Many of my beliefs and thoughts may turn out wrong. The point is simply to become less wrong. Generating some noise may actually be beneficial for that. Noise is an inherent part of our universe. With our senses and brain we try to find signals within it. We often consider noise as a disadvantage, but noise can also help to regularize our learning, make sure you don&#39;t take ideas and beliefs for granted. Functional noise makes us <a href="https://en.wikipedia.org/wiki/Antifragile">Antifragile</a>.</p> <p>A colleague once mentioned that I am <a href="http://easydamus.com/chaoticgood.html">Chaotic Good</a>. I looked it up and I agree. I think generating functional noise is a great tool for us chaotically-good-aligned-entities.</p> <p>Also, all other cool domain names I came up with were already taken. Selection effects are powerful.</p> <p>The blog itself is written with <a href="https://franklinjl.org/">Franklin.jl</a>, which helps me write &#40;Julia&#41; code whenever I want to:</p> <pre><code class=language-julia >abstract type AbstractPoint end
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/poole_lanyon.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+
+   <title>Functional Noise</title>  
+</head>
+<body>
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Functional Noise</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item " href="/">Home</a>
+    <a class="sidebar-nav-item " href="/about/">About</a>
+    <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a>
+  </nav>
+  <div class="sidebar-item">
+    <p>&copy; Matthijs Cox.</p>
+  </div>
+</div>
+
+<!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+content to avoid any CSS collisions with our real content. -->
+<div class="wrap">
+  <div class="masthead">
+    <div class="container">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Functional Noise</a>
+        <small>Maybe it's useful, or maybe not</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="container content">
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="why_a_blog"><a href="#why_a_blog" class="header-anchor">Why a blog?</a></h1>
+<p>Writing a blog is good for clearing my thoughts. I&#39;d like to get those ideas out of my mental pipeline, before it clogs up. A public website will generate just enough anxiety for me to write my ideas down more clearly. This may help me reflect on my thoughts, observe changes in my beliefs and habits and thereby hopefully improve myself over time.</p>
+<p>Many of my beliefs and thoughts may turn out wrong. The point is simply to become less wrong. Generating some noise may actually be beneficial for that. Noise is an inherent part of our universe. With our senses and brain we try to find signals within it. We often consider noise as a disadvantage, but noise can also help to regularize our learning, make sure you don&#39;t take ideas and beliefs for granted. Functional noise makes us <a href="https://en.wikipedia.org/wiki/Antifragile">Antifragile</a>.</p>
+<p>A colleague once mentioned that I am <a href="http://easydamus.com/chaoticgood.html">Chaotic Good</a>. I looked it up and I agree. I think generating functional noise is a great tool for us chaotically-good-aligned-entities.</p>
+<p>Also, all other cool domain names I came up with were already taken. Selection effects are powerful.</p>
+<p>The blog itself is written with <a href="https://franklinjl.org/">Franklin.jl</a>, which helps me write &#40;Julia&#41; code whenever I want to:</p>
+<pre><code class="language-julia">abstract type AbstractPoint end
 struct XYPoint&#123;T&lt;:Real&#125; &lt;: AbstractPoint
     x::T
     y::T
-end</code></pre> <p>So far Julia has helped me reduce some internal suffering &#40;damnit, why can&#39;t I code in a language that is both easy and fast?&#33;&#41;. It has added some noise to the world &#40;oh no, <a href="https://xkcd.com/927/">yet another programming language</a>&#41;, but I believe it will be worth it.</p> <p>If you found this blog, it&#39;s probably random. Or maybe only my future self will read this. That&#39;s fine.</p> <h2 id=how_to_blog ><a href="#how_to_blog" class=header-anchor >How to blog?</a></h2> <p>I have a fulltime job, two children, a partner to satisfy and other relationships and duties. Some people have asked me: &quot;where do you find the time for all this?&quot;. I think it&#39;s the wrong question. What else are you spending your time on?</p> <p>I agree you need <a href="https://thezvi.wordpress.com/2017/09/30/slack/">Slack</a>. Make sure you have enough time and energy as a buffer. You need to avoid burning out, or running out of money, or dying too early. This blog and all my side-projects are my buffer. Whenever I get tired, I pauze it. But in general I gain energy from it, since I like these things. And the best kind of slack has upside risk; you may greatly benefit from it.</p> <p>Too many people I know spend their time either on;</p> <ul> <li><p>easy relaxation &#40;NetFlix, social media, etc.&#41;</p> <li><p>over-optimization &#40;endless career advancement, etc.&#41;</p> </ul> <p>Many forms of easy relaxation can be bad, as it doesn&#39;t give long term joy. Often it doesn&#39;t even give short term joy &#40;social media addictions come to mind&#41;. I aggressively cut back on this time loss category. I only watch NetFlix when I&#39;m really tired. And preferably only after some meditation.</p> <p>Over-optimization is another great pitfall. I still fall for it too. Just spend more time on your current tasks. Spend all your time on your career and maybe advance by 20-50&#37; in salary and status over the years. But there is another way, introduced to me as the Barbell Strategy. Normally you use it for investing, but you can apply it to your personal life as well. Use your current life &#40;or a simpler version of it&#41; as a safe investment on the one side, and take on some high risk side-projects on the other side. This provides safety, while also giving you a chance of high rewards, depending on what you choose, in financial returns, or status, or happiness or meaning.</p> <p>So that&#39;s how I write this blog. I take some time away from easy relaxation and over-optimizing behavior, and apply it to fun, useful, risky adventures. Best case, I amaze myself. Worst case, I generate some noise.</p> <script src="https://utteranc.es/client.js" repo="matthijscox/Blog" issue-term=pathname  label=Comment  theme=github-light  crossorigin=anonymous  async> </script> <div class=page-foot > <div class=copyright > &copy; Matthijs Cox. Last modified: March 27, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>. </div> </div> </div> </div> </div> <script src="/libs/highlight/highlight.pack.js"></script> <script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: ' '});</script> <label for=sidebar-checkbox  class=sidebar-toggle ></label>
+end</code></pre>
+<p>So far Julia has helped me reduce some internal suffering &#40;damnit, why can&#39;t I code in a language that is both easy and fast?&#33;&#41;. It has added some noise to the world &#40;oh no, <a href="https://xkcd.com/927/">yet another programming language</a>&#41;, but I believe it will be worth it.</p>
+<p>If you found this blog, it&#39;s probably random. Or maybe only my future self will read this. That&#39;s fine.</p>
+<h2 id="how_to_blog"><a href="#how_to_blog" class="header-anchor">How to blog?</a></h2>
+<p>I have a fulltime job, two children, a partner to satisfy and other relationships and duties. Some people have asked me: &quot;where do you find the time for all this?&quot;. I think it&#39;s the wrong question. What else are you spending your time on?</p>
+<p>I agree you need <a href="https://thezvi.wordpress.com/2017/09/30/slack/">Slack</a>. Make sure you have enough time and energy as a buffer. You need to avoid burning out, or running out of money, or dying too early. This blog and all my side-projects are my buffer. Whenever I get tired, I pauze it. But in general I gain energy from it, since I like these things. And the best kind of slack has upside risk; you may greatly benefit from it.</p>
+<p>Too many people I know spend their time either on;</p>
+<ul>
+<li><p>easy relaxation &#40;NetFlix, social media, etc.&#41;</p>
+</li>
+<li><p>over-optimization &#40;endless career advancement, etc.&#41;</p>
+</li>
+</ul>
+<p>Many forms of easy relaxation can be bad, as it doesn&#39;t give long term joy. Often it doesn&#39;t even give short term joy &#40;social media addictions come to mind&#41;. I aggressively cut back on this time loss category. I only watch NetFlix when I&#39;m really tired. And preferably only after some meditation.</p>
+<p>Over-optimization is another great pitfall. I still fall for it too. Just spend more time on your current tasks. Spend all your time on your career and maybe advance by 20-50&#37; in salary and status over the years. But there is another way, introduced to me as the Barbell Strategy. Normally you use it for investing, but you can apply it to your personal life as well. Use your current life &#40;or a simpler version of it&#41; as a safe investment on the one side, and take on some high risk side-projects on the other side. This provides safety, while also giving you a chance of high rewards, depending on what you choose, in financial returns, or status, or happiness or meaning.</p>
+<p>So that&#39;s how I write this blog. I take some time away from easy relaxation and over-optimizing behavior, and apply it to fun, useful, risky adventures. Best case, I amaze myself. Worst case, I generate some noise.</p>
+    <script src="https://utteranc.es/client.js"
+        repo="matthijscox/Blog"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Matthijs Cox. Last modified: March 27, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+      </div>  <!-- div: content container -->
+    </div> <!-- wrap -->
+    
+    
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+    
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  </body>
+</html>
