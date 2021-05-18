@@ -1,4 +1,113 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_lanyon.css"> <link rel=stylesheet  href="/css/adjust.css"> <link rel=icon  href="/assets/favicon.png"> <title>Functional Noise</title> <input type=checkbox  class=sidebar-checkbox  id=sidebar-checkbox > <div class=sidebar  id=sidebar > <div class=sidebar-item > <p>Functional Noise</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/about/">About</a> <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a> </nav> <div class=sidebar-item > <p>&copy; Matthijs Cox.</p> </div> </div> <!-- Wrap is the content to shift when toggling the sidebar. We wrap the content to avoid any CSS collisions with our real content. --> <div class=wrap > <div class=masthead > <div class=container > <h3 class=masthead-title > <a href="/" title=Home >Functional Noise</a> <small>Maybe it's useful, or maybe not</small> </h3> </div> </div> <div class="container content"> <div class=franklin-content ><h1 id=weekly_noise ><a href="#weekly_noise" class=header-anchor >Weekly Noise</a></h1> <p>Just need to get some mental noise out of my brain. That&#39;s why it&#39;s important to keep writing. </p> <p>Here are a bunch things I did or thought about this week, some may turn into longer posts. I could just dump these on social media, but then it&#39;s all lost in the feed. Now it&#39;s like my personal public diary.</p> <p>Finite vs infinite games re-entered my minds eye via this canadian techie&#39;s post on <a href="https://alexdanco.com/2021/01/11/why-the-canadian-tech-scene-doesnt-work/">Why the Canadian tech scene doesn&#39;t work</a>. Need to write something about it, also in comparison to my previous post about dark arts. Finite games feel like a dark art.</p> <p>Also his <a href="https://alexdanco.com/2021/04/10/world-building/">world building story</a> resonated. Constructing a narrative. Fabricating a meme. Building a new world. Stories are so important to how people think and perceive the world. I know memes are self-reproducing ideas that spread between humans, kinda like genes in our DNA. These &#39;worlds&#39; he mentioned are virtual entities weaved using multiple memes, a new combination of them or some slight mutations. Companies and nations are such long lasting virtual entities. Humans are their computing substrate. Much can be written about it and the shape of <a href="https://slatestarcodex.com/2014/07/30/meditations-on-moloch/">Moloch</a> is already known. But here he is talking about spinning up such entities/worlds in just about any context for your own convenience. Sounds like a tool that can be greatly used and abused. I&#39;ll need to write more about that.</p> <p><a href="https://metarationality.com/nebulosity">Nebulosity</a>. An interesting meta-rationality concept. How does it apply to culture? We can see the shape of culture from far away, like in other companies, countries or ages, but I struggle to see it up close.</p> <p>Now that I dare to publicly discuss some of my own views I meet more interesting people. This way I met a kindred spirit. Just resonated. Should have talked sooner. Exchanged blogs and podcast links. Though most links I got were from investor types, who write persuasive and have a helicopter view on capital and society, but are not necessarily truth seekers. &#40;Exploration vs Exploitation: How much should you focus on finding interesting people and topics versus grinding towards a real goal?&#41;</p> <p>Some of my managers read my blog and posts. I wonder what the effect will be, but if they are truly <a href="https://www.ribbonfarm.com/2009/10/07/the-gervais-principle-or-the-office-according-to-the-office/">clueless</a> it won&#39;t matter.</p> <p>Interest in &#40;meta-&#41;rational thinking might be bigger than I expected. Maybe I&#39;ll write an introductionary post for Dutch/European readers about my take on the rationalist community.</p> <p>Had a chat with a local investor at <a href="https://lumolabs.io/">Lumo Labs</a>. I hope he plays an infinite game. Most big companies we have in the region were spin-offs from Philips like 20-40? years ago. ASML is the biggest local player now. But what great companies have we started since then? Are we just as bad as the Canadian tech scene?</p> <p>I have another failure under my belt: I can&#39;t ship a package with biosensors to Andrey in Russia. We could not get it to pass all warehouse checks. To repent, I <a href="https://github.com/brainflow-dev/brainflow/pull/270">promised</a> to write BrainFlow c&#43;&#43; code myself in order to integrate a new biosensor. I haven&#39;t coded c since... 12 years ago? How to inspect and experiment quickly in a language without a REPL? Anyway, if I am silent for a while, the most likely reason is I am working on this.</p> <p>We had an interesting Julia discussion at work about NaN vs Missing vs rejected data. In MATLAB people use <code>NaN</code>s a lot. This is easy for handling missing or removed data, but not a great practice. I should write down the arguments once and for all, including steelmanning the <code>NaN</code> position. The <a href="https://docs.julialang.org/en/v1/manual/missing/">Julia manual</a> avoids taking a stance. Actually, we may have to explain:</p> <ul> <li><p><code>NaN</code>, occurs for operations on numbers that are undefined, like <code>0/0</code>. You probably encountered an edge case in your algorithm.</p> <li><p><code>Missing</code>, when there is no value, but theoretically there might be.</p> <li><p><code>Nothing</code>, when there is no value and there never will be.</p> <li><p><code>undef</code>, which is only used in &#40;array&#41; constructors to allocate memory without filling it with a specific value.</p> <li><p>For rejected data, please don&#39;t overwrite the value with <code>Missing</code>, but define your own type, like:</p> </ul> <pre><code class=language-julia >struct BooleanNumber&#123;T&lt;:Number&#125; &lt;: Number
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/poole_lanyon.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+
+   <title>Functional Noise</title>  
+</head>
+<body>
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Functional Noise</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item " href="/">Home</a>
+    <a class="sidebar-nav-item " href="/about/">About</a>
+    <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a>
+  </nav>
+  <div class="sidebar-item">
+    <p>&copy; Matthijs Cox.</p>
+  </div>
+</div>
+
+<!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+content to avoid any CSS collisions with our real content. -->
+<div class="wrap">
+  <div class="masthead">
+    <div class="container">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Functional Noise</a>
+        <small>Regularize Your Mind</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="container content">
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="weekly_noise"><a href="#weekly_noise" class="header-anchor">Weekly Noise</a></h1>
+<p>Just need to get some mental noise out of my brain. That&#39;s why it&#39;s important to keep writing. </p>
+<p>Here are a bunch things I did or thought about this week, some may turn into longer posts. I could just dump these on social media, but then it&#39;s all lost in the feed. Now it&#39;s like my personal public diary.</p>
+<p>Finite vs infinite games re-entered my minds eye via this canadian techie&#39;s post on <a href="https://alexdanco.com/2021/01/11/why-the-canadian-tech-scene-doesnt-work/">Why the Canadian tech scene doesn&#39;t work</a>. Need to write something about it, also in comparison to my previous post about dark arts. Finite games feel like a dark art.</p>
+<p>Also his <a href="https://alexdanco.com/2021/04/10/world-building/">world building story</a> resonated. Constructing a narrative. Fabricating a meme. Building a new world. Stories are so important to how people think and perceive the world. I know memes are self-reproducing ideas that spread between humans, kinda like genes in our DNA. These &#39;worlds&#39; he mentioned are virtual entities weaved using multiple memes, a new combination of them or some slight mutations. Companies and nations are such long lasting virtual entities. Humans are their computing substrate. Much can be written about it and the shape of <a href="https://slatestarcodex.com/2014/07/30/meditations-on-moloch/">Moloch</a> is already known. But here he is talking about spinning up such entities/worlds in just about any context for your own convenience. Sounds like a tool that can be greatly used and abused. I&#39;ll need to write more about that.</p>
+<p><a href="https://metarationality.com/nebulosity">Nebulosity</a>. An interesting meta-rationality concept. How does it apply to culture? We can see the shape of culture from far away, like in other companies, countries or ages, but I struggle to see it up close.</p>
+<p>Now that I dare to publicly discuss some of my own views I meet more interesting people. This way I met a kindred spirit. Just resonated. Should have talked sooner. Exchanged blogs and podcast links. Though most links I got were from investor types, who write persuasive and have a helicopter view on capital and society, but are not necessarily truth seekers. &#40;Exploration vs Exploitation: How much should you focus on finding interesting people and topics versus grinding towards a real goal?&#41;</p>
+<p>Some of my managers read my blog and posts. I wonder what the effect will be, but if they are truly <a href="https://www.ribbonfarm.com/2009/10/07/the-gervais-principle-or-the-office-according-to-the-office/">clueless</a> it won&#39;t matter.</p>
+<p>Interest in &#40;meta-&#41;rational thinking might be bigger than I expected. Maybe I&#39;ll write an introductionary post for Dutch/European readers about my take on the rationalist community.</p>
+<p>Had a chat with a local investor at <a href="https://lumolabs.io/">Lumo Labs</a>. I hope he plays an infinite game. Most big companies we have in the region were spin-offs from Philips like 20-40? years ago. ASML is the biggest local player now. But what great companies have we started since then? Are we just as bad as the Canadian tech scene?</p>
+<p>I have another failure under my belt: I can&#39;t ship a package with biosensors to Andrey in Russia. We could not get it to pass all warehouse checks. To repent, I <a href="https://github.com/brainflow-dev/brainflow/pull/270">promised</a> to write BrainFlow c&#43;&#43; code myself in order to integrate a new biosensor. I haven&#39;t coded c since... 12 years ago? How to inspect and experiment quickly in a language without a REPL? Anyway, if I am silent for a while, the most likely reason is I am working on this.</p>
+<p>We had an interesting Julia discussion at work about NaN vs Missing vs rejected data. In MATLAB people use <code>NaN</code>s a lot. This is easy for handling missing or removed data, but not a great practice. I should write down the arguments once and for all, including steelmanning the <code>NaN</code> position. The <a href="https://docs.julialang.org/en/v1/manual/missing/">Julia manual</a> avoids taking a stance.  Actually, we may have to explain:</p>
+<ul>
+<li><p><code>NaN</code>, occurs for operations on numbers that are undefined, like <code>0/0</code>. You probably encountered an edge case in your algorithm.</p>
+</li>
+<li><p><code>Missing</code>, when there is no value, but theoretically there might be.</p>
+</li>
+<li><p><code>Nothing</code>, when there is no value and there never will be.</p>
+</li>
+<li><p><code>undef</code>, which is only used in &#40;array&#41; constructors to allocate memory without filling it with a specific value.</p>
+</li>
+<li><p>For rejected data, please don&#39;t overwrite the value with <code>Missing</code>, but define your own type, like:</p>
+</li>
+</ul>
+<pre><code class="language-julia">struct BooleanNumber&#123;T&lt;:Number&#125; &lt;: Number
     value::T
     valid::Bool
-end</code></pre> <p>Two reasons why people cannot follow you:</p> <ol> <li><p>They simply cannot comprehend or you cannot explain your learning journey anymore. The <a href="https://www.lesswrong.com/tag/inferential-distance">inferential gap</a> is too large.</p> <li><p>They find your ideas distasteful and too far from the popular norm of society. You have passed outside the <a href="https://en.wikipedia.org/wiki/Overton_window">Overton window</a>.</p> </ol> <p>In my <a href="https://www.functionalnoise.com/pages/2021-04-11-dark-defense/">previous post</a> I have effectively set up a <a href="https://www.lesswrong.com/posts/Kbm6QnJv9dgWsPHQP/schelling-fences-on-slippery-slopes">Schelling fence</a> on the slippery slope to becoming ever more political. I don&#39;t know if it&#39;ll hold, but I am hoping to somehow start a coalition of resistance. </p> <p>Commenter vamarkov asked what to do with all these politically savvy micromanagers that live in any big organization. You will have to work with them, right? No, the point is to unite, remove them and build a cultural immune system against such bad practices. In the meantime it&#39;ll suck, but find some allies or move to another department or organization if you can. Zvi provides some additional ideas to <a href="https://www.lesswrong.com/s/kNANcHLNtJt5qeuSS/p/S2Tgbve2d3vpsNtrQ">fight moral mazes</a>, but his general advice is to <a href="https://www.lesswrong.com/s/kNANcHLNtJt5qeuSS/p/a8wjKNSGCPSzdWMMa">flee</a>.</p> <p>Some people responded to my quest to find a good <a href="https://www.functionalnoise.com/pages/2021-04-04-biosensor-goal/">continuous blood pressure sensor</a>. Actually we may be closer to <a href="https://www.superwatches.com/fitness-trackers-for-blood-pressure/">blood pressure smart watches</a> than I thought. Ideally it should all work well during excercise and I found a <a href="https://ares-analytics.com/">local startup</a> with a somewhat related mission.</p> <p>Finally, a fascinating book review of <a href="https://astralcodexten.substack.com/p/your-book-review-progress-and-poverty">Progress and Poverty by Henry George</a> who asked the question <em>&quot;How come all this new economic development and industrialized technology hasn&#39;t eliminated poverty and oppression?&quot;</em> in 1879. The question and answer remain valid today. Laborers create value. Capitalists create rocket fuel for laborers. But by George, The Rent Is Too Damn High, causing all of us to stay still while running faster. Perhaps laborers and capitalists should unite, declare war on the landlords and tax them to death.</p> <script src="https://utteranc.es/client.js" repo="matthijscox/Blog" issue-term=pathname  label=Comment  theme=github-light  crossorigin=anonymous  async> </script> <div class=page-foot > <div class=copyright > &copy; Matthijs Cox. Last modified: April 18, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>. </div> </div> </div> </div> </div> <script src="/libs/highlight/highlight.pack.js"></script> <script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: ' '});</script> <label for=sidebar-checkbox  class=sidebar-toggle ></label>
+end</code></pre>
+<p>Two reasons why people cannot follow you:</p>
+<ol>
+<li><p>They simply cannot comprehend or you cannot explain your learning journey anymore. The <a href="https://www.lesswrong.com/tag/inferential-distance">inferential gap</a> is too large.</p>
+</li>
+<li><p>They find your ideas distasteful and too far from the popular norm of society. You have passed outside the <a href="https://en.wikipedia.org/wiki/Overton_window">Overton window</a>.</p>
+</li>
+</ol>
+<p>In my <a href="https://www.functionalnoise.com/pages/2021-04-11-dark-defense/">previous post</a> I have effectively set up a <a href="https://www.lesswrong.com/posts/Kbm6QnJv9dgWsPHQP/schelling-fences-on-slippery-slopes">Schelling fence</a> on the slippery slope to becoming ever more political. I don&#39;t know if it&#39;ll hold, but I am hoping to somehow start a coalition of resistance. </p>
+<p>Commenter vamarkov asked what to do with all these politically savvy micromanagers that live in any big organization. You will have to work with them, right? No, the point is to unite, remove them and build a cultural immune system against such bad practices. In the meantime it&#39;ll suck, but find some allies or move to another department or organization if you can. Zvi provides some additional ideas to <a href="https://www.lesswrong.com/s/kNANcHLNtJt5qeuSS/p/S2Tgbve2d3vpsNtrQ">fight moral mazes</a>, but his general advice is to <a href="https://www.lesswrong.com/s/kNANcHLNtJt5qeuSS/p/a8wjKNSGCPSzdWMMa">flee</a>.</p>
+<p>Some people responded to my quest to find a good <a href="https://www.functionalnoise.com/pages/2021-04-04-biosensor-goal/">continuous blood pressure sensor</a>. Actually we may be closer to <a href="https://www.superwatches.com/fitness-trackers-for-blood-pressure/">blood pressure smart watches</a> than I thought. Ideally it should all work well during excercise and I found a <a href="https://ares-analytics.com/">local startup</a> with a somewhat related mission.</p>
+<p>Finally, a fascinating book review of <a href="https://astralcodexten.substack.com/p/your-book-review-progress-and-poverty">Progress and Poverty by Henry George</a> who asked the question <em>&quot;How come all this new economic development and industrialized technology hasn&#39;t eliminated poverty and oppression?&quot;</em> in 1879. The question and answer remain valid today. Laborers create value. Capitalists create rocket fuel for laborers. But by George, The Rent Is Too Damn High, causing all of us to stay still while running faster. Perhaps laborers and capitalists should unite, declare war on the landlords and tax them to death.</p>
+    <script src="https://utteranc.es/client.js"
+        repo="matthijscox/Blog"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Matthijs Cox. Last modified: April 21, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+      </div>  <!-- div: content container -->
+    </div> <!-- wrap -->
+    
+    
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+    
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  </body>
+</html>

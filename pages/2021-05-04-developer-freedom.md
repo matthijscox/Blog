@@ -110,3 +110,5 @@ A final word of warning, if you tell a big story yourself, try to make it resona
 
 
 In the end all you need to do is change the stories in your head and the stories in other people's heads. It's like writing software, but a little less rigorous and a lot more nebulous.
+
+{{ addcomments }}
