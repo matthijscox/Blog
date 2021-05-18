@@ -1,99 +1,232 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-<channel>
-  <title><![CDATA[Functional Noise]]></title>
-  <description><![CDATA[Maybe it&#39;s useful, or maybe not
-]]></description>
-  <link>https://www.functionalnoise.com/</link>
-  <atom:link href="https://www.functionalnoise.com/feed.xml" rel="self" type="application/rss+xml" />
-  <item>
-    <title><![CDATA[Developer Freedom]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-05-04-developer-freedom/</link>
-    <description><![CDATA[How better stories may liberate corporate software developers.
-<br><a href="https://www.functionalnoise.com/pages/2021-05-04-developer-freedom/">Read more</a>]]></description>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:media="http://search.yahoo.com/mrss/"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss">
+
+  <channel>
+    <title>
+      <![CDATA[  Functional Noise  ]]>
+    </title>
+    <link> https://www.functionalnoise.com </link>
+    <description>
+      <![CDATA[  Regularize Your Mind  ]]>
+    </description>
+    <atom:link
+      href="https://www.functionalnoise.com\feed.xml"
+      rel="self"
+      type="application/rss+xml" />
+
+
+<item>
+  <title>
+    <![CDATA[  Biosensor Startups  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-05-18-biosensor-startups/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-05-18-biosensor-startups/index.html </guid>
+  <description>
+    <![CDATA[  Researching local biosensor startups and my own desires.  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-05-04-developer-freedom/</guid>
-    <pubDate>Tue, 4 May 2021 00:00:00 UT</pubDate>
-  </item>
-  <item>
-    <title><![CDATA[C++ Array Printing]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-04-20-cplusplus-array-printing/</link>
-    <description><![CDATA[C&#43;&#43; Array Printing - exploring how to print vector arrays in c&#43;&#43;
-<br><a href="https://www.functionalnoise.com/pages/2021-04-20-cplusplus-array-printing/">Read more</a>]]></description>
+  <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Developer Freedom  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-05-04-developer-freedom/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-05-04-developer-freedom/index.html </guid>
+  <description>
+    <![CDATA[  How better stories may liberate corporate software developers.  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-04-20-cplusplus-array-printing/</guid>
-    <pubDate>Tue, 27 Apr 2021 00:00:00 UT</pubDate>
-  </item>
-  <item>
-    <title><![CDATA[Beacon]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-04-27-beacon/</link>
-    <description><![CDATA[Beacon of rationality
-<br><a href="https://www.functionalnoise.com/pages/2021-04-27-beacon/">Read more</a>]]></description>
+  <pubDate>Tue, 18 May 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Beacon  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-04-27-beacon/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-04-27-beacon/index.html </guid>
+  <description>
+    <![CDATA[  Beacon of rationality  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-04-27-beacon/</guid>
-    <pubDate>Tue, 27 Apr 2021 00:00:00 UT</pubDate>
-  </item>
-  <item>
-    <title><![CDATA[Defense against the dark arts]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-04-11-dark-defense/</link>
-    <description><![CDATA[Defense against the dark arts - dealing with my politics aversion
-<br><a href="https://www.functionalnoise.com/pages/2021-04-11-dark-defense/">Read more</a>]]></description>
+  <pubDate>Wed, 28 Apr 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  C&#43;&#43; Array Printing  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-04-20-cplusplus-array-printing/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-04-20-cplusplus-array-printing/index.html </guid>
+  <description>
+    <![CDATA[  C&#43;&#43; Array Printing - exploring how to print vector arrays in c&#43;&#43;  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-04-11-dark-defense/</guid>
-    <pubDate>Fri, 23 Apr 2021 00:00:00 UT</pubDate>
-  </item>
-  <item>
-    <title><![CDATA[Weekly Noise]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-04-18-weekly-noise/</link>
-    <description><![CDATA[Weekly Noise - blurting out some thoughts
-<br><a href="https://www.functionalnoise.com/pages/2021-04-18-weekly-noise/">Read more</a>]]></description>
+  <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Julia Developer Tips  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-03-23-julia-tips/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-03-23-julia-tips/index.html </guid>
+  <description>
+    <![CDATA[  Tips and tricks for new Julia developers  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-04-18-weekly-noise/</guid>
-    <pubDate>Sun, 18 Apr 2021 00:00:00 UT</pubDate>
-  </item>
-  <item>
-    <title><![CDATA[The Original Biosensor Goal]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-04-04-biosensor-goal/</link>
-    <description><![CDATA[The Original Biosensor Goal with a bunch of babbling
-<br><a href="https://www.functionalnoise.com/pages/2021-04-04-biosensor-goal/">Read more</a>]]></description>
+  <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Defense against the dark arts  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-04-11-dark-defense/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-04-11-dark-defense/index.html </guid>
+  <description>
+    <![CDATA[  Defense against the dark arts - dealing with my politics aversion  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-04-04-biosensor-goal/</guid>
-    <pubDate>Mon, 5 Apr 2021 00:00:00 UT</pubDate>
-  </item>
-  <item>
-    <title><![CDATA[Julia Developer Tips]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-03-23-julia-tips/</link>
-    <description><![CDATA[Tips and tricks for new Julia developers
-<br><a href="https://www.functionalnoise.com/pages/2021-03-23-julia-tips/">Read more</a>]]></description>
+  <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  The Original Biosensor Goal  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-04-04-biosensor-goal/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-04-04-biosensor-goal/index.html </guid>
+  <description>
+    <![CDATA[  The Original Biosensor Goal with a bunch of babbling  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-03-23-julia-tips/</guid>
-    <pubDate>Sat, 27 Mar 2021 00:00:00 UT</pubDate>
-  </item>
-  <item>
-    <title><![CDATA[Biosignal Machine Learning]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-02-22-biosignal-machine-learning/</link>
-    <description><![CDATA[blog post about biosignal machine learning project
-<br><a href="https://www.functionalnoise.com/pages/2021-02-22-biosignal-machine-learning/">Read more</a>]]></description>
+  <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Weekly Noise  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-04-18-weekly-noise/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-04-18-weekly-noise/index.html </guid>
+  <description>
+    <![CDATA[  Weekly Noise - blurting out some thoughts  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-02-22-biosignal-machine-learning/</guid>
-    <pubDate>Sat, 27 Mar 2021 00:00:00 UT</pubDate>
-  </item>
-  <item>
-    <title><![CDATA[Unnecessary Boredom Bias]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-03-20-boredom/</link>
-    <description><![CDATA[Changing my mind about the use of boredom
-<br><a href="https://www.functionalnoise.com/pages/2021-03-20-boredom/">Read more</a>]]></description>
+  <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Biosignal Machine Learning  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-02-22-biosignal-machine-learning/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-02-22-biosignal-machine-learning/index.html </guid>
+  <description>
+    <![CDATA[  blog post about biosignal machine learning project  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-03-20-boredom/</guid>
-    <pubDate>Sat, 27 Mar 2021 00:00:00 UT</pubDate>
-  </item>
-  <item>
-    <title><![CDATA[Why]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-03-14-why/</link>
-    <description><![CDATA[blog post about why and how I started
-<br><a href="https://www.functionalnoise.com/pages/2021-03-14-why/">Read more</a>]]></description>
+  <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Unnecessary Boredom Bias  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-03-20-boredom/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-03-20-boredom/index.html </guid>
+  <description>
+    <![CDATA[  Changing my mind about the use of boredom  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-03-14-why/</guid>
-    <pubDate>Sun, 14 Mar 2021 00:00:00 UT</pubDate>
-  </item>
-</channel>
-</rss>
+  <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Why  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-03-14-why/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-03-14-why/index.html </guid>
+  <description>
+    <![CDATA[  blog post about why and how I started  ]]>
+  </description>  
+    
+  <pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+</channel></rss>
