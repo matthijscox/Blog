@@ -2,104 +2,110 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
-    <loc>https://www.functionalnoise.com\pages\2021-04-20-cplusplus-array-printing\index.html</loc>
-    <lastmod>2021-04-21</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://www.functionalnoise.com\pages\2021-03-14-why\index.html</loc>
-    <lastmod>2021-03-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://www.functionalnoise.com\pages\2021-02-22-biosignal-machine-learning\index.html</loc>
-    <lastmod>2021-03-23</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://www.functionalnoise.com\pages\2021-03-20-boredom\index.html</loc>
-    <lastmod>2021-03-23</lastmod>
+    <loc>https://www.functionalnoise.com\pages\2021-04-18-weekly-noise\index.html</loc>
+    <lastmod>2021-04-18</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://www.functionalnoise.com\pages\2021-06-04-mind-decay\index.html</loc>
-    <lastmod>2021-06-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://www.functionalnoise.com\pages\2021-03-23-julia-tips\index.html</loc>
-    <lastmod>2021-04-21</lastmod>
+    <lastmod>2021-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://www.functionalnoise.com\blogroll\index.html</loc>
-    <lastmod>2021-03-23</lastmod>
+    <lastmod>2021-03-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://www.functionalnoise.com\pages\2021-05-18-biosensor-startups\index.html</loc>
-    <lastmod>2021-05-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://www.functionalnoise.com\pages\2021-06-22-urge\index.html</loc>
-    <lastmod>2021-06-22</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-</url>
-<url>
-    <loc>https://www.functionalnoise.com\pages\2021-04-11-dark-defense\index.html</loc>
-    <lastmod>2021-04-21</lastmod>
+    <loc>https://www.functionalnoise.com\pages\2021-03-23-julia-tips\index.html</loc>
+    <lastmod>2021-03-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://www.functionalnoise.com\index.html</loc>
-    <lastmod>2021-03-23</lastmod>
+    <lastmod>2021-03-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://www.functionalnoise.com\404\index.html</loc>
-    <lastmod>2020-11-03</lastmod>
+    <loc>https://www.functionalnoise.com\pages\2021-05-18-biosensor-startups\index.html</loc>
+    <lastmod>2021-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://www.functionalnoise.com\pages\2021-04-04-biosensor-goal\index.html</loc>
-    <lastmod>2021-04-21</lastmod>
+    <loc>https://www.functionalnoise.com\pages\2021-02-22-biosignal-machine-learning\index.html</loc>
+    <lastmod>2021-03-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://www.functionalnoise.com\pages\2021-05-04-developer-freedom\index.html</loc>
-    <lastmod>2021-05-18</lastmod>
+    <lastmod>2021-07-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://www.functionalnoise.com\about\index.html</loc>
-    <lastmod>2021-03-23</lastmod>
+    <loc>https://www.functionalnoise.com\pages\2021-04-04-biosensor-goal\index.html</loc>
+    <lastmod>2021-04-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
-    <loc>https://www.functionalnoise.com\pages\2021-04-18-weekly-noise\index.html</loc>
-    <lastmod>2021-04-21</lastmod>
+    <loc>https://www.functionalnoise.com\404\index.html</loc>
+    <lastmod>2021-03-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://www.functionalnoise.com\pages\2021-06-22-urge\index.html</loc>
+    <lastmod>2021-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://www.functionalnoise.com\pages\2021-04-20-cplusplus-array-printing\index.html</loc>
+    <lastmod>2021-04-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://www.functionalnoise.com\pages\2021-04-27-beacon\index.html</loc>
-    <lastmod>2021-04-28</lastmod>
+    <lastmod>2021-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://www.functionalnoise.com\about\index.html</loc>
+    <lastmod>2021-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://www.functionalnoise.com\pages\2021-07-02-julia-encapsulation\index.html</loc>
+    <lastmod>2021-07-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://www.functionalnoise.com\pages\2021-03-14-why\index.html</loc>
+    <lastmod>2021-03-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://www.functionalnoise.com\pages\2021-04-11-dark-defense\index.html</loc>
+    <lastmod>2021-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://www.functionalnoise.com\pages\2021-03-20-boredom\index.html</loc>
+    <lastmod>2021-03-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
