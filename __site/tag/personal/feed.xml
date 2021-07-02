@@ -1,99 +1,45 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<rss version="2.0"
-  xmlns:content="http://purl.org/rss/1.0/modules/content/"
-  xmlns:dc="http://purl.org/dc/elements/1.1/"
-  xmlns:media="http://search.yahoo.com/mrss/"
-  xmlns:atom="http://www.w3.org/2005/Atom"
-  xmlns:georss="http://www.georss.org/georss">
-
-  <channel>
-    <title>
-      <![CDATA[  {{fd2rss website_title}}  ]]>
-    </title>
-    <link> {{website_url}} </link>
-    <description>
-      <![CDATA[  {{fd2rss website_description}}  ]]>
-    </description>
-    <atom:link
-      href="{{fd_rss_feed_url}}"
-      rel="self"
-      type="application/rss+xml" />
-
-
-<item>
-  <title>
-    <![CDATA[  The Urge  ]]>
-  </title>
-  <link> https://www.functionalnoise.com\pages/2021-06-22-urge/index.html </link>
-  <guid> https://www.functionalnoise.com\pages/2021-06-22-urge/index.html </guid>
-  <description>
-    <![CDATA[  More reporting on my crappy mood.  ]]>
-  </description>  
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel>
+  <title><![CDATA[Functional Noise]]></title>
+  <description><![CDATA[Regularize Your Mind
+]]></description>
+  <link>https://www.functionalnoise.com/</link>
+  <atom:link href="https://www.functionalnoise.com/tag/personal/feed.xml" rel="self" type="application/rss+xml" />
+  <item>
+    <title><![CDATA[Mind Decay]]></title>
+    <link>https://www.functionalnoise.com/pages/2021-06-04-mind-decay/</link>
+    <description><![CDATA[Reporting on my crappy mood.
+<br><a href="https://www.functionalnoise.com/pages/2021-06-04-mind-decay/">Read more</a>]]></description>
     
-  <pubDate>Tue, 22 Jun 2021 00:00:00 +0000</pubDate>  
-  
-  
-  <atom:author>
-    <atom:name>Matthijs Cox</atom:name>
-  </atom:author>
-        
-</item>
-
-<item>
-  <title>
-    <![CDATA[  Mind Decay  ]]>
-  </title>
-  <link> https://www.functionalnoise.com\pages/2021-06-04-mind-decay/index.html </link>
-  <guid> https://www.functionalnoise.com\pages/2021-06-04-mind-decay/index.html </guid>
-  <description>
-    <![CDATA[  Reporting on my crappy mood.  ]]>
-  </description>  
+    <guid>https://www.functionalnoise.com/pages/2021-06-04-mind-decay/</guid>
+    <pubDate>Fri, 2 Jul 2021 00:00:00 UT</pubDate>
+  </item>
+  <item>
+    <title><![CDATA[The Urge]]></title>
+    <link>https://www.functionalnoise.com/pages/2021-06-22-urge/</link>
+    <description><![CDATA[More reporting on my crappy mood.
+<br><a href="https://www.functionalnoise.com/pages/2021-06-22-urge/">Read more</a>]]></description>
     
-  <pubDate>Fri, 04 Jun 2021 00:00:00 +0000</pubDate>  
-  
-  
-  <atom:author>
-    <atom:name>Matthijs Cox</atom:name>
-  </atom:author>
-        
-</item>
-
-<item>
-  <title>
-    <![CDATA[  Unnecessary Boredom Bias  ]]>
-  </title>
-  <link> https://www.functionalnoise.com\pages/2021-03-20-boredom/index.html </link>
-  <guid> https://www.functionalnoise.com\pages/2021-03-20-boredom/index.html </guid>
-  <description>
-    <![CDATA[  Changing my mind about the use of boredom  ]]>
-  </description>  
+    <guid>https://www.functionalnoise.com/pages/2021-06-22-urge/</guid>
+    <pubDate>Fri, 2 Jul 2021 00:00:00 UT</pubDate>
+  </item>
+  <item>
+    <title><![CDATA[Unnecessary Boredom Bias]]></title>
+    <link>https://www.functionalnoise.com/pages/2021-03-20-boredom/</link>
+    <description><![CDATA[Changing my mind about the use of boredom
+<br><a href="https://www.functionalnoise.com/pages/2021-03-20-boredom/">Read more</a>]]></description>
     
-  <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>  
-  
-  
-  <atom:author>
-    <atom:name>Matthijs Cox</atom:name>
-  </atom:author>
-        
-</item>
-
-<item>
-  <title>
-    <![CDATA[  Why  ]]>
-  </title>
-  <link> https://www.functionalnoise.com\pages/2021-03-14-why/index.html </link>
-  <guid> https://www.functionalnoise.com\pages/2021-03-14-why/index.html </guid>
-  <description>
-    <![CDATA[  blog post about why and how I started  ]]>
-  </description>  
+    <guid>https://www.functionalnoise.com/pages/2021-03-20-boredom/</guid>
+    <pubDate>Sat, 27 Mar 2021 00:00:00 UT</pubDate>
+  </item>
+  <item>
+    <title><![CDATA[Why]]></title>
+    <link>https://www.functionalnoise.com/pages/2021-03-14-why/</link>
+    <description><![CDATA[blog post about why and how I started
+<br><a href="https://www.functionalnoise.com/pages/2021-03-14-why/">Read more</a>]]></description>
     
-  <pubDate>Sun, 14 Mar 2021 00:00:00 +0000</pubDate>  
-  
-  
-  <atom:author>
-    <atom:name>Matthijs Cox</atom:name>
-  </atom:author>
-        
-</item>
-</channel></rss>
+    <guid>https://www.functionalnoise.com/pages/2021-03-14-why/</guid>
+    <pubDate>Sun, 14 Mar 2021 00:00:00 UT</pubDate>
+  </item>
+</channel>
+</rss>

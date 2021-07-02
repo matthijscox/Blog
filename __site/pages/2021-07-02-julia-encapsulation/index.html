@@ -1,0 +1,102 @@
+<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_lanyon.css"> <link rel=stylesheet  href="/css/adjust.css"> <link rel=icon  href="/assets/favicon.png"> <title>Functional Noise</title> <input type=checkbox  class=sidebar-checkbox  id=sidebar-checkbox > <div class=sidebar  id=sidebar > <div class=sidebar-item > <p>Functional Noise</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/about/">About</a> <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a> </nav> <div class=sidebar-item > <p>&copy; Matthijs Cox.</p> </div> </div> <!-- Wrap is the content to shift when toggling the sidebar. We wrap the content to avoid any CSS collisions with our real content. --> <div class=wrap > <div class=masthead > <div class=container > <h3 class=masthead-title > <a href="/" title=Home >Functional Noise</a> <small>Regularize Your Mind</small> </h3> </div> </div> <div class="container content"> <div class=franklin-content ><h1 id=julia_encapsulation ><a href="#julia_encapsulation" class=header-anchor >Julia Encapsulation</a></h1> <p>Julia is a language that provides no easy encapsulation out of the box. It&#39;s a language that evolved in the open source world, so collaboration and re-usability are key. Julia has no reason to block people from accessing data or functions.</p> <p>Corporations are different. We&#39;re running into some discussions with c&#43;&#43; developers, for whom encapsulation is a basic desire. I would like to form a better opinion on this topic. &#40;Some even think it&#39;s my job to have an opinion on such esoteric subjects.&#41; </p> <p>Encapsulation means the ability to wrap data and functions into some unit &#40;often a class&#41; AND to prevent access to some of these functions and data. The information that can be accessed from the outside is often called <em>public</em>, the hidden information is called <em>private</em>.</p> <p>The Julia handbook from Tom Kwong has a chapter devoted to encapsulation, he states the following reasons for encapsulation in his Robustness chapter:</p> <blockquote> <p>Based on the Principle of Least Privilege &#40;POLP&#41;, we would consider hiding unnecessary implementation details to the client of the interface. However, Julia&#39;s data structure is transparent – all fields are automatically exposed and accessible. This poses a potential problem because any improper usage or mutation can break the system. Additionally, by accessing the fields directly, the code becomes more tightly coupled with the underlying implementation of an object.</p> </blockquote> <p>Here&#39;s also a <a href="https://github.com/ninjaaron/oo-and-polymorphism-in-julia">blog post</a> from someone who talks about encapsulation and goes into more expected OO concepts and their relation to Julia.</p> <p>What are all the places where we may want to protect things? I can think of the following:</p> <ul> <li><p>Functions</p> <li><p>Types</p> <li><p>Modules</p> </ul> <h2 id=functions ><a href="#functions" class=header-anchor >Functions</a></h2> <p>I hope you know what functions are. But do you really? They take input, execute some more functions and create output. They can also mutate the input. They have a local scope, in Julia that means that something from the outside cannot access the inside.</p> <p>So... you have encapsulation on the inside? Jep, a function is a lovely unit that automatically encapsulates data and functions defined within its scope. Great&#33;</p> <p>Here&#39;s an example, a function containing a function and a variable. You cannot access them.</p> <pre><code class=language-julia >function example&#40;&#41;
+    x &#61; 5
+    function inside&#40;&#41;
+        y &#61; 6
+    end
+end
+
+julia&gt; example.x
+ERROR: type example has no field x
+
+julia&gt; example.inside
+ERROR: type example has no field inside</code></pre> <p>So Julia has encapsulation in functions. Oh wait, there is no way to make these things public, so others cannot re-use them even if we wanted to. Basically everything is private. Hmm... we want the option to choose between what is public and private.</p> <p>Actually we can just make the function return the public stuff. We can even get very creative by returning local functions from functions that mutate local variables, see this example:</p> <pre><code class=language-julia >function test&#40;&#41;
+    x::Int64 &#61; 2
+    function get_x&#40;&#41;
+        return x
+    end
+    function add_x&#40;y::Int64&#41;
+        x &#43;&#61; y
+        return nothing
+    end
+    return &#40;get_x &#61; get_x, add_x &#61; add_x&#41;
+end
+
+julia&gt; t &#61; test&#40;&#41;
+julia&gt; t.add_x&#40;4&#41;
+julia&gt; t.get_x&#40;&#41;
+6</code></pre> <p>Making a function return a local function is called a <a href="https://en.wikipedia.org/wiki/Closure_&#40;computer_programming&#41;">closure</a>. In our case above it adds unnecessary complexity in my opinion, so I wouldn&#39;t advise this pattern, but it does the encapsulation job, right?</p> <p>Functions do all the work. Data passes through them. Functions call other functions. When people talk about encapsulation to prevent access, they basically mean that functions outside your designated unit &#40;often a class&#41; should not be able to access your private stuff.</p> <p>Now what? Well I&#39;m not sure yet, let&#39;s just move on to composite types and their properties.</p> <h2 id=composite_types ><a href="#composite_types" class=header-anchor >Composite Types</a></h2> <p>Data in Julia is always stored in composite types. Some consider these types like classes without methods. So if you want to prevent access to data, then types might do the work.</p> <p>You just want to avoid write access? Then it&#39;s easy, just make your type immutable. Which it is by default.</p> <p>Want to avoid write access to a subset of fields? Split off the data into a mutable and an immutable type. Make a composite type of the two of them. Sounds good enough to me.</p> <p>You want to also avoid read access? That is a bit harder.</p> <p>First: make it clear to the users that this is private data. The guideline is an underscore in front of the field name, like <code>_my_private_data</code>. That reduces the chance of accidents. Obviously this is a gentlemen&#39;s agreement, they could still access this data, but they would be doing it at their own risk.</p> <p>To take it a step further, you could define a new method of the <code>getproperty</code> and <code>setproperty&#33;</code> function for your custom type. That will make it less convenient to get the private fields.</p> <pre><code class=language-julia >struct Example
+    public
+    also_public
+    _private
+end
+
+function Base.getproperty&#40;example::Example, prop::Symbol&#41;
+    public_props &#61; &#40;:public, :also_public&#41;
+    if prop in public_props
+         return getfield&#40;example, prop&#41;
+    else
+         throw&#40;UndefVarError&#40;prop&#41;&#41;
+    end
+end
+
+julia&gt; example &#61; Example&#40;1, 2, 3&#41;
+julia&gt; example._private
+ERROR: UndefVarError: _private not defined</code></pre> <p>If you don&#39;t want people to change some properties of a mutable type, then you&#39;ll have to use a similar trick for <code>setproperty&#33;</code>. In Julia you can change the behavior of your type entirely by easily &#39;overloading&#39; all relevant functions that dispatch on your type.</p> <p>But what if the user explicitly calls the <code>getfield</code> and <code>setfield</code>? Your users are somekind of ninja spies and they really want your data. Personally, I would stop worrying about encapsulation and start worrying about real world security.</p> <p>There is again a creative option with closures to make it even harder to access the properties, similar to the previous section. You initialize a type with functions as properties. Basically you combine functions &#40;everything private&#41; with types &#40;everything public&#41;.</p> <pre><code class=language-julia ># the private stuff
+struct _Rectangle
+  width::Float64
+  height::Float64
+end
+
+# the public stuff
+struct Rectangle
+  area::Function
+end
+
+# the closure trick
+function Rectangle&#40;width::Float64, height::Float64&#41;
+  self &#61; _Rectangle&#40;width, height&#41;
+  area&#40;&#41; &#61; self.width * self.height
+  return Rectangle&#40;area&#41;
+end
+
+# it works&#33;
+julia&gt; rect &#61; Rectangle&#40;4.0, 5.0&#41;
+julia&gt; rect.area&#40;&#41;
+20</code></pre> <p>Good luck accessing those private properties now. Not sure if this is always results in the most performant code, but it&#39;s a fun intellectual excercise.</p> <p>I never used this approach, but if you do go this route, be careful when defining multiple constructors, they should all return a type that behaves the same, else I expect confusion from your users. The behavior of the type depends now on the local functions that are assigned to it in the constructor function. I don&#39;t like that, the behavior of a specific type should be known based on the type definition itself. Definitely don&#39;t make it mutable, imagine if someone injects another function into the type properties.</p> <p>Note: there is a <a href="https://github.com/JuliaLang/Juleps/pull/54">discussion about internal properties</a>. That may provide the final solution one day.</p> <h3 id=reasons_to_avoid_data_access ><a href="#reasons_to_avoid_data_access" class=header-anchor >Reasons to avoid data access?</a></h3> <p>Let&#39;s say you designed a lovely custom type, with some lovely data on the inside that&#39;s a bit hard to understand. You want to provide the user with some easy interface and hide all these messy details. </p> <p>The DataFrame is a good example. It has a simple interface, you just select rows and columns via the <code>getindex</code>, which looks like <code>df&#91;row, column&#93;</code>. Column selection and inserting can go via <code>getproperty</code> and <code>setproperty&#33;</code> looking like <code>df.new_column &#61; &#91;1, 2, 3&#93;</code>. Lovely interface, no need to look at the internal machinery.</p> <p>Next there is the possibility that people ignore the interface, go into the internals and accidentally break something.</p> <p>Let&#39;s look for something to break. I&#39;ll take the <code>Dict</code> type in Julia. It&#39;s interface is simple, you add key-value pairs with the <code>getindex</code> again. It remembers the number of pairs, which you can access via <code>length</code>, but you can totally break the dict by mutating the underlying count property:</p> <pre><code class=language-julia >julia&gt; d &#61; Dict&#40;&#41;
+julia&gt; d&#91;:a&#93; &#61; &quot;bla&quot;
+julia&gt; length&#40;d&#41;
+1
+julia&gt; d.count &#61; 4
+julia&gt; length&#40;d&#41;
+4
+julia&gt; &#91;v for &#40;k,v&#41; in d&#93;
+4-element Vector&#123;String&#125;:
+    &quot;bla&quot;
+ #undef
+ #undef
+ #undef</code></pre> <p>I&#39;ve never seen this happening. It just shows that all those Julia users never break the Dict in their code, because the internals are simply not documented. Who would be smart enough to read the internal source code, yet foolish enough to break it? </p> <h2 id=modules_and_packages ><a href="#modules_and_packages" class=header-anchor >Modules and packages</a></h2> <p>Functions &#40;and type constructors&#41; are embedded inside modules for others to re-use. A package is just a well defined module that you can easily install and use. &#40;If you are directly <code>include&#40;&#41;</code>-ing raw source code from others into your code to re-use their functions, you are doing it wrong.&#41;</p> <p>So if we want to avoid access to functions, we need to make modules do the work. To a module, functions are basically data fields that get accessed. The approach is described by Tom Kwong in his book. You wrap a let block &#40;fully private&#41; into a module &#40;fully public&#41;. Any functions that you declare <code>global</code> in the let block will be available in the module scope.</p> <pre><code class=language-julia >module Example   
+    let x &#61; 0, y &#61; 2
+        global function add_one&#40;&#41;
+            x &#43;&#61; 1
+            return nothing
+        end
+        global function print_x&#40;&#41;
+             return private_print&#40;&#41;
+        end
+        function private_print&#40;&#41;
+             return println&#40;x&#41;
+        end
+    end
+end
+
+julia&gt; Example.print_x&#40;&#41;
+0
+julia&gt; Example.add_one&#40;&#41;
+julia&gt; Example.print_x&#40;&#41;
+1
+
+julia&gt; Example.x
+ERROR: UndefVarError: x not defined
+
+julia&gt; Example.private_print
+ERROR: UndefVarError: private_print not defined</code></pre> <p>Note that we can hide both persisting types and functions in the let block of the module.</p> <p>The general lesson to hide stuff in Julia: get creative with <a href="https://docs.julialang.org/en/v1/manual/variables-and-scoping/">scopes</a>.</p> <h3 id=reasons_to_avoid_access_to_functions ><a href="#reasons_to_avoid_access_to_functions" class=header-anchor >Reasons to avoid access to functions?</a></h3> <p>Why would you want to stop users from using your functions?</p> <p>Maybe this function is some internal function that is not part of the public API and may change later in the future? That means you didn&#39;t write a docstring for users, nor did you export it. You can add an underscore in front for extra clarity. All these things should be sufficient &quot;no threspassing&quot; signals for good users to understand the risk of using this private function.</p> <p>You don&#39;t want some entangled mess of function calls throughout your own code? In other words, you want to reduce <a href="https://en.m.wikipedia.org/wiki/Coupling_&#40;computer_programming&#41;">coupling</a>? Then don&#39;t make it part of the public package API. Anyway, designing a good interface requires lots of thinking. Mindlessly making things private won&#39;t help you.</p> <p>If your users really like all your internal functions, maybe you should talk to them about it. Perhaps it&#39;s good to improve the formal API, or rewrite them into a separate package and manage these facilities officially?</p> <h2 id=conclusion ><a href="#conclusion" class=header-anchor >Conclusion</a></h2> <p>I think the most important reasons to hide things in the code are:</p> <ol> <li><p>To abstract details away behind an interface. Make your code easier to use, since the user doesn&#39;t need to understand the details. And make it more maintainable, since the developer can change the details as long as the behavior remains equal.</p> <li><p>To avoid strongly coupled systems, where one subsystem uses a lot of internals from another subsystem. Again this is for maintainability &#40;most code advice is&#41;. You want to avoid a tangled mess, where one local change has unexpected system wide impact, leading to much extra work.</p> <li><p>To protect against unwanted behavior. Someone else may accidentally change the state of your program by changing a variable at runtime.</p> </ol> <p>I think these are perfectly reasonable desires. But none of them require you to actually hide things. There are other options.</p> <p>Julia is really good at making things easy for the user. You can dispatch any existing Base functions onto your new custom type. Voila, new interfaces&#33; </p> <p>You don&#39;t want people to change your data? Make the type immutable&#33;</p> <p>Don&#39;t want to make the type immutable? Clearly indicate it&#39;s a private property, with underscores. Go the extra mile by writing a specific <code>setproperty&#33;</code> for your type.</p> <p>Also try to avoid persisting states if possible. Lovely quote from the Erlang founder in <a href="http://harmful.cat-v.org/software/OO_programming/why_oo_sucks">this post</a>.</p> <blockquote> <p>State is the root of all evil. In particular functions with side effects should be avoided.</p> </blockquote> <p>You don&#39;t want people to read your data or functions? Add an underscore and don&#39;t document them. Clearly document the public exported functions instead. Make the public functions super easy to use&#33;</p> <p>Really, really don&#39;t want people to access your data and functions? Drop them inside a let block inside a module.</p> <p>Also I hope you have a test suite that tests your system, so stuff cannot be broken accidentally.</p> <p>When collaborating with other humans &#40;in a single codebase&#41;, you should assume their intentions in the following order:</p> <ul> <li><p>Good intentions</p> <li><p>Ignorance</p> <li><p>Bad intentions</p> </ul> <p>I believe you should design your codebase accordingly for good intentions and expect some ignorance. Bad intentions need to be dealt with outside the code base.</p> <p>Therefore, I believe we should worry less about protecting our privates and focus more on clearly describing what the public interface is. And remove all resistance to using the public interface, keep it simple and easy, thereby rewarding the use of the public interface over any internals. </p> <p>Stop hiding things, start making things simple. That&#39;s the real spirit of encapsulation.</p> <script src="https://utteranc.es/client.js" repo="matthijscox/Blog" issue-term=pathname  label=Comment  theme=github-light  crossorigin=anonymous  async> </script> <div class=page-foot > <div class=copyright > &copy; Matthijs Cox. Last modified: July 02, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>. </div> </div> </div> </div> </div> <script src="/libs/highlight/highlight.pack.js"></script> <script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: ' '});</script> <label for=sidebar-checkbox  class=sidebar-toggle ></label>
