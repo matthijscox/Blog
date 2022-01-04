@@ -1,13 +1,120 @@
-<!doctype html> <html lang=en > <meta charset=UTF-8 > <meta name=viewport  content="width=device-width, initial-scale=1"> <link rel=stylesheet  href="/libs/highlight/github.min.css"> <link rel=stylesheet  href="/css/franklin.css"> <link rel=stylesheet  href="/css/poole_lanyon.css"> <link rel=stylesheet  href="/css/adjust.css"> <link rel=icon  href="/assets/favicon.png"> <title>Functional Noise</title> <input type=checkbox  class=sidebar-checkbox  id=sidebar-checkbox > <div class=sidebar  id=sidebar > <div class=sidebar-item > <p>Functional Noise</p> </div> <nav class=sidebar-nav > <a class="sidebar-nav-item " href="/">Home</a> <a class="sidebar-nav-item " href="/about/">About</a> <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a> </nav> <div class=sidebar-item > <p>&copy; Matthijs Cox.</p> </div> </div> <!-- Wrap is the content to shift when toggling the sidebar. We wrap the content to avoid any CSS collisions with our real content. --> <div class=wrap > <div class=masthead > <div class=container > <h3 class=masthead-title > <a href="/" title=Home >Functional Noise</a> <small>Regularize Your Mind</small> </h3> </div> </div> <div class="container content"> <div class=franklin-content ><h1 id=julia_developer_tips ><a href="#julia_developer_tips" class=header-anchor >Julia Developer Tips</a></h1> <p>I currently spend quite some time teaching Julia to interested developers. One recurring question is to share my tips for Julia development, specifically tooling and utility functions. Things that make your work easier, but that I always forget to explain explicitly. All these tips can be Googled and read in the Julia documentation, but I&#39;ll write them down here for later reference. Considered it a curated list of tips.</p> <h2 id=how_to_get_started_with_julia ><a href="#how_to_get_started_with_julia" class=header-anchor >How to get started with Julia</a></h2> <p>I assume you are already familiar with Julia. If not, go download it from the <a href="https://julialang.org/">Julia website</a>. Start learning via your preferred style, the <a href="https://julialang.org/learning/">Julia learning page</a> has a great overview of material.</p> <p>What I used for teaching so far:</p> <ul> <li><p>Like to dive deep? Read the <a href="https://docs.julialang.org/en/v1/manual/getting-started/">manual</a>.</p> <li><p>Like to read a free book? <a href="https://benlauwens.github.io/ThinkJulia.jl/latest/book.html">ThinkJulia</a>.</p> <li><p>Like guided training with a tutor? Watch <a href="https://juliaacademy.com/courses">videos</a>.</p> <li><p>Like to start hands-on work with Jupyter notebooks? Find them on <a href="https://github.com/JuliaAcademy/JuliaTutorials/tree/main/introductory-tutorials/intro-to-julia">Github</a>.</p> <li><p>Like reading academic papers? Start with the <a href="https://arxiv.org/pdf/1411.1607.pdf">paper</a> from the founders.</p> </ul> <p>Please learn Julia in the way that works best for you, I can&#39;t tell you what works best.</p> <h3 id=which_ide ><a href="#which_ide" class=header-anchor >Which IDE?</a></h3> <p>I use <a href="https://code.visualstudio.com/">Visual Study Code</a> with the <a href="https://www.julia-vscode.org/">Julia extension</a>. But please use whatever you like. For example, I have a colleague who raves about <a href="https://neovim.io/">Neovim</a> and corresponding Julia plugin.</p> <h3 id=julia_package_creation ><a href="#julia_package_creation" class=header-anchor >Julia package creation</a></h3> <p>After learning the Julia language basics, the next thing you should learn is how to create Julia packages. It&#39;s the one and only way to distribute your code to others in a standard manner.</p> <p>I taught myself via this <a href="https://www.youtube.com/watch?v&#61;QVmU29rCjaA">Youtube Video</a>. Created by Chris Rackauckas, a prominent Julia contributor.</p> <p>I recently discovered this <a href="https://jaantollander.com/post/how-to-create-software-packages-with-julia-language/">Blog Post - How to create packages with Julia</a>, which also gives a good overview.</p> <h2 id=the_julia_tips ><a href="#the_julia_tips" class=header-anchor >The Julia tips</a></h2> <p>The Julia manual already includes quite some tips:</p> <ul> <li><p><a href="https://docs.julialang.org/en/v1/manual/performance-tips/">Julia Manual - Performance Tips</a></p> <li><p><a href="https://docs.julialang.org/en/v1/manual/workflow-tips/">Julia Manual - Workflow Tips</a></p> <li><p><a href="https://docs.julialang.org/en/v1/manual/style-guide/">Julia Manual - Styleguide</a></p> </ul> <h3 id=basic_utilities ><a href="#basic_utilities" class=header-anchor >Basic Utilities</a></h3> <p>Julia has plenty of &#40;interactive&#41; utilities to help you make some more sense of Julia code. When I accidentally use one of these functions in a training, people often tell me &quot;I wish you would spend more time explaining these&quot;. So here it goes.</p> <p>The most basic &#39;utilities&#39; are all functions to get type information. These should be covered in all Julia teaching material, but let&#39;s do a quick recap:</p> <p>You&#39;ll find yourself wanting to know the type:</p> <pre><code class=language-julia >julia&gt; typeof&#40;3&#41;
-Int64</code></pre> <p>Or maybe you want to know the supertype</p> <pre><code class=language-julia >julia&gt; supertype&#40;Int64&#41;
-Signed</code></pre> <p>Another great function you should never forget is to get all the methods of a function:</p> <pre><code class=language-julia >julia&gt; methods&#40;append&#33;&#41;
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/poole_lanyon.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+
+   <title>Functional Noise</title>  
+</head>
+<body>
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Functional Noise</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item " href="/">Home</a>
+    <a class="sidebar-nav-item " href="/about/">About</a>
+    <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a>
+  </nav>
+  <div class="sidebar-item">
+    <p>&copy; Matthijs Cox.</p>
+  </div>
+</div>
+
+<!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+content to avoid any CSS collisions with our real content. -->
+<div class="wrap">
+  <div class="masthead">
+    <div class="container">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Functional Noise</a>
+        <small>Regularize Your Mind</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="container content">
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="julia_developer_tips"><a href="#julia_developer_tips" class="header-anchor">Julia Developer Tips</a></h1>
+<p>I currently spend quite some time teaching Julia to interested developers. One recurring question is to share my tips for Julia development, specifically tooling and utility functions. Things that make your work easier, but that I always forget to explain explicitly. All these tips can be Googled and read in the Julia documentation, but I&#39;ll write them down here for later reference. Considered it a curated list of tips.</p>
+<h2 id="how_to_get_started_with_julia"><a href="#how_to_get_started_with_julia" class="header-anchor">How to get started with Julia</a></h2>
+<p>I assume you are already familiar with Julia. If not, go download it from the <a href="https://julialang.org/">Julia website</a>. Start learning via your preferred style, the <a href="https://julialang.org/learning/">Julia learning page</a> has a great overview of material.</p>
+<p>What I used for teaching so far:</p>
+<ul>
+<li><p>Like to dive deep? Read the <a href="https://docs.julialang.org/en/v1/manual/getting-started/">manual</a>.</p>
+</li>
+<li><p>Like to read a free book? <a href="https://benlauwens.github.io/ThinkJulia.jl/latest/book.html">ThinkJulia</a>.</p>
+</li>
+<li><p>Like guided training with a tutor? Watch <a href="https://juliaacademy.com/courses">videos</a>.</p>
+</li>
+<li><p>Like to start hands-on work with Jupyter notebooks? Find them on <a href="https://github.com/JuliaAcademy/JuliaTutorials/tree/main/introductory-tutorials/intro-to-julia">Github</a>.</p>
+</li>
+<li><p>Like reading academic papers? Start with the <a href="https://arxiv.org/pdf/1411.1607.pdf">paper</a> from the founders.</p>
+</li>
+</ul>
+<p>Please learn Julia in the way that works best for you, I can&#39;t tell you what works best.</p>
+<h3 id="which_ide"><a href="#which_ide" class="header-anchor">Which IDE?</a></h3>
+<p>I use <a href="https://code.visualstudio.com/">Visual Study Code</a> with the <a href="https://www.julia-vscode.org/">Julia extension</a>. But please use whatever you like. For example, I have a colleague who raves about <a href="https://neovim.io/">Neovim</a> and corresponding Julia plugin.</p>
+<h3 id="julia_package_creation"><a href="#julia_package_creation" class="header-anchor">Julia package creation</a></h3>
+<p>After learning the Julia language basics, the next thing you should learn is how to create Julia packages. It&#39;s the one and only way to distribute your code to others in a standard manner.</p>
+<p>I taught myself via this <a href="https://www.youtube.com/watch?v&#61;QVmU29rCjaA">Youtube Video</a>. Created by Chris Rackauckas, a prominent Julia contributor.</p>
+<p>I recently discovered this <a href="https://jaantollander.com/post/how-to-create-software-packages-with-julia-language/">Blog Post - How to create packages with Julia</a>, which also gives a good overview.</p>
+<h2 id="the_julia_tips"><a href="#the_julia_tips" class="header-anchor">The Julia tips</a></h2>
+<p>The Julia manual already includes quite some tips:</p>
+<ul>
+<li><p><a href="https://docs.julialang.org/en/v1/manual/performance-tips/">Julia Manual - Performance Tips</a></p>
+</li>
+<li><p><a href="https://docs.julialang.org/en/v1/manual/workflow-tips/">Julia Manual - Workflow Tips</a></p>
+</li>
+<li><p><a href="https://docs.julialang.org/en/v1/manual/style-guide/">Julia Manual - Styleguide</a></p>
+</li>
+</ul>
+<h3 id="basic_utilities"><a href="#basic_utilities" class="header-anchor">Basic Utilities</a></h3>
+<p>Julia has plenty of &#40;interactive&#41; utilities to help you make some more sense of Julia code. When I accidentally use one of these functions in a training, people often tell me &quot;I wish you would spend more time explaining these&quot;. So here it goes.</p>
+<p>The most basic &#39;utilities&#39; are all functions to get type information. These should be covered in all Julia teaching material, but let&#39;s do a quick recap:</p>
+<p>You&#39;ll find yourself wanting to know the type:</p>
+<pre><code class="language-julia">julia&gt; typeof&#40;3&#41;
+Int64</code></pre>
+<p>Or maybe you want to know the supertype</p>
+<pre><code class="language-julia">julia&gt; supertype&#40;Int64&#41;
+Signed</code></pre>
+<p>Another great function you should never forget is to get all the methods of a function:</p>
+<pre><code class="language-julia">julia&gt; methods&#40;append&#33;&#41;
 # 5 methods for generic function &quot;append&#33;&quot;:
 &#91;1&#93; append&#33;&#40;A::Array&#123;Bool,1&#125;, items::BitArray&#123;1&#125;&#41; in Base at bitarray.jl:772
 &#91;2&#93; append&#33;&#40;B::BitArray&#123;1&#125;, items::BitArray&#123;1&#125;&#41; in Base at bitarray.jl:755
 &#91;3&#93; append&#33;&#40;a::Array&#123;T,1&#125; where T, items::AbstractArray&#123;T,1&#125; where T&#41; in Base at array.jl:973
 &#91;4&#93; append&#33;&#40;B::BitArray&#123;1&#125;, items&#41; in Base at bitarray.jl:771
-&#91;5&#93; append&#33;&#40;a::AbstractArray&#123;T,1&#125; where T, iter&#41; in Base at array.jl:981</code></pre> <p><a href="https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#Interactive-Utilities">InteractiveUtils.jl</a>, by default loaded in your Julia REPL. Note: don&#39;t use them in your packages if you can avoid it, they are primarily tools for developers to use on the REPL. The names of these functions are pretty self-explanatory.</p> <ul> <li><p><a href="https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#InteractiveUtils.subtypes">subtypes</a></p> <li><p><a href="https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#InteractiveUtils.supertypes">supertypes</a></p> <li><p><a href="https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#InteractiveUtils.methodswith">methodswith</a></p> <li><p><a href="https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#InteractiveUtils.@which">@which</a></p> <li><p><a href="https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#InteractiveUtils.@edit">@edit</a></p> </ul> <p>I especially use <code>@which</code> and <code>@edit</code> more and more as our code base grows. It helps you find which method is being called, where <code>@edit</code> immediately opens your editor at that location:</p> <pre><code class=language-julia >julia&gt; @which push&#33;&#40;&#91;1,2&#93;, 1&#41;
-push&#33;&#40;a::Array&#123;T,1&#125;, item&#41; where T in Base at array.jl:932</code></pre> <p>Another cool trick is to quickly make a subtype tree, for example with AbstractTrees</p> <pre><code class=language-julia >julia&gt; using AbstractTrees
+&#91;5&#93; append&#33;&#40;a::AbstractArray&#123;T,1&#125; where T, iter&#41; in Base at array.jl:981</code></pre>
+<p><a href="https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#Interactive-Utilities">InteractiveUtils.jl</a>, by default loaded in your Julia REPL. Note: don&#39;t use them in your packages if you can avoid it, they are primarily tools for developers to use on the REPL. The names of these functions are pretty self-explanatory.</p>
+<ul>
+<li><p><a href="https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#InteractiveUtils.subtypes">subtypes</a></p>
+</li>
+<li><p><a href="https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#InteractiveUtils.supertypes">supertypes</a></p>
+</li>
+<li><p><a href="https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#InteractiveUtils.methodswith">methodswith</a></p>
+</li>
+<li><p><a href="https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#InteractiveUtils.@which">@which</a></p>
+</li>
+<li><p><a href="https://docs.julialang.org/en/v1/stdlib/InteractiveUtils/#InteractiveUtils.@edit">@edit</a></p>
+</li>
+</ul>
+<p>I especially use <code>@which</code> and <code>@edit</code> more and more as our code base grows. It helps you find which method is being called, where <code>@edit</code> immediately opens your editor at that location:</p>
+<pre><code class="language-julia">julia&gt; @which push&#33;&#40;&#91;1,2&#93;, 1&#41;
+push&#33;&#40;a::Array&#123;T,1&#125;, item&#41; where T in Base at array.jl:932</code></pre>
+<p>Another cool trick is to quickly make a subtype tree, for example with AbstractTrees</p>
+<pre><code class="language-julia">julia&gt; using AbstractTrees
 julia&gt; AbstractTrees.children&#40;x::Type&#41; &#61; subtypes&#40;x&#41;
 julia&gt; print_tree&#40;Integer&#41;
 Integer
@@ -24,8 +131,47 @@ Integer
    ├─ UInt16
    ├─ UInt32
    ├─ UInt64
-   └─ UInt8</code></pre> <p>As you grow in Julia experience, you&#39;ll find yourself wanting more utilities. Like <code>Test.@inferred</code> which is useful to check for type instability. I can advice the book <a href="https://www.packtpub.com/product/hands-on-design-patterns-and-best-practices-with-julia/9781838648817">Julia Hands-on Design Patterns book</a> for more goodies.</p> <h3 id=unit_testing ><a href="#unit_testing" class=header-anchor >Unit Testing</a></h3> <p>Every Julia package developer is doing Test Driven Development. It&#39;s the defacto standard in software development nowadays. Where to learn TDD? I watched two Robert C Martin &#40;Uncle Bob&#41; videos at work about TDD and that was it. I&#39;m sure there are free TDD tutorials out there, but I didn&#39;t need much more to be convinced.</p> <p>What do you want me to say about unit testing? It&#39;s almost trivial and already explained in the blog post <a href="https://jaantollander.com/post/how-to-create-software-packages-with-julia-language/">&quot;How to create packages with Julia&quot;</a>.</p> <pre><code class=language-Julia >using Test
+   └─ UInt8</code></pre>
+<p>As you grow in Julia experience, you&#39;ll find yourself wanting more utilities. Like <code>Test.@inferred</code> which is useful to check for type instability. I can advice the book <a href="https://www.packtpub.com/product/hands-on-design-patterns-and-best-practices-with-julia/9781838648817">Julia Hands-on Design Patterns book</a> for more goodies.</p>
+<h3 id="unit_testing"><a href="#unit_testing" class="header-anchor">Unit Testing</a></h3>
+<p>Every Julia package developer is doing Test Driven Development. It&#39;s the defacto standard in software development nowadays. Where to learn TDD? I watched two Robert C Martin &#40;Uncle Bob&#41; videos at work about TDD and that was it. I&#39;m sure there are free TDD tutorials out there, but I didn&#39;t need much more to be convinced.</p>
+<p>What do you want me to say about unit testing? It&#39;s almost trivial and already explained in the blog post <a href="https://jaantollander.com/post/how-to-create-software-packages-with-julia-language/">&quot;How to create packages with Julia&quot;</a>.</p>
+<pre><code class="language-Julia">using Test
 @testset &quot;name your testset&quot; begin
     # just test anything that evaluates to a Boolean
     @test 1&#61;&#61;2
-end</code></pre> <p>If you do test driven development, you should have good code coverage pretty much by default. But you&#39;ll want to brag about your code coverage, so you can use <a href="https://github.com/JuliaCI/Coverage.jl">Coverage.jl</a></p> <h3 id=profiling ><a href="#profiling" class=header-anchor >Profiling</a></h3> <p>Julia has a <a href="https://docs.julialang.org/en/v1/manual/profile/">profiler</a>. To make a quick overview plot I love <a href="https://github.com/timholy/ProfileView.jl">ProfileView.jl</a>.</p> <p>That&#39;s actually all I ever used for profiling.</p> <h3 id=debugging ><a href="#debugging" class=header-anchor >Debugging</a></h3> <p>To be honest I hardly ever use the debugger.</p> <p>Debugging works out of the box in Visual Studio Code, you can see the <a href="https://www.julia-vscode.org/docs/stable/userguide/debugging/">Julia-VSCode debugging guide</a> for more information.</p> <p>Julia has debugging capabilities embedded which you can use from the command line. I liked <a href="https://opensourc.es/blog/basics-debugging/">this blog post</a> which compares multiple debugging alternatives.</p> <script src="https://utteranc.es/client.js" repo="matthijscox/Blog" issue-term=pathname  label=Comment  theme=github-light  crossorigin=anonymous  async> </script> <div class=page-foot > <div class=copyright > &copy; Matthijs Cox. Last modified: March 27, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>. </div> </div> </div> </div> </div> <script src="/libs/highlight/highlight.pack.js"></script> <script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: ' '});</script> <label for=sidebar-checkbox  class=sidebar-toggle ></label>
+end</code></pre>
+<p>If you do test driven development, you should have good code coverage pretty much by default. But you&#39;ll want to brag about your code coverage, so you can use <a href="https://github.com/JuliaCI/Coverage.jl">Coverage.jl</a></p>
+<h3 id="profiling"><a href="#profiling" class="header-anchor">Profiling</a></h3>
+<p>Julia has a <a href="https://docs.julialang.org/en/v1/manual/profile/">profiler</a>. To make a quick overview plot I love <a href="https://github.com/timholy/ProfileView.jl">ProfileView.jl</a>.</p>
+<p>That&#39;s actually all I ever used for profiling.</p>
+<h3 id="debugging"><a href="#debugging" class="header-anchor">Debugging</a></h3>
+<p>To be honest I hardly ever use the debugger.</p>
+<p>Debugging works out of the box in Visual Studio Code, you can see the <a href="https://www.julia-vscode.org/docs/stable/userguide/debugging/">Julia-VSCode debugging guide</a> for more information.</p>
+<p>Julia has debugging capabilities embedded which you can use from the command line. I liked <a href="https://opensourc.es/blog/basics-debugging/">this blog post</a> which compares multiple debugging alternatives.</p>
+    <script src="https://utteranc.es/client.js"
+        repo="matthijscox/Blog"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Matthijs Cox. Last modified: April 21, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+      </div>  <!-- div: content container -->
+    </div> <!-- wrap -->
+    
+    
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+    
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  </body>
+</html>

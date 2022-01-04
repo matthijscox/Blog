@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/poole_lanyon.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+
+   <title>Functional Noise</title>  
+</head>
+<body>
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Functional Noise</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item " href="/">Home</a>
+    <a class="sidebar-nav-item " href="/about/">About</a>
+    <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a>
+  </nav>
+  <div class="sidebar-item">
+    <p>&copy; Matthijs Cox.</p>
+  </div>
+</div>
+
+<!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+content to avoid any CSS collisions with our real content. -->
+<div class="wrap">
+  <div class="masthead">
+    <div class="container">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Functional Noise</a>
+        <small>Regularize Your Mind</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="container content">
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="julia_data_modeling_a_pointy_example"><a href="#julia_data_modeling_a_pointy_example" class="header-anchor">Julia Data Modeling: A Pointy Example</a></h1>
+<p>Julia&#39;s high performance gives the developer a lot of freedom in their choice of data structures. The downside of this freedom is that you need to spend more time thinking about the optimal data model for your code.</p>
+<p>In a low performance language you are often restrained by the interface of the underlying high performance library. For example, in the MATLAB language or the Python Numpy package you are encouraged to make vectors of only numbers.</p>
+<p>In Julia you can define your own custom types, which can be just as performant, or even more performant depending on your use case, than the already available types.</p>
+<h2 id="lots_of_points"><a href="#lots_of_points" class="header-anchor">Lot&#39;s of Points</a></h2>
+<p>To illustrate the possibilities, I&#39;ll take a simple example that I personally encountered a lot. You&#39;ve got some data points on an XY plane and the data is labeled as valid or not.</p>
+<p>The straightforward way to model this data &#40;coming from a vectorized framework&#41; is to define these as vectors.</p>
+<p>To keep them easily together in Julia, you&#39;ll then want to put them in a custom type:</p>
+<pre><code class="language-julia">struct VectorData
+    x::Vector&#123;Float64&#125;
+    y::Vector&#123;Float64&#125;
+    validx::Vector&#123;Bool&#125;
+    validy::Vector&#123;Bool&#125;
+end</code></pre>
+<p>The reason that vectors &#40;of primitive types&#41; are often performant is due to how your computer stores memory in data. When you apply operations that need to iterate over <code>x</code> for example, the compact memory layout is quite ideal. You can read this excellent article about <a href="https://viralinstruction.com/posts/hardware/">What scientists must know about hardware to write fast code</a>.</p>
+<p>So this can be a very good data structure. For example for multiplying your <code>x</code> values with a matrix.</p>
+<p>If you spend a lot of time iterating over the data points however, like filtering the valid data based on some function, things become a bit more messy.</p>
+<p>Also some developer might suddenly decide not all vectors in <code>VectorData</code> need to be equally long. Or the user of your data structure accidentally only changes one vector. If you want the vectors to be mutable, yet always of equal length, then you should check the vector lengths in all your functions to be safe :&#40;</p>
+<p>Let&#39;s try an alternative.</p>
+<pre><code class="language-julia">struct PointData
+    x::Float64
+    y::Float64
+    validx::Bool
+    validy::Bool
+end
+struct PointVector
+   points::Vector&#123;PointData&#125;
+end</code></pre>
+<p>Note that I put the vector of <code>PointData</code> into a struct, which just makes function dispatching more pleasant.</p>
+<p>Let&#39;s write our desired filter function and try them both. Decide for yourself which solution you find most readable.</p>
+<pre><code class="language-julia">function within_threshold&#40;x::T, y::T, threshold::T&#41; where T&lt;:Real
+    return x^2 &#43; y^2 &lt; threshold^2
+end
+
+function filter_points&#40;pts::VectorData, threshold&#61;0.4&#41;
+    keep &#61; pts.validx .&amp; pts.validy .&amp; within_threshold.&#40;pts.x, pts.y, Ref&#40;threshold&#41;&#41;
+    return VectorData&#40;pts.x&#91;keep&#93;, pts.y&#91;keep&#93;, pts.validx&#91;keep&#93;, pts.validy&#91;keep&#93;&#41;
+end
+
+function keep_point&#40;p::PointData, threshold&#41;
+    return p.validx &amp;&amp; p.validy &amp;&amp; within_threshold&#40;p.x, p.y, threshold&#41;
+end
+
+function filter_points&#40;points::AbstractArray&#123;PointData&#125;, threshold&#61;0.4&#41;
+    return filter&#40;p -&gt; keep_point&#40;p, threshold&#41;, points&#41;
+end
+
+function filter_points&#40;pts::PointVector, threshold&#61;0.4&#41;
+    return PointVector&#40;filter_points&#40;pts.points&#41;&#41;
+end</code></pre>
+<p>We can quickly try both functions out by constructing some example data:</p>
+<pre><code class="language-julia">function Base.convert&#40;::Type&#123;PointVector&#125;, v::VectorData&#41;
+    points &#61; PointData.&#40;v.x, v.y, v.validx, v.validy&#41;
+    return PointVector&#40;points&#41;
+end
+
+using BenchmarkTools
+N &#61; 10_000_000 # making the vectors do not fit in my computer&#39;s cache ;&#41;
+vd &#61; VectorData&#40;rand&#40;N&#41;, rand&#40;N&#41;, rand&#40;Bool, N&#41;, rand&#40;Bool, N&#41;&#41;
+
+@benchmark filter_points&#40;vd&#41;
+
+BenchmarkTools.Trial: 175 samples with 1 evaluation.
+ Range &#40;min … max&#41;:  25.246 ms … 62.595 ms  ┊ GC &#40;min … max&#41;: 0.00&#37; … 27.22&#37;
+ Time  &#40;median&#41;:     26.840 ms              ┊ GC &#40;median&#41;:    0.00&#37;
+ Time  &#40;mean ± σ&#41;:   28.581 ms ±  4.728 ms  ┊ GC &#40;mean ± σ&#41;:  1.55&#37; ±  5.52&#37;
+
+ Memory estimate: 6.60 MiB, allocs estimate: 14.
+
+pv &#61; convert&#40;PointVector, vd&#41;
+@benchmark filter_points&#40;pv&#41;
+
+BenchmarkTools.Trial: 170 samples with 1 evaluation.
+ Range &#40;min … max&#41;:  21.897 ms … 85.568 ms  ┊ GC &#40;min … max&#41;:  0.00&#37; … 8.27&#37;
+ Time  &#40;median&#41;:     28.346 ms              ┊ GC &#40;median&#41;:     0.72&#37;
+ Time  &#40;mean ± σ&#41;:   29.538 ms ±  7.879 ms  ┊ GC &#40;mean ± σ&#41;:  10.11&#37; ± 9.53&#37;
+
+ Memory estimate: 228.88 MiB, allocs estimate: 4.</code></pre>
+<p>In this case it turns the times are roughly equal. My PointVector solution is slightly faster, but does use way more memory.</p>
+<h2 id="interlude_filtering_better"><a href="#interlude_filtering_better" class="header-anchor">Interlude: Filtering better</a></h2>
+<p>I am a little annoyed at the memory usage of the filter function. So I am exploring how to improve that here.</p>
+<p>The <code>Base.filter&#40;&#41;</code> function might be the memory consumer. If you write a list comprehension it actually use <code>Iterators.filter</code>, so these two solutions behave equally. Less memory usage, but slightly slower:</p>
+<pre><code class="language-julia">function filter_points&#40;points::AbstractArray&#123;PointData&#125;, threshold&#61;0.4&#41;
+    return &#91;p for p in points if keep_point&#40;p, threshold&#41;&#93;
+end
+function filter_points&#40;points::AbstractArray&#123;PointData&#125;, threshold&#61;0.4&#41;
+    return collect&#40;Iterators.filter&#40;p -&gt; keep_point&#40;p, threshold&#41;, points&#41;&#41;
+end
+
+@benchmark filter_points&#40;pv&#41;
+
+BenchmarkTools.Trial: 117 samples with 1 evaluation.
+ Range &#40;min … max&#41;:  36.909 ms … 101.812 ms  ┊ GC &#40;min … max&#41;: 0.00&#37; … 0.00&#37;
+ Time  &#40;median&#41;:     39.738 ms               ┊ GC &#40;median&#41;:    0.00&#37;
+ Time  &#40;mean ± σ&#41;:   42.855 ms ±   7.999 ms  ┊ GC &#40;mean ± σ&#41;:  1.13&#37; ± 3.73&#37;
+
+ Memory estimate: 14.26 MiB, allocs estimate: 14.</code></pre>
+<p>I can also define the functionality myself. You can see it&#39;s pretty much equal to the list comprehension.</p>
+<pre><code class="language-julia">function filter_points&#40;points::T, threshold&#61;0.4&#41; where T&lt;:AbstractArray&#123;PointData&#125;
+    new_points &#61; T&#40;&#41;
+    for p in points
+        if keep_point&#40;p, threshold&#41;
+            push&#33;&#40;new_points, p&#41;
+        end
+    end
+    return new_points
+end
+
+@benchmark filter_points&#40;pv&#41;
+
+BenchmarkTools.Trial: 116 samples with 1 evaluation.
+ Range &#40;min … max&#41;:  41.746 ms … 57.218 ms  ┊ GC &#40;min … max&#41;: 0.00&#37; … 22.16&#37;
+ Time  &#40;median&#41;:     42.415 ms              ┊ GC &#40;median&#41;:    0.00&#37;
+ Time  &#40;mean ± σ&#41;:   43.246 ms ±  2.438 ms  ┊ GC &#40;mean ± σ&#41;:  1.21&#37; ±  4.03&#37;
+
+ Memory estimate: 14.26 MiB, allocs estimate: 14.</code></pre>
+<p>It seems I can reduce memory usage at the cost of some runtime performance. In the source code of <code>Base.filter</code> I see that it pre-allocates a new vector and shrinks it afterwards, while in this code we grow the new vector dynamically. I&#39;m keeping this info here for future reference.</p>
+<h2 id="more_point_possibilities"><a href="#more_point_possibilities" class="header-anchor">More point possibilities</a></h2>
+<p>Having to choose between an array of structs, or a struct of arrays, is a typical scenario while coding in Julia. The best choice really depends on what you intend to do most with your data. If performance is not the issue, then I prefer the array of structs for reasons of clarity &#40;that means the <code>PointVector</code> in the above example&#41;.</p>
+<p>But let&#39;s not stop there and explore some more options together.</p>
+<p>Why not accept the fact that we have two points intertwined in our data model?</p>
+<pre><code class="language-julia">struct Point&#123;T&#125;
+    x::T
+    y::T
+end
+struct TwoPoints
+    values::Point&#123;Float64&#125;
+    valid::Point&#123;Bool&#125;
+end
+struct VectorTwoPoints
+    data::Vector&#123;TwoPoints&#125;
+end</code></pre>
+<p>Or pair up the value and valid field. Perhaps this is a common pattern in your codebase to flag any value as valid or not?</p>
+<pre><code class="language-julia">struct ValidValue&#123;T&#125;
+    value::T
+    valid::Bool
+end
+struct VectorPointValues
+    data::Vector&#123;Point&#123;ValidValue&#125;&#125;
+end</code></pre>
+<p>Or accept that we always have a value and a valid per direction. The interesting thing here is that we can extend the directions easily in the future if we want to go 3D for example. To label the direction, we could use an enum, but those are not popular in Julia. One reason is that you cannot easily dispatch on enums. So you might find something like this:</p>
+<pre><code class="language-julia">abstract type Direction end
+struct X &lt;: Direction end
+struct Y &lt;: Direction end
+
+struct DirectionalValidValue
+    direction::Direction
+    value::Float64
+    valid::Bool
+end
+struct VectorDirectionalValues
+    data::Vector&#123;DirectionalValidValue&#125;
+end</code></pre>
+<p>And now we could go full circle and just make a struct array again:</p>
+<pre><code class="language-julia">struct DirectionalVectorData
+    direction::Vector&#123;&lt;:Direction&#125;
+    values::Vector&#123;Float64&#125;
+    valid::Vector&#123;Bool&#125;
+end</code></pre>
+<p>This last one might be best if we often find ourselves concatenating the x and y value from the initial structure. For example if we want to fit the x and y data together in a 2D model.</p>
+<p>I&#39;m not going to test the filtering performance of all of these. I expect roughly equal performance as the <code>PointVector</code> solution, with a little extra overhead if we use structs inside structs.</p>
+<p>The ideal structures will depend on your own use case; what you do with the data in the functions you write. I&#39;m still learning what is best for my own use cases. A structure of arrays seems to be the first choice for performance, assuming your data fits into memory as continuous vectors. DataFrames.jl stores each column as a vector for this purpose. But the desire to want both a struct array and an array of structs is a common pattern as well. So common that it has it&#39;s own package: <a href="https://github.com/JuliaArrays/StructArrays.jl">StructArrays.jl</a>.</p>
+<h2 id="structarrays"><a href="#structarrays" class="header-anchor">StructArrays</a></h2>
+<p>Let&#39;s have a brief look at StructArrays. I&#39;m re-using the data generated in the example from the beginning.</p>
+<pre><code class="language-julia">julia&gt; using StructArrays
+
+julia&gt; sa &#61; StructArray&#40;pv.points&#41;
+10000000-element StructArray&#40;::Vector&#123;Float64&#125;, ::Vector&#123;Float64&#125;, ::Vector&#123;Bool&#125;, ::Vector&#123;Bool&#125;&#41; with eltype PointData:
+ PointData&#40;0.8342412444868733, 0.7156389385059589, false, false&#41;
+ ⋮
+ PointData&#40;0.21446860650049493, 0.23189128521923086, false, false&#41;
+
+# you can get the properties again
+julia&gt; sa.x
+10000000-element Vector&#123;Float64&#125;:
+ 0.8342412444868733
+ ⋮
+ 0.21446860650049493
+
+# we can apply our filter function on it
+julia&gt; filter_points&#40;sa&#41;
+314598-element StructArray&#40;::Vector&#123;Float64&#125;, ::Vector&#123;Float64&#125;, ::Vector&#123;Bool&#125;, ::Vector&#123;Bool&#125;&#41; with eltype PointData:
+ PointData&#40;0.09048345510701994, 0.320553989305556, true, true&#41;
+ ⋮
+ PointData&#40;0.11419461083293259, 0.34645035134668634, true, true&#41;
+
+julia&gt; @benchmark filter_points&#40;sa&#41;
+BenchmarkTools.Trial: 73 samples with 1 evaluation.
+ Range &#40;min … max&#41;:  63.260 ms … 92.607 ms  ┊ GC &#40;min … max&#41;: 0.00&#37; … 14.19&#37;
+ Time  &#40;median&#41;:     66.733 ms              ┊ GC &#40;median&#41;:    0.00&#37;
+ Time  &#40;mean ± σ&#41;:   68.442 ms ±  5.277 ms  ┊ GC &#40;mean ± σ&#41;:  0.48&#37; ±  2.31&#37;
+
+ Memory estimate: 14.26 MiB, allocs estimate: 14.</code></pre>
+<p>Unfortunately it&#39;s slower than the direct implementations, StructArrays seems to add a bit of overhead. But the convenience might be worth it for you, and maybe you do not spend that much time iterating over the rows/elements of the struct array.</p>
+<h2 id="custom_struct_array_implementation"><a href="#custom_struct_array_implementation" class="header-anchor">Custom struct array implementation</a></h2>
+<p>If you want to build your own custom struct array, you&#39;ll have to write your own iterators and other functionality. It&#39;s more work, but is it worth it? Let&#39;s see how it goes.</p>
+<p>Basically I will just extend the <code>VectorData</code> type and link it to the <code>PointData</code> type via iterate and getindex and such. I will copy the structures here for clarity again.</p>
+<pre><code class="language-julia">struct PointData
+    x::Float64
+    y::Float64
+    validx::Bool
+    validy::Bool
+end
+struct VectorData
+    x::Vector&#123;Float64&#125;
+    y::Vector&#123;Float64&#125;
+    validx::Vector&#123;Bool&#125;
+    validy::Vector&#123;Bool&#125;
+end
+
+# remember there is some danger in this assumption
+Base.length&#40;v::VectorData&#41; &#61; length&#40;v.x&#41;
+Base.eachindex&#40;v::VectorData&#41; &#61; eachindex&#40;v.x&#41;
+Base.IteratorSize&#40;::Type&#123;VectorData&#125;&#41; &#61; Base.HasLength&#40;&#41;
+
+# I stole this function from AbstractArrays.jl, after reading StructArrays.jl
+# we could also choose to make VectorData &lt;: AbstractArray
+function Base.iterate&#40;A::VectorData, state&#61;&#40;eachindex&#40;A&#41;,&#41;&#41;
+    y &#61; iterate&#40;state...&#41;
+    y &#61;&#61;&#61; nothing &amp;&amp; return nothing
+    A&#91;y&#91;1&#93;&#93;, &#40;state&#91;1&#93;, Base.tail&#40;y&#41;...&#41;
+end
+
+function Base.getindex&#40;A::VectorData, idx::Integer&#41;
+    return PointData&#40;A.x&#91;idx&#93;, A.y&#91;idx&#93;, A.validx&#91;idx&#93;, A.validy&#91;idx&#93;&#41;
+end
+
+# defining my own filter function, not sure if there is a better way
+function Base.filter&#40;f::Function, A::VectorData&#41;
+    keep &#61; Int64&#91;&#93;
+    for &#40;index, p&#41; in enumerate&#40;A&#41;
+        if f&#40;p&#41;
+            push&#33;&#40;keep, index&#41;
+        end
+    end
+    return VectorData&#40;A.x&#91;keep&#93;, A.y&#91;keep&#93;, A.validx&#91;keep&#93;, A.validy&#91;keep&#93;&#41;
+end</code></pre>
+<p>Now we can use iteration to filter the points:</p>
+<pre><code class="language-julia">function filter_points&#40;pts::VectorData, threshold&#61;0.4&#41;
+    return filter&#40;p -&gt; keep_point&#40;p, threshold&#41;, pts&#41;
+end</code></pre>
+<p>Let&#39;s look at the filtering performance.</p>
+<pre><code class="language-julia">using BenchmarkTools
+N &#61; 10_000_000
+vd &#61; VectorData&#40;rand&#40;N&#41;, rand&#40;N&#41;, rand&#40;Bool, N&#41;, rand&#40;Bool, N&#41;&#41;
+
+@benchmark filter_points&#40;vd&#41;
+
+BenchmarkTools.Trial: 82 samples with 1 evaluation.
+ Range &#40;min … max&#41;:  54.039 ms … 83.368 ms  ┊ GC &#40;min … max&#41;: 0.00&#37; … 0.00&#37;
+ Time  &#40;median&#41;:     60.138 ms              ┊ GC &#40;median&#41;:    0.00&#37;
+ Time  &#40;mean ± σ&#41;:   61.772 ms ±  5.472 ms  ┊ GC &#40;mean ± σ&#41;:  1.02&#37; ± 3.27&#37;
+
+ Memory estimate: 10.61 MiB, allocs estimate: 21.</code></pre>
+<p>You see it&#39;s hard to do a much better job than StructArrays. And definitely hard to beat an actual struct of arrays.</p>
+    <script src="https://utteranc.es/client.js"
+        repo="matthijscox/Blog"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Matthijs Cox. Last modified: January 04, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+      </div>  <!-- div: content container -->
+    </div> <!-- wrap -->
+    
+    
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+    
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  </body>
+</html>

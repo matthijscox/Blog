@@ -1,36 +1,99 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
-<channel>
-  <title><![CDATA[Functional Noise]]></title>
-  <description><![CDATA[Regularize Your Mind
-]]></description>
-  <link>https://www.functionalnoise.com/</link>
-  <atom:link href="https://www.functionalnoise.com/tag/code/feed.xml" rel="self" type="application/rss+xml" />
-  <item>
-    <title><![CDATA[Julia Encapsulation]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-07-02-julia-encapsulation/</link>
-    <description><![CDATA[Reflections on encapsulation in the Julia language
-<br><a href="https://www.functionalnoise.com/pages/2021-07-02-julia-encapsulation/">Read more</a>]]></description>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss version="2.0"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:media="http://search.yahoo.com/mrss/"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss">
+
+  <channel>
+    <title>
+      <![CDATA[  {{fd2rss website_title}}  ]]>
+    </title>
+    <link> {{website_url}} </link>
+    <description>
+      <![CDATA[  {{fd2rss website_description}}  ]]>
+    </description>
+    <atom:link
+      href="{{fd_rss_feed_url}}"
+      rel="self"
+      type="application/rss+xml" />
+
+
+<item>
+  <title>
+    <![CDATA[  Julia Data Modeling: A Pointy Example  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2022-01-04-julia-data-modeling/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2022-01-04-julia-data-modeling/index.html </guid>
+  <description>
+    <![CDATA[  Julia Data Modeling: A Pointy Example  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-07-02-julia-encapsulation/</guid>
-    <pubDate>Fri, 2 Jul 2021 00:00:00 UT</pubDate>
-  </item>
-  <item>
-    <title><![CDATA[Julia Developer Tips]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-03-23-julia-tips/</link>
-    <description><![CDATA[Tips and tricks for new Julia developers
-<br><a href="https://www.functionalnoise.com/pages/2021-03-23-julia-tips/">Read more</a>]]></description>
+  <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Julia Encapsulation  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-07-02-julia-encapsulation/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-07-02-julia-encapsulation/index.html </guid>
+  <description>
+    <![CDATA[  Reflections on encapsulation in the Julia language  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-03-23-julia-tips/</guid>
-    <pubDate>Sat, 27 Mar 2021 00:00:00 UT</pubDate>
-  </item>
-  <item>
-    <title><![CDATA[Biosignal Machine Learning]]></title>
-    <link>https://www.functionalnoise.com/pages/2021-02-22-biosignal-machine-learning/</link>
-    <description><![CDATA[blog post about biosignal machine learning project
-<br><a href="https://www.functionalnoise.com/pages/2021-02-22-biosignal-machine-learning/">Read more</a>]]></description>
+  <pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Julia Developer Tips  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-03-23-julia-tips/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-03-23-julia-tips/index.html </guid>
+  <description>
+    <![CDATA[  Tips and tricks for new Julia developers  ]]>
+  </description>  
     
-    <guid>https://www.functionalnoise.com/pages/2021-02-22-biosignal-machine-learning/</guid>
-    <pubDate>Sat, 27 Mar 2021 00:00:00 UT</pubDate>
-  </item>
-</channel>
-</rss>
+  <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Biosignal Machine Learning  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-02-22-biosignal-machine-learning/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-02-22-biosignal-machine-learning/index.html </guid>
+  <description>
+    <![CDATA[  blog post about biosignal machine learning project  ]]>
+  </description>  
+    
+  <pubDate>Tue, 23 Mar 2021 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+</channel></rss>
