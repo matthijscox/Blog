@@ -46,7 +46,7 @@ What steps did I take so far?
 * Stopped using the app, explored mind states experimentally by myself. Tried to observe my own thoughts passing by. Tried to observe the observer. Accidentally found some altered mind state, got a bit scared.
 * Started reading up on deeper meditation. Read the book [Mastering the core teachings of the Buddha](https://slatestarcodex.com/2017/09/18/book-review-mastering-the-core-teachings-of-the-buddha/)
 * I actually stopped meditating at some point, focus entirely on my biosensor hobby during a high energy period lasting several months. I recall I hit some feeling that caused severe aversion, I now think it was the 'central body axis tension'; a pocket of repressed emotion.
-* I recall I did do somekind of 'micro-meditations', which created some pleasure. I could use it to overcome fear or exhaustion temporarily. But the strenght faded over time.
+* I recall I did somekind of 'micro-meditations', which create some pleasure boost. I could use these to overcome fear or exhaustion temporarily. But the strenght of the boosts faded over time, they became less effective.
 * When I got increasingly tired, I dropped the project, started meditating more and more.
 * Began reading the book ['Seeing that Frees'](https://www.goodreads.com/book/show/25172403-seeing-that-frees)
 * Followed Nick Cammarata on Twitter who talked a lot about the pleasure states (Jhana). Others also mentioned how embracing pleasure states and self-love helped them.
@@ -70,7 +70,7 @@ My current hypothesis is that the central body axis tension was a felt-sense rep
 
 [Internal Family Systems (IFS)](https://en.wikipedia.org/wiki/Internal_Family_Systems_Model) suddenly seems a lot more realistic.
 
-After my holiday period I went back to work. The team I am work with is doing great in my absence. Another good aspect of the holiday is that I can now let them go better, let them self-manage.
+After my holiday period I went back to work. The team I work with is doing great in my absence. Another good aspect of the holiday is that I can now let them go better, let them self-manage.
 
 ## Current status
 
