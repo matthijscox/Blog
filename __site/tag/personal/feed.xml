@@ -9,17 +9,36 @@
 
   <channel>
     <title>
-      <![CDATA[  {{fd2rss website_title}}  ]]>
+      <![CDATA[  Functional Noise  ]]>
     </title>
-    <link> {{website_url}} </link>
+    <link> https://www.functionalnoise.com </link>
     <description>
-      <![CDATA[  {{fd2rss website_description}}  ]]>
+      <![CDATA[  Regularize Your Mind  ]]>
     </description>
     <atom:link
-      href="{{fd_rss_feed_url}}"
+      href="https://www.functionalnoise.com\feed.xml"
       rel="self"
       type="application/rss+xml" />
 
+
+<item>
+  <title>
+    <![CDATA[  Catharsis  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2022-06-21-catharsis/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2022-06-21-catharsis/index.html </guid>
+  <description>
+    <![CDATA[  Catharsis. Reflections on a year of mental darkness.  ]]>
+  </description>  
+    
+  <pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
 
 <item>
   <title>

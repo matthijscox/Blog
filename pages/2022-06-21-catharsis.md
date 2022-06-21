@@ -40,6 +40,8 @@ Occasionally I would experience a really positive worldview and a high energy st
 
 ## Meditation journey
 
+I believe my meditative practices have helped me a lot, so let's summarize this journey for future reference.
+
 What steps did I take so far?
 * Decided I needed to be more mentally present at home with the family.
 * Started mindfulness via a mobile app. Slowly went from 5 minutes (of pure agony sometimes) to relatively easy 15 minute practice. Took a year or so.
@@ -66,16 +68,14 @@ My main activities during this holiday period:
 * Let my wife read my journal. Talked about it. New insight. Cried for the first time in many years.
 * Dissolved central body axis tension in meditation. Reached higher beginning of immaterial Jhana.
 
-My current hypothesis is that the central body axis tension was a felt-sense representing a bunch of repressed emotions. I've been slowly dissolving these. Communicating with it, accepting the emotions.
-
-[Internal Family Systems (IFS)](https://en.wikipedia.org/wiki/Internal_Family_Systems_Model) suddenly seems a lot more realistic.
+My current hypothesis is that the central body axis tension was a felt-sense representing a bunch of repressed emotions. I've been slowly dissolving these. Communicating with it, accepting the emotions. The [Internal Family Systems (IFS)](https://en.wikipedia.org/wiki/Internal_Family_Systems_Model) model suddenly seems a lot more realistic.
 
 After my holiday period I went back to work. The team I work with is doing great in my absence. Another good aspect of the holiday is that I can now let them go better, let them self-manage.
 
 ## Current status
 
-It's been two weeks since my holiday period. My energy levels were extremely high and I talked to a lot of people. A few days ago we have our internal company conference, where I presented. I think burned through a lot of energy there, the days afterwards I was tired again. Have been trying to rest more and analyze myself. The primary 'problem' in the last days (and also during high energy) is this constant fabrication of stories and thoughts in the mind. The Buddhists books call this [conceptual proliferation](https://en.wikipedia.org/wiki/Conceptual_proliferation). When left unattended, this can spread out like a web, causing increasing amounts of suffering. On the other hand, my curiosity wants to explore new ideas all the time, so I'll have to find the right balance. Finding this balance will be the next challenge.
+It's been two weeks since my holiday period. My energy levels were extremely high afterwards and I talked to a lot of people. A few days ago we had our internal company conference, where I presented. I burned through a lot of energy there, so the days afterwards I was tired again. Quickly tried to rest more and analyze myself. The primary 'problem' in the last days (and also during high energy) is this constant fabrication of stories and thoughts in the mind. The meditation books call this [conceptual proliferation](https://en.wikipedia.org/wiki/Conceptual_proliferation). When left unattended, this can spread out like a web, causing increasing amounts of suffering. On the other hand, my curiosity wants to explore new ideas all the time, so I'll have to find the right balance. Finding this balance will be the next challenge. The journey never ends.
 
-In general, I am noticing a lot more subtlety in my feelings and thoughts. I am monitoring myself much more carefully. I am able to let go of things more easily. These are good improvements. The struggle is how to rest enough, meditate enough, gain new insights, all while going about normal busy life.
+In general, I notice a lot more subtlety in my feelings and thoughts. I monitor myself much more carefully. I am able to let go of things more easily. These are good improvements. The struggle is how to rest enough, meditate enough, gain new insights, feel happy, all while going about normal busy life.
 
 {{ addcomments }}
