@@ -121,4 +121,10 @@
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
+<url>
+    <loc>https://www.functionalnoise.com\pages\2022-06-30-whys\index.html</loc>
+    <lastmod>2022-06-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
 </urlset>
