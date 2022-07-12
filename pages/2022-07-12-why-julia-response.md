@@ -15,7 +15,7 @@ TL;DR;
 * Some valid concerns and the community is taking them seriously.
 * Mostly an ecosystem problem that is slowly being addressed.
 * Formalizing Abstract Interfaces will solve this problem.
-* With Julia you can shoot yourself in the foot … as with any other programming languages.
+* With Julia you can shoot yourself in the foot … as with any other programming language.
 * We need to improve documentation.
 * Every Julia release is tested against all registered packages, need some help for "correctness" that can be easily addressed.
 
@@ -52,8 +52,10 @@ julia> cux[1]
 
 The problem with the `@inbounds` macro is not a Julia specific thing, in Cython that is an option that the developer can disable to speed things up and in C … it is not even there, you can always index and array out of bounds. The fact that in Julia you can disable bounds so easily makes it a problem apparently … Half of the complaint was that the official documentation had one wrong example.
 
-I personally like the Julia community because for EVERY Julia release they run all the unit tests of ALL upstream registered packages and if there is a regression they fix that either on the Julia release or with the package developer or both. Let me reiterate that they do this for EVERY release. We typically don't do that level of testing inside the companies we worked for. If "correctness" is a issue for something, it just a matter of adding tests and we can learn from the Julia community.
+I personally like the Julia community because EVERY day they run all the unit tests of ALL upstream registered packages. If there is a regression they fix that either on a Julia release or with the package developer or both. Let me reiterate that they do this [EVERY day](https://github.com/JuliaCI/NanosoldierReports/tree/master/pkgeval/by_date). We typically don't do that level of rigorous testing inside the companies we worked for. If "correctness" is a issue for something, it is a matter of better testing and we can learn from the Julia community.
 
 The focus on the Julia community has been on speed and composability, whereas now they are starting to focus on growth pains, in this case correctness is worrisome, but it is definitely something that can be addressed. On the other hand python now has the opposite problem, most of PyData presentations are on python scalability and ways to speed it up. Adding speed "after the fact" is more difficult than fixing incorrect results. Moving forward, we still believe the language foundations are a strength.
+
+Thanks to Mosè Giordano for proof-reading and providing insightful comments.
 
 {{ addcomments }}
