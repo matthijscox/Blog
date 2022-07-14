@@ -34,6 +34,8 @@ Many Julia package developers realized this and they are paying extra attention 
 This problem is very obvious with the `OffsetArrays` packages, one of the promises that AbstractArrays expects is that elements are accessed by indexes and that bounds will be checked.
 However, you can use the  `@inbounds` macro as a "promise" to the compiler that you were not going to access indexes outside bounds in order to speed things up. This creates two conflicting promises (`OffsetArrays` promises one thing, and `@inbounds` another) and things go bad as mentioned in the blog.
 
+As a side note, `OffsetArrays` is a very peculiar package for a niche group of users who don't like the default array indexing. We would never advise to deploy OffsetArrays into production. In general, we advise to carefully review every dependency you introduce into your production environment.
+
 The Julia authors didn't consider that `@inbounds` could be used to screw things up. A way to solve it what is done on the `CUDA` package with a warning, e.g.
 ```julia
 julia> using CUDA
