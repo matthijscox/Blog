@@ -57,7 +57,7 @@ content to avoid any CSS collisions with our real content. -->
 </li>
 <li><p>Formalizing Abstract Interfaces will solve this problem.</p>
 </li>
-<li><p>With Julia you can shoot yourself in the foot … as with any other programming languages.</p>
+<li><p>With Julia you can shoot yourself in the foot … as with any other programming language.</p>
 </li>
 <li><p>We need to improve documentation.</p>
 </li>
@@ -84,8 +84,9 @@ julia&gt; cux&#91;1&#93;
 └ @ GPUArrays C:\Users\jvieyras\.julia\packages\GPUArrays\Zecv7\src\host\indexing.jl:56
 0.5820401314176449</code></pre>
 <p>The problem with the <code>@inbounds</code> macro is not a Julia specific thing, in Cython that is an option that the developer can disable to speed things up and in C … it is not even there, you can always index and array out of bounds. The fact that in Julia you can disable bounds so easily makes it a problem apparently … Half of the complaint was that the official documentation had one wrong example.</p>
-<p>I personally like the Julia community because for EVERY Julia release they run all the unit tests of ALL upstream registered packages and if there is a regression they fix that either on the Julia release or with the package developer or both. Let me reiterate that they do this for EVERY release. We typically don&#39;t do that level of testing inside the companies we worked for. If &quot;correctness&quot; is a issue for something, it just a matter of adding tests and we can learn from the Julia community.</p>
+<p>I personally like the Julia community because EVERY day they run all the unit tests of ALL upstream registered packages. If there is a regression they fix that either on a Julia release or with the package developer or both. Let me reiterate that they do this <a href="https://github.com/JuliaCI/NanosoldierReports/tree/master/pkgeval/by_date">EVERY day</a>. We typically don&#39;t do that level of rigorous testing inside the companies we worked for. If &quot;correctness&quot; is a issue for something, it is a matter of better testing and we can learn from the Julia community.</p>
 <p>The focus on the Julia community has been on speed and composability, whereas now they are starting to focus on growth pains, in this case correctness is worrisome, but it is definitely something that can be addressed. On the other hand python now has the opposite problem, most of PyData presentations are on python scalability and ways to speed it up. Adding speed &quot;after the fact&quot; is more difficult than fixing incorrect results. Moving forward, we still believe the language foundations are a strength.</p>
+<p>Thanks to Mosè Giordano for proof-reading and providing insightful comments.</p>
     <script src="https://utteranc.es/client.js"
         repo="matthijscox/Blog"
         issue-term="pathname"
@@ -97,7 +98,7 @@ julia&gt; cux&#91;1&#93;
 
 <div class="page-foot">
   <div class="copyright">
-    &copy; Matthijs Cox. Last modified: July 11, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
+    &copy; Matthijs Cox. Last modified: July 14, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
   </div>
 </div>
 </div><!-- CONTENT ENDS HERE -->
