@@ -97,6 +97,8 @@ For a full comparison look at:
 * The Julia source code file [BasicTypes.jl](https://github.com/matthijscox/embedjuliainc/blob/main/basic/BasicTypes/src/BasicTypes.jl)
 * The C++ file calling into the Julia library in [basic.cpp](https://github.com/matthijscox/embedjuliainc/blob/main/basic/main-cpp/basic.cpp) which uses [basic.h](https://github.com/matthijscox/embedjuliainc/blob/main/basic/BasicTypes/build/basic.h).
 
+In general Julia's [C interface documentation](https://docs.julialang.org/en/v1/base/c/#C-Interface) is your friend.
+
 The typical pattern is straightforward, this Julia code:
 ```julia
 Base.@ccallable function test_int64(myInt64::Int64)::Int64
@@ -111,6 +113,44 @@ int64_t myInt64 = 9006271;
 test_int64(myInt64);
 ```
 
+### Struct types
+
+As the manual says on [Struct Type Correspondences](https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/#Struct-Type-Correspondences). Structs can be passed. Fixed size arrays in c/c++ map onto the `NTuple` in Julia.
+
+Nested structs work just fine:
+```julia
+struct ChildStruct
+    ChildStructId::Cint
+end
+
+mutable struct ParentStruct
+    ParentStructId::Cint
+    myChildStruct::ChildStruct
+end
+
+Base.@ccallable function test_nested_structs(myParentStruct::ParentStruct)::ParentStruct
+    return myParentStruct
+end
+```
+
+The corresponding C/C++ interface:
+```c++
+struct ChildStruct
+{
+    int ChildStructId;
+};
+
+struct ParentStruct
+{
+    int ParentStructId;
+    ChildStruct myChildStruct;
+};
+
+ParentStruct test_nested_structs(ParentStruct myParentStruct);
+```
+
+Be careful with placing variable-sized arrays inside structs (this includes strings). You will have to somehow pass along the array size and manually unwrap such complexity. I still have to write a complex example for this, for example with a struct with an array of nested structs with strings inside.
+
 ### Passing by reference
 
 If you want to avoid any copying and additional memory allocation, you will have to pass the data by reference as a pointer. A typical example is to pass an array by reference. In the example code I pass an `Array{Cint}`. Note that you also need to pass the dimensions of the array, in this case only the length, since we assume it's a vector.
@@ -122,9 +162,34 @@ Base.@ccallable function test_array(myArrayPtr::Ptr{Cint}, myArraySize::Cint)::C
 end
 ```
 
-## Lessons Learned
+### Mutating
 
-`GC.@preserve`
+Let's pass a struct by reference and mutate it. You can first load the entire struct with `unsafe_load`.
+
+```julia
+Base.@ccallable function test_nested_structs_ptr(myParentStructPtr::Ptr{ParentStruct})::Cvoid
+    myParentStruct = unsafe_load(myParentStructPtr)
+    myParentStruct.myChildStruct = ChildStruct(12)
+    return Cvoid()
+end
+```
+
+For arrays you can first `unsafe_wrap` like in the section above. Or you can immediately `unsafe_store!` on an individual element. As always be very careful with these operations.
+
+## Garbage Collector
+
+The manual is clear on [memory management](https://docs.julialang.org/en/v1/manual/embedding/#Memory-Management) from within c/c++. You can even disable the garbage collector if you want.
+
+One thing we ran into while testing the c-callable Julia functions from within a Julia script, is that the garbage collector may remove your object even while the function is executing. This can happen when passing pointers instead of objects and leads to horribly unexpected segmentation faults. Please use the `GC.@preserve` for those cases.
+
+I placed an example in the precompile statements file:
+```julia
+arr = Cint[1,2,3]
+arr_pointer = Ptr{Cint}(pointer_from_objref(arr))
+len_arr = Base.cconvert(Cint, length(arr))
+# please garbage collector, preserve my array during execution
+GC.@preserve arr test_array(arr_pointer, len_arr)
+```
 
 ## Error handling
 
