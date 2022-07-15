@@ -30,14 +30,18 @@ int main()
 
 Now on your command line run: `g++ example.cpp -o example`. This will compile an example.exe, which you can then run on your command line with `example.exe` and see the output string "hello world".
 
-Use `gcc` for c and `g++` for c++. These functions come with a bunch of compile and link options, the most common ones are:
+Use `gcc` for c and `g++` for c++. These functions come with a bunch of compile and link options. There are so many options... The most common ones are:
 
 * `-c` (Compilation option).
 Compile only. Produces .o files from source files without doing any linking.
+* `-I[/path/to/headers]` (Compilation option).
+Include a folder with header files, like julia.h.
 * `-o file-name` (Link option, usually).
 Use file-name as the name of the file produced by g++ (usually, this is an executable file).
-* `-Llibrary-name` (Link option).
+* `-l[library-name]` (Link option).
 Link in the specified library. See above. (Link option).
+* `-L[/path/to/shared-libraries] -l[library-name]` (Link option).
+Link in the specified library, like julia.dll, from a given folder.
 
 ## Compiling Julia
 
@@ -47,7 +51,7 @@ PackageCompiler does take a few minutes to compile any Julia code, even a simple
 
 We will be using the [create_library](https://julialang.github.io/PackageCompiler.jl/stable/libs.html) functionality of PackageCompiler.
 
-## Simple example
+## Existing examples?
 
 A skeleton Julia compilation example is already available [here](https://github.com/JuliaLang/PackageCompiler.jl/tree/master/examples/MyLib).
 
@@ -80,7 +84,43 @@ extern "C"
 
 ## Basic Types
 
+I created an example of basic type data transfer between Julia and c++ in this [repository](https://github.com/matthijscox/embedjuliainc/tree/main/basic). It contains implementations of the following data types:
+* Booleans
+* Integers
+* Doubles
+* Strings
+* Structs
+* Arrays
+* Enumerations
 
+For a full comparison look at:
+* The Julia source code file [BasicTypes.jl](https://github.com/matthijscox/embedjuliainc/blob/main/basic/BasicTypes/src/BasicTypes.jl)
+* The C++ file calling into the Julia library in [basic.cpp](https://github.com/matthijscox/embedjuliainc/blob/main/basic/main-cpp/basic.cpp) which uses [basic.h](https://github.com/matthijscox/embedjuliainc/blob/main/basic/BasicTypes/build/basic.h).
+
+The typical pattern is straightforward, this Julia code:
+```julia
+Base.@ccallable function test_int64(myInt64::Int64)::Int64
+    return myInt64
+end
+```
+
+You can call with such c++ code:
+```c++
+int64_t test_int64(int64_t myInt64);
+int64_t myInt64 = 9006271;
+test_int64(myInt64);
+```
+
+### Passing by reference
+
+If you want to avoid any copying and additional memory allocation, you will have to pass the data by reference as a pointer. A typical example is to pass an array by reference. In the example code I pass an `Array{Cint}`. Note that you also need to pass the dimensions of the array, in this case only the length, since we assume it's a vector.
+
+```julia
+Base.@ccallable function test_array(myArrayPtr::Ptr{Cint}, myArraySize::Cint)::Cvoid
+    myArray = unsafe_wrap(Array{Cint}, myArrayPtr, myArraySize, own=false)
+    # do stuff, mutating an element will mutate the original C memory, be careful
+end
+```
 
 ## Lessons Learned
 
@@ -88,6 +128,10 @@ extern "C"
 
 ## Error handling
 
-Special acknowledgements to Daan Sperber and Evangelos Paradas for helping me figure out a lot of the steps involved.
+TODO
+
+## Acknowledgements
+
+Special acknowledgements to Daan Sperber, Biao Xu and Evangelos Paradas for helping me figure out a lot of the steps involved.
 
 {{ addcomments }}
