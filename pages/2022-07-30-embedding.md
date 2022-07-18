@@ -7,11 +7,21 @@
 
 # Advanced Julia: Embedding in C/C++
 
-Embedding compiled Julia libraries inside a foreign environment with a C-callable interface is an advanced topic on the border of my expertise. It's heavily underdocumented and non-trivial, I'll try to explain what I know.
+Embedding compiled Julia libraries inside a foreign environment with a C-callable interface is an advanced topic on the border of my expertise. It's somewhat underdocumented and non-trivial, I'm writing down the steps I followed in this tutorial.
 
-Some fundamentals are explained in the [Embedding section](https://docs.julialang.org/en/v1/manual/embedding/) in the Julia manual. For the datatypes that can be passed between C and Julia, see [calling-c-and-fortran-code](https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/).
+The fundamentals are explained in the [Embedding section](https://docs.julialang.org/en/v1/manual/embedding/) in the Julia manual. For the datatypes that can be passed between C and Julia, see [calling-c-and-fortran-code](https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/).
 
 I will make things hard for myself and compile on Windows. Also note that I am using c++ instead of c, while the interface with the Julia library is actually c.
+
+High level the steps involved are:
+* Setup a c/c++ compiler
+* Make a Julia package
+* Write the Julia c-interface functions
+* Write the c++ code calling those functions
+* Compile Julia code to a library with PackageCompiler.jl
+* Compile c++ and link it to the Julia library
+
+Most of this article will be about explaining how to setup the Julia-C interface functions and types.
 
 ## Compiling C++
 
@@ -50,6 +60,10 @@ Link in the specified library, like julia.dll, from a given folder.
 PackageCompiler does take a few minutes to compile any Julia code, even a simple hello world. That's because all of Julia base is included, regardless of whether actually need all base functionality or not.
 
 We will be using the [create_library](https://julialang.github.io/PackageCompiler.jl/stable/libs.html) functionality of PackageCompiler.
+
+## Create a Julia package
+
+I assume you have basic Julia knowledge. Julia libraries are created from a package, so go ahead and make one in a folder with `Pkg.generate("MyLibrary")`.
 
 ## Existing examples?
 
