@@ -21,7 +21,7 @@ High level the steps involved are:
 * Compile Julia code to a library with PackageCompiler.jl
 * Compile c++ and link it to the Julia library
 
-Most of this article will be about explaining how to setup the Julia-C interface functions and types.
+I'll explain how I did these steps and especially touch upon the Julia-C interface functions and types.
 
 ## Compiling C++
 
@@ -127,6 +127,10 @@ int64_t myInt64 = 9006271;
 test_int64(myInt64);
 ```
 
+### Header file
+
+The `PackageCompiler.create_library` function also likes to receive a header file. So please write all your c/c++ interface types and functions inside this header file. I wonder if this header file could be created automatically from all the `Base.@ccallable` function signatures? Now you have to manually keep the Julia source code and the header file in sync.
+
 ### Struct types
 
 As the manual says on [Struct Type Correspondences](https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/#Struct-Type-Correspondences). Structs can be passed. Fixed size arrays in c/c++ map onto the `NTuple` in Julia.
@@ -137,9 +141,10 @@ struct ChildStruct
     ChildStructId::Cint
 end
 
-mutable struct ParentStruct
+struct ParentStruct
     ParentStructId::Cint
     myChildStruct::ChildStruct
+    staticArray::NTuple{3, Cint}
 end
 
 Base.@ccallable function test_nested_structs(myParentStruct::ParentStruct)::ParentStruct
@@ -158,6 +163,7 @@ struct ParentStruct
 {
     int ParentStructId;
     ChildStruct myChildStruct;
+    int staticArray[3];
 };
 
 ParentStruct test_nested_structs(ParentStruct myParentStruct);
