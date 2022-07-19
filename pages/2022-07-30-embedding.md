@@ -11,7 +11,7 @@ Embedding compiled Julia libraries inside a foreign environment with a C-callabl
 
 The fundamentals are explained in the [Embedding section](https://docs.julialang.org/en/v1/manual/embedding/) in the Julia manual. For the datatypes that can be passed between C and Julia, see [calling-c-and-fortran-code](https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/).
 
-I will make things hard for myself and compile on Windows. Also note that I am using c++ instead of c, while the interface with the Julia library is actually c.
+I will make things hard for myself and compile on Windows. Also note that I am using c++ instead of c, while most currently available Julia embedding examples use pure c.
 
 High level the steps involved are:
 * Setup a c/c++ compiler
@@ -270,6 +270,10 @@ JL_CATCH {
 ```
 
 To print the error type and message, you will have to use functions directly from the Julia runtime. We did not yet find a nice and easy way to convert the Julia exception into a c++ exception.
+
+## Conclusion
+
+Embedding in c/c++ is non-trivial. If you can avoid embedding Julia and using c-native interface in your project, then I advise you to avoid it. For example setup a server with a REST API or something similar. If you have to embed and don't care too much about performance and want to send complex nested structures with variable-sized arrays, then consider using a simpler interface, like (de)serialize to JSON via a Cstring or something. In the special case that you really need to send native c types to c/c++ then you can use what I wrote in this blog post. I do not guarantee all my examples are safe and robust, this simple tutorial is far from complete. If you have to embed with native c-types, try to keep the interface types as simple as possible. Good luck!
 
 ## Acknowledgements
 
