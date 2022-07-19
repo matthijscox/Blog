@@ -213,7 +213,63 @@ GC.@preserve arr test_array(arr_pointer, len_arr)
 
 ## Error handling
 
-TODO
+A typical old C way of error handling is to always return an integer on the C interface. The Julia code is then responsible for catching errors and returning the corresponding error integer. Any other desired output arguments are passed as mutable input parameters on the C interface. I've added an example with an [ExceptionHandler.jl](https://github.com/matthijscox/embedjuliainc/tree/main/exceptions) package for this case to my repository. If you want the error messages as well, you could also pass along a struct with the error code/type and a Cstring with the error message.
+
+But that is not what I was looking for. I want a way to catch Julia exceptions inside c++. The Julia manual [embedding section on exceptions](https://docs.julialang.org/en/v1/manual/embedding/#Exceptions) is not clear on how to do this for native `Base.@ccallable` functions. Through experimentation I found out that exceptions cannot be caught by a regular try/catch block inside the c++ code wrapping around the julia library call.
+
+Let's say we have a function that throws errors on the c-interface:
+```julia
+Base.@ccallable function throw_basic_error()::Cint
+    throw(ErrorException("this is an error"))
+    return 0
+end
+```
+
+### Missed exceptions
+
+This would be an expected way to catch errors, but it doesn't work:
+
+```c++
+try
+{
+    throw_basic_error();
+}
+catch (const std::exception& e)
+{
+    std::cout << "\n a standard exception was caught, with message '"
+                << e.what() << std::endl;
+}
+catch (...)
+{
+    std::cout << "\n unknown exception caught" << std::endl;
+}
+```
+
+When running this code, you will see an error like `fatal: error thrown and no exception handler available.`. Our current assumption is that this is due to Julia initializing in another thread or process than the c++ code itself.
+
+### Catch those exceptions
+
+After some digging we found the `JL_TRY` and `JL_CATCH` macros in the Julia header file. These can be used to catch Julia exceptions:
+
+```c++
+JL_TRY {
+    throw_basic_error();
+}
+JL_CATCH {
+    jl_value_t *errs = jl_stderr_obj();
+    std::cout << "A Julia exception was caught" << std::endl;
+    if (errs) {
+        jl_value_t *showf = jl_get_function(jl_base_module, "showerror");
+        if (showf != NULL) {
+            jl_call2(showf, errs, jl_current_exception());
+            jl_printf(jl_stderr_stream(), "\n");
+        }
+    }
+    return 1;
+}
+```
+
+To print the error type and message, you will have to use functions directly from the Julia runtime. We did not yet find a nice and easy way to convert the Julia exception into a c++ exception.
 
 ## Acknowledgements
 
