@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/poole_lanyon.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+
+   <title>Functional Noise</title>  
+</head>
+<body>
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Functional Noise</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item " href="/">Home</a>
+    <a class="sidebar-nav-item " href="/about/">About</a>
+    <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a>
+  </nav>
+  <div class="sidebar-item">
+    <p>&copy; Matthijs Cox.</p>
+  </div>
+</div>
+
+<!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+content to avoid any CSS collisions with our real content. -->
+<div class="wrap">
+  <div class="masthead">
+    <div class="container">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Functional Noise</a>
+        <small>Regularize Your Mind</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="container content">
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="advanced_julia_embedding_in_cc"><a href="#advanced_julia_embedding_in_cc" class="header-anchor">Advanced Julia: Embedding in C/C&#43;&#43;</a></h1>
+<p>Embedding compiled Julia libraries inside a foreign environment with a C-callable interface is an advanced topic on the border of my expertise. It&#39;s somewhat underdocumented and non-trivial, I&#39;m writing down the steps I followed in this tutorial.</p>
+<p>The fundamentals are explained in the <a href="https://docs.julialang.org/en/v1/manual/embedding/">Embedding section</a> in the Julia manual. For the datatypes that can be passed between C and Julia, see <a href="https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/">calling-c-and-fortran-code</a>.</p>
+<p>I will make things hard for myself and compile on Windows. Also note that I am using c&#43;&#43; instead of c, while most currently available Julia embedding examples use pure c.</p>
+<p>High level the steps involved are:</p>
+<ul>
+<li><p>Setup a c/c&#43;&#43; compiler</p>
+</li>
+<li><p>Make a Julia package</p>
+</li>
+<li><p>Write the Julia c-interface functions</p>
+</li>
+<li><p>Write the c&#43;&#43; code calling those functions</p>
+</li>
+<li><p>Compile Julia code to a library with PackageCompiler.jl</p>
+</li>
+<li><p>Compile c&#43;&#43; and link it to the Julia library</p>
+</li>
+</ul>
+<p>I&#39;ll explain how I did these steps and especially touch upon the Julia-C interface functions and types.</p>
+<h2 id="compiling_c"><a href="#compiling_c" class="header-anchor">Compiling C&#43;&#43;</a></h2>
+<p>I will compile C&#43;&#43; on Windows. It&#39;s notoriously difficult on Windows to find the right compiler. I got burned once on some generic MinGW compiler, creating all kinds of wrong string conversions, took us days to find out. So far the MinGW x86<em>64-8.1.0-posix-seh-rt</em>v6-rev0 is working fine on my personal system. You can also use the <a href="https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view&#61;msvc-170">Microsoft Visual C&#43;&#43; compiler tools</a>, you can download the command line tools separate from the Visual Studio IDE. Make sure the right tool is added to your windows path. Use <code>where g&#43;&#43;</code> or <code>where gcc</code> to find out which one you are using.</p>
+<p>Let&#39;s start at the real basics. So make a file called example.cpp.</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+
+int main&#40;&#41;
+&#123;
+    std::cout &lt;&lt; &quot;hello world&quot; &lt;&lt; std::endl;
+    return 0;
+&#125;</code></pre>
+<p>Now on your command line run: <code>g&#43;&#43; example.cpp -o example</code>. This will compile an example.exe, which you can then run on your command line with <code>example.exe</code> and see the output string &quot;hello world&quot;.</p>
+<p>Use <code>gcc</code> for c and <code>g&#43;&#43;</code> for c&#43;&#43;. These functions come with a bunch of compile and link options. There are so many options... The most common ones are:</p>
+<ul>
+<li><p><code>-c</code> &#40;Compilation option&#41;.</p>
+</li>
+</ul>
+<p>Compile only. Produces .o files from source files without doing any linking.</p>
+<ul>
+<li><p><code>-I&#91;/path/to/headers&#93;</code> &#40;Compilation option&#41;.</p>
+</li>
+</ul>
+<p>Include a folder with header files, like julia.h.</p>
+<ul>
+<li><p><code>-o file-name</code> &#40;Link option, usually&#41;.</p>
+</li>
+</ul>
+<p>Use file-name as the name of the file produced by g&#43;&#43; &#40;usually, this is an executable file&#41;.</p>
+<ul>
+<li><p><code>-l&#91;library-name&#93;</code> &#40;Link option&#41;.</p>
+</li>
+</ul>
+<p>Link in the specified library. See above. &#40;Link option&#41;.</p>
+<ul>
+<li><p><code>-L&#91;/path/to/shared-libraries&#93; -l&#91;library-name&#93;</code> &#40;Link option&#41;.</p>
+</li>
+</ul>
+<p>Link in the specified library, like julia.dll, from a given folder.</p>
+<h2 id="compiling_julia"><a href="#compiling_julia" class="header-anchor">Compiling Julia</a></h2>
+<p><a href="https://github.com/JuliaLang/PackageCompiler.jl">PackageCompiler.jl</a> is your primary friend and documentation is improving rapidly. Perhaps in the future we will have an incredible <a href="https://github.com/tshort/StaticCompiler.jl">StaticCompiler.jl</a>, but that&#39;s for another time.</p>
+<p>PackageCompiler does take a few minutes to compile any Julia code, even a simple hello world. That&#39;s because all of Julia base is included, regardless of whether actually need all base functionality or not.</p>
+<p>We will be using the <a href="https://julialang.github.io/PackageCompiler.jl/stable/libs.html">create_library</a> functionality of PackageCompiler.</p>
+<h2 id="create_a_julia_package"><a href="#create_a_julia_package" class="header-anchor">Create a Julia package</a></h2>
+<p>I assume you have basic Julia knowledge. Julia libraries are created from a package, so go ahead and make one in a folder with <code>Pkg.generate&#40;&quot;MyLibrary&quot;&#41;</code>.</p>
+<h2 id="existing_examples"><a href="#existing_examples" class="header-anchor">Existing examples?</a></h2>
+<p>A skeleton Julia compilation example is already available <a href="https://github.com/JuliaLang/PackageCompiler.jl/tree/master/examples/MyLib">here</a>.</p>
+<p>For a pure C example implementation see Simon Byrne&#39;s <a href="https://github.com/simonbyrne/libcg">libcg</a>. See if you can already run that example.</p>
+<p>Steps:</p>
+<ul>
+<li><p>Clone the repository in a folder. You know: <code>git clone https://github.com/simonbyrne/libcg.git</code>.</p>
+</li>
+<li><p>Run the Makefile. Uh oh...</p>
+</li>
+</ul>
+<p>OK, running Makefile on Windows isn&#39;t trivial either. <a href="https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows">StackOverflow provides some answers</a>. My c/c&#43;&#43; mingw installation comes with <code>mingw32-make</code>, but that doesn&#39;t work with this Makefile, see this <a href="https://github.com/simonbyrne/libcg/issues/21">issue</a>. Advise is to install Cygwin with make, because they use a lot of shell scripting which doesn&#39;t work on Windows.</p>
+<p>OK, so this example is not so simple on Windows. In the end I decided to write my own Windows Makefile for my own c&#43;&#43; code and compile it with <code>mingw32-make</code>.</p>
+<h3 id="interlude_makefiles"><a href="#interlude_makefiles" class="header-anchor">Interlude: Makefiles?</a></h3>
+<p>Compiling c/c&#43;&#43; projects generally involves a lot of steps to compile multiple files and link libraries together. This can become a complex build process and you don&#39;t want to type all commands manually all the time. So people made build tools&#33; Yay&#33; Typically these come with their own kind of scripting language that you need to learn. Hmm, OK, just do it. It&#39;s also generally Unix oriented, not Windows. Make is a one common build tool, here&#39;s a <a href="https://makefiletutorial.com/">Makefile tutorial</a>.</p>
+<p>As an example, I enjoyed this <a href="https://earthly.dev/blog/g&#43;&#43;-makefile/">g&#43;&#43; makefile example</a>. It explains all compilation steps and how to make a Makefile for our simple example c&#43;&#43; program above. Very informative, please read and try it out&#33;</p>
+<h3 id="interlude_name_mangling"><a href="#interlude_name_mangling" class="header-anchor">Interlude: Name Mangling</a></h3>
+<p>Another thing that is different in all my examples below, is that c&#43;&#43; mangles the names of functions. That means that a function <code>f&#40;int&#41;</code> get&#39;s turning into something like <code>__f_i&#40;int&#41;</code>. To avoid this we need to use <a href="https://www.geeksforgeeks.org/extern-c-in-c/">extern C</a> whenever we define function interfaces. This took me a while to figure out, so a lesson learned the hard way&#33;</p>
+<pre><code class="language-cpp">extern &quot;C&quot;
+&#123;
+    #include &quot;julia_init.h&quot;
+&#125;</code></pre>
+<h2 id="basic_types"><a href="#basic_types" class="header-anchor">Basic Types</a></h2>
+<p>I created an example of basic type data transfer between Julia and c&#43;&#43; in this <a href="https://github.com/matthijscox/embedjuliainc/tree/main/basic">repository</a>. It contains implementations of the following data types:</p>
+<ul>
+<li><p>Booleans</p>
+</li>
+<li><p>Integers</p>
+</li>
+<li><p>Doubles</p>
+</li>
+<li><p>Strings</p>
+</li>
+<li><p>Structs</p>
+</li>
+<li><p>Arrays</p>
+</li>
+<li><p>Enumerations</p>
+</li>
+</ul>
+<p>For a full comparison look at:</p>
+<ul>
+<li><p>The Julia source code file <a href="https://github.com/matthijscox/embedjuliainc/blob/main/basic/BasicTypes/src/BasicTypes.jl">BasicTypes.jl</a></p>
+</li>
+<li><p>The C&#43;&#43; file calling into the Julia library in <a href="https://github.com/matthijscox/embedjuliainc/blob/main/basic/main-cpp/basic.cpp">basic.cpp</a> which uses <a href="https://github.com/matthijscox/embedjuliainc/blob/main/basic/BasicTypes/build/basic.h">basic.h</a>.</p>
+</li>
+</ul>
+<p>In general Julia&#39;s <a href="https://docs.julialang.org/en/v1/base/c/#C-Interface">C interface documentation</a> is your friend.</p>
+<p>The typical pattern is straightforward, this Julia code:</p>
+<pre><code class="language-julia">Base.@ccallable function test_int64&#40;myInt64::Int64&#41;::Int64
+    return myInt64
+end</code></pre>
+<p>You can call with such c&#43;&#43; code:</p>
+<pre><code class="language-cpp">int64_t test_int64&#40;int64_t myInt64&#41;;
+int64_t myInt64 &#61; 9006271;
+test_int64&#40;myInt64&#41;;</code></pre>
+<h3 id="header_file"><a href="#header_file" class="header-anchor">Header file</a></h3>
+<p>The <code>PackageCompiler.create_library</code> function also likes to receive a header file. So please write all your c/c&#43;&#43; interface types and functions inside this header file. I wonder if this header file could be created automatically from all the <code>Base.@ccallable</code> function signatures? Now you have to manually keep the Julia source code and the header file in sync.</p>
+<h3 id="struct_types"><a href="#struct_types" class="header-anchor">Struct types</a></h3>
+<p>As the manual says on <a href="https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/#Struct-Type-Correspondences">Struct Type Correspondences</a>. Structs can be passed. Fixed size arrays in c/c&#43;&#43; map onto the <code>NTuple</code> in Julia.</p>
+<p>Nested structs work just fine:</p>
+<pre><code class="language-julia">struct ChildStruct
+    ChildStructId::Cint
+end
+
+struct ParentStruct
+    ParentStructId::Cint
+    myChildStruct::ChildStruct
+    staticArray::NTuple&#123;3, Cint&#125;
+end
+
+Base.@ccallable function test_nested_structs&#40;myParentStruct::ParentStruct&#41;::ParentStruct
+    return myParentStruct
+end</code></pre>
+<p>The corresponding C/C&#43;&#43; interface:</p>
+<pre><code class="language-cpp">struct ChildStruct
+&#123;
+    int ChildStructId;
+&#125;;
+
+struct ParentStruct
+&#123;
+    int ParentStructId;
+    ChildStruct myChildStruct;
+    int staticArray&#91;3&#93;;
+&#125;;
+
+ParentStruct test_nested_structs&#40;ParentStruct myParentStruct&#41;;</code></pre>
+<p>Be careful with placing variable-sized arrays inside structs &#40;this includes strings&#41;. You will have to somehow pass along the array size and manually unwrap such complexity. I still have to write a complex example for this, for example with a struct with an array of nested structs with strings inside.</p>
+<h3 id="passing_by_reference"><a href="#passing_by_reference" class="header-anchor">Passing by reference</a></h3>
+<p>If you want to avoid any copying and additional memory allocation, you will have to pass the data by reference as a pointer. A typical example is to pass an array by reference. In the example code I pass an <code>Array&#123;Cint&#125;</code>. Note that you also need to pass the dimensions of the array, in this case only the length, since we assume it&#39;s a vector.</p>
+<pre><code class="language-julia">Base.@ccallable function test_array&#40;myArrayPtr::Ptr&#123;Cint&#125;, myArraySize::Cint&#41;::Cvoid
+    myArray &#61; unsafe_wrap&#40;Array&#123;Cint&#125;, myArrayPtr, myArraySize, own&#61;false&#41;
+    # do stuff, mutating an element will mutate the original C memory, be careful
+end</code></pre>
+<h3 id="mutating"><a href="#mutating" class="header-anchor">Mutating</a></h3>
+<p>Let&#39;s pass a struct by reference and mutate it. You can first load the entire struct with <code>unsafe_load</code>.</p>
+<pre><code class="language-julia">Base.@ccallable function test_nested_structs_ptr&#40;myParentStructPtr::Ptr&#123;ParentStruct&#125;&#41;::Cvoid
+    myParentStruct &#61; unsafe_load&#40;myParentStructPtr&#41;
+    myParentStruct.myChildStruct &#61; ChildStruct&#40;12&#41;
+    return Cvoid&#40;&#41;
+end</code></pre>
+<p>For arrays you can first <code>unsafe_wrap</code> like in the section above. Or you can immediately <code>unsafe_store&#33;</code> on an individual element. As always be very careful with these operations.</p>
+<h2 id="garbage_collector"><a href="#garbage_collector" class="header-anchor">Garbage Collector</a></h2>
+<p>The manual is clear on <a href="https://docs.julialang.org/en/v1/manual/embedding/#Memory-Management">memory management</a> from within c/c&#43;&#43;. You can even disable the garbage collector if you want.</p>
+<p>One thing we ran into while testing the c-callable Julia functions from within a Julia script, is that the garbage collector may remove your object even while the function is executing. This can happen when passing pointers instead of objects and leads to horribly unexpected segmentation faults. Please use the <code>GC.@preserve</code> for those cases.</p>
+<p>I placed an example in the precompile statements file:</p>
+<pre><code class="language-julia">arr &#61; Cint&#91;1,2,3&#93;
+arr_pointer &#61; Ptr&#123;Cint&#125;&#40;pointer_from_objref&#40;arr&#41;&#41;
+len_arr &#61; Base.cconvert&#40;Cint, length&#40;arr&#41;&#41;
+# please garbage collector, preserve my array during execution
+GC.@preserve arr test_array&#40;arr_pointer, len_arr&#41;</code></pre>
+<h2 id="error_handling"><a href="#error_handling" class="header-anchor">Error handling</a></h2>
+<p>A typical old C way of error handling is to always return an integer on the C interface. The Julia code is then responsible for catching errors and returning the corresponding error integer. Any other desired output arguments are passed as mutable input parameters on the C interface. I&#39;ve added an example with an <a href="https://github.com/matthijscox/embedjuliainc/tree/main/exceptions">ExceptionHandler.jl</a> package for this case to my repository. If you want the error messages as well, you could also pass along a struct with the error code/type and a Cstring with the error message.</p>
+<p>But that is not what I was looking for. I want a way to catch Julia exceptions inside c&#43;&#43;. The Julia manual <a href="https://docs.julialang.org/en/v1/manual/embedding/#Exceptions">embedding section on exceptions</a> is not clear on how to do this for native <code>Base.@ccallable</code> functions. Through experimentation I found out that exceptions cannot be caught by a regular try/catch block inside the c&#43;&#43; code wrapping around the julia library call.</p>
+<p>Let&#39;s say we have a function that throws errors on the c-interface:</p>
+<pre><code class="language-julia">Base.@ccallable function throw_basic_error&#40;&#41;::Cint
+    throw&#40;ErrorException&#40;&quot;this is an error&quot;&#41;&#41;
+    return 0
+end</code></pre>
+<h3 id="missed_exceptions"><a href="#missed_exceptions" class="header-anchor">Missed exceptions</a></h3>
+<p>This would be an expected way to catch errors, but it doesn&#39;t work:</p>
+<pre><code class="language-cpp">try
+&#123;
+    throw_basic_error&#40;&#41;;
+&#125;
+catch &#40;const std::exception&amp; e&#41;
+&#123;
+    std::cout &lt;&lt; &quot;\n a standard exception was caught, with message &#39;&quot;
+                &lt;&lt; e.what&#40;&#41; &lt;&lt; std::endl;
+&#125;
+catch &#40;...&#41;
+&#123;
+    std::cout &lt;&lt; &quot;\n unknown exception caught&quot; &lt;&lt; std::endl;
+&#125;</code></pre>
+<p>When running this code, you will see an error like <code>fatal: error thrown and no exception handler available.</code>. Our current assumption is that this is due to Julia initializing in another thread or process than the c&#43;&#43; code itself.</p>
+<h3 id="catch_those_exceptions"><a href="#catch_those_exceptions" class="header-anchor">Catch those exceptions</a></h3>
+<p>After some digging we found the <code>JL_TRY</code> and <code>JL_CATCH</code> macros in the Julia header file. These can be used to catch Julia exceptions:</p>
+<pre><code class="language-cpp">JL_TRY &#123;
+    throw_basic_error&#40;&#41;;
+&#125;
+JL_CATCH &#123;
+    jl_value_t *errs &#61; jl_stderr_obj&#40;&#41;;
+    std::cout &lt;&lt; &quot;A Julia exception was caught&quot; &lt;&lt; std::endl;
+    if &#40;errs&#41; &#123;
+        jl_value_t *showf &#61; jl_get_function&#40;jl_base_module, &quot;showerror&quot;&#41;;
+        if &#40;showf &#33;&#61; NULL&#41; &#123;
+            jl_call2&#40;showf, errs, jl_current_exception&#40;&#41;&#41;;
+            jl_printf&#40;jl_stderr_stream&#40;&#41;, &quot;\n&quot;&#41;;
+        &#125;
+    &#125;
+    return 1;
+&#125;</code></pre>
+<p>To print the error type and message, you will have to use functions directly from the Julia runtime. We did not yet find a nice and easy way to convert the Julia exception into a c&#43;&#43; exception.</p>
+<h2 id="conclusion"><a href="#conclusion" class="header-anchor">Conclusion</a></h2>
+<p>Embedding in c/c&#43;&#43; is non-trivial. If you can avoid embedding Julia and using c-native interface in your project, then I advise you to avoid it. For example setup a server with a REST API or something similar. If you have to embed and don&#39;t care too much about performance and want to send complex nested structures with variable-sized arrays, then consider using a simpler interface, like &#40;de&#41;serialize to JSON via a Cstring or something. In the special case that you really need to send native c types to c/c&#43;&#43; then you can use what I wrote in this blog post. I do not guarantee all my examples are safe and robust, this simple tutorial is far from complete. If you have to embed with native c-types, try to keep the interface types as simple as possible. Good luck&#33;</p>
+<h2 id="acknowledgements"><a href="#acknowledgements" class="header-anchor">Acknowledgements</a></h2>
+<p>Special acknowledgements to Daan Sperber, Biao Xu and Evangelos Paradas for helping me figure out a lot of the steps involved.</p>
+    <script src="https://utteranc.es/client.js"
+        repo="matthijscox/Blog"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Matthijs Cox. Last modified: July 19, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+      </div>  <!-- div: content container -->
+    </div> <!-- wrap -->
+    
+    
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+    
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  </body>
+</html>

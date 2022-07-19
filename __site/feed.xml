@@ -23,6 +23,25 @@
 
 <item>
   <title>
+    <![CDATA[  Advanced Julia: Embedding in C&#43;&#43;  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2022-07-30-embedding/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2022-07-30-embedding/index.html </guid>
+  <description>
+    <![CDATA[  Embedding Julia in C&#43;&#43; the hard way  ]]>
+  </description>  
+    
+  <pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
     <![CDATA[  My Whys  ]]>
   </title>
   <link> https://www.functionalnoise.com\pages/2022-06-30-whys/index.html </link>
@@ -31,7 +50,7 @@
     <![CDATA[  My Whys. Finding my personal reasons.  ]]>
   </description>  
     
-  <pubDate>Thu, 30 Jun 2022 00:00:00 +0000</pubDate>  
+  <pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate>  
   
   
   <atom:author>

@@ -28,7 +28,7 @@ I'll explain how I did these steps and especially touch upon the Julia-C interfa
 I will compile C++ on Windows. It's notoriously difficult on Windows to find the right compiler. I got burned once on some generic MinGW compiler, creating all kinds of wrong string conversions, took us days to find out. So far the MinGW x86_64-8.1.0-posix-seh-rt_v6-rev0 is working fine on my personal system. You can also use the [Microsoft Visual C++ compiler tools](https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-170), you can download the command line tools separate from the Visual Studio IDE. Make sure the right tool is added to your windows path. Use `where g++` or `where gcc` to find out which one you are using.
 
 Let's start at the real basics. So make a file called example.cpp.
-```c++
+```cpp
 #include <iostream>
 
 int main()
@@ -89,7 +89,7 @@ As an example, I enjoyed this [g++ makefile example](https://earthly.dev/blog/g+
 
 Another thing that is different in all my examples below, is that c++ mangles the names of functions. That means that a function `f(int)` get's turning into something like `__f_i(int)`. To avoid this we need to use [extern C](https://www.geeksforgeeks.org/extern-c-in-c/) whenever we define function interfaces. This took me a while to figure out, so a lesson learned the hard way!
 
-```c++
+```cpp
 extern "C"
 {
     #include "julia_init.h"
@@ -121,7 +121,7 @@ end
 ```
 
 You can call with such c++ code:
-```c++
+```cpp
 int64_t test_int64(int64_t myInt64);
 int64_t myInt64 = 9006271;
 test_int64(myInt64);
@@ -153,7 +153,7 @@ end
 ```
 
 The corresponding C/C++ interface:
-```c++
+```cpp
 struct ChildStruct
 {
     int ChildStructId;
@@ -229,7 +229,7 @@ end
 
 This would be an expected way to catch errors, but it doesn't work:
 
-```c++
+```cpp
 try
 {
     throw_basic_error();
@@ -251,7 +251,7 @@ When running this code, you will see an error like `fatal: error thrown and no e
 
 After some digging we found the `JL_TRY` and `JL_CATCH` macros in the Julia header file. These can be used to catch Julia exceptions:
 
-```c++
+```cpp
 JL_TRY {
     throw_basic_error();
 }
