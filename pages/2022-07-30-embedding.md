@@ -3,7 +3,7 @@
 @def title = "Advanced Julia: Embedding libraries in C++"
 @def authors = """Matthijs"""
 @def rss = "Embedding Julia libraries in C++ on Windows"
-@def tags = ["julia", "code"]
+@def tags = ["julia", "cpp", "code"]
 
 # Advanced Julia: Embedding libraries in C++
 
@@ -219,6 +219,32 @@ end
 ```
 
 I don't know if it is a smart thing to do. You'll have to manually interpret the bytes...
+
+I think the best way to go, is to place pointers inside the structs and to manually `unsafe_wrap` every array.
+```julia
+struct VarSizedStruct
+    lenArray::Cint
+    varArrayPtr::Ptr{Cdouble}
+    lenString::Cint # in case the string is not NUL-terminated
+    string::Ptr{Uint8}
+end
+struct NestedVarStruct
+    len::Cint
+    varArrayPtr::Ptr{VarSizedStruct}
+end
+
+function Base.@ccallable(nestedPtr::Ptr{NestedVarStruct})::Cvoid
+    nested = unsafe_load(nestedPtr)
+    len = nested.len
+    struct_array = unsafe_wrap(Array{VarSizedStruct}, nested.varArrayPtr, len, own=false)
+    last_struct = struct_array[len]
+    last_double_array = unsafe_wrap(Array{Cdouble}, last_struct.varArrayPtr, last_struct.lenArray, own=false)
+    last_string = unsafe_string(last_struct.string, last_struct.lenString)
+    return Cvoid()
+end
+```
+
+Basically you are not passing along the struct with data, but a collection of pointers and lengths. You'll have to then manually convert the data to an internal Julia representation of your choosing. It seems error prone and feels like it could be automated.
 
 ## Garbage Collector
 

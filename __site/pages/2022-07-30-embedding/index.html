@@ -226,6 +226,28 @@ struct NestedVarStruct
     varArray::Array&#123;VarSizedStruct&#125;
 end</code></pre>
 <p>I don&#39;t know if it is a smart thing to do. You&#39;ll have to manually interpret the bytes...</p>
+<p>I think the best way to go, is to place pointers inside the structs and to manually <code>unsafe_wrap</code> every array.</p>
+<pre><code class="language-julia">struct VarSizedStruct
+    lenArray::Cint
+    varArrayPtr::Ptr&#123;Cdouble&#125;
+    lenString::Cint # in case the string is not NUL-terminated
+    string::Ptr&#123;Uint8&#125;
+end
+struct NestedVarStruct
+    len::Cint
+    varArrayPtr::Ptr&#123;VarSizedStruct&#125;
+end
+
+function Base.@ccallable&#40;nestedPtr::Ptr&#123;NestedVarStruct&#125;&#41;::Cvoid
+    nested &#61; unsafe_load&#40;nestedPtr&#41;
+    len &#61; nested.len
+    struct_array &#61; unsafe_wrap&#40;Array&#123;VarSizedStruct&#125;, nested.varArrayPtr, len, own&#61;false&#41;
+    last_struct &#61; struct_array&#91;len&#93;
+    last_double_array &#61; unsafe_wrap&#40;Array&#123;Cdouble&#125;, last_struct.varArrayPtr, last_struct.lenArray, own&#61;false&#41;
+    last_string &#61; unsafe_string&#40;last_struct.string, last_struct.lenString&#41;
+    return Cvoid&#40;&#41;
+end</code></pre>
+<p>Basically you are not passing along the struct with data, but a collection of pointers and lengths. You&#39;ll have to then manually convert the data to an internal Julia representation of your choosing. It seems error prone and feels like it could be automated.</p>
 <h2 id="garbage_collector"><a href="#garbage_collector" class="header-anchor">Garbage Collector</a></h2>
 <p>The manual is clear on <a href="https://docs.julialang.org/en/v1/manual/embedding/#Memory-Management">memory management</a> from within c/c&#43;&#43;. You can even disable the garbage collector if you want.</p>
 <p>One thing we ran into while testing the c-callable Julia functions from within a Julia script, is that the garbage collector may remove your object even while the function is executing. This can happen when passing pointers instead of objects and leads to horribly unexpected segmentation faults. Please use the <code>GC.@preserve</code> for those cases.</p>
