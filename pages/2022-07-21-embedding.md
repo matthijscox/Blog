@@ -1,4 +1,4 @@
-@def published = Date(2022, 07, 30)
+@def published = Date(2022, 07, 21)
 @def hascode = true
 @def title = "Advanced Julia: Embedding libraries in C++"
 @def authors = """Matthijs"""
