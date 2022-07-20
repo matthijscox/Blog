@@ -25,7 +25,7 @@ I'll explain how I did these steps and especially touch upon the Julia-C interfa
 
 ## Compiling C++
 
-I will compile C++ on Windows. It's notoriously difficult on Windows to find the right compiler. I got burned once on some generic MinGW compiler, creating all kinds of wrong string conversions, took us days to find out. So far the MinGW x86_64-8.1.0-posix-seh-rt_v6-rev0 is working fine on my personal system. You can also use the [Microsoft Visual C++ compiler tools](https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-170), you can download the command line tools separate from the Visual Studio IDE. Make sure the right tool is added to your windows path. Use `where g++` or `where gcc` to find out which one you are using.
+I will compile C++ on Windows. It's notoriously difficult on Windows to find the right compiler. I got burned once on some generic MinGW compiler, creating all kinds of wrong string conversions, took us days to find out. So far the MinGW `x86_64-8.1.0-posix-seh-rt_v6-rev0` version is working fine on my personal system. You can also use the [Microsoft Visual C++ compiler tools](https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view=msvc-170), you can download the command line tools separate from the Visual Studio IDE. Make sure the right tool is added to your windows path. Use `where g++` or `where gcc` to find out which one you are using.
 
 Let's start at the real basics. So make a file called example.cpp.
 ```cpp
@@ -49,9 +49,9 @@ Include a folder with header files, like julia.h.
 * `-o file-name` (Link option, usually).
 Use file-name as the name of the file produced by g++ (usually, this is an executable file).
 * `-l[library-name]` (Link option).
-Link in the specified library. See above. (Link option).
+Link in the specified library, for example `-ljulia` for libjulia.dll.
 * `-L[/path/to/shared-libraries] -l[library-name]` (Link option).
-Link in the specified library, like julia.dll, from a given folder.
+Link in the specified library from a given folder.
 
 ## Create a Julia package
 
@@ -80,7 +80,7 @@ Steps:
 * Clone the repository in a folder. You know: `git clone https://github.com/simonbyrne/libcg.git`.
 * Run the Makefile. Uh oh...
 
-OK, running the Makefile on Windows isn't trivial either. [StackOverflow provides some answers](https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows). My c/c++ mingw installation comes with `mingw32-make`, but that doesn't work with this specific Makefile, see this [issue](https://github.com/simonbyrne/libcg/issues/21). Advise is to install Cygwin with make, because they use a lot of shell scripting which doesn't work on Windows.
+OK, running the Makefile on Windows isn't trivial either. [StackOverflow provides some answers](https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows). My c/c++ mingw installation comes with `mingw32-make`, but that doesn't work with this specific Makefile, see this [issue](https://github.com/simonbyrne/libcg/issues/21). Advise is to install Cygwin together with `make`, because the examples repositories use a lot of shell scripting which doesn't work on Windows.
 
 OK, so this example is not so simple on Windows. In the end I decided to write my own Windows Makefile for my own c++ code and run it with `mingw32-make`.
 
@@ -140,7 +140,9 @@ The `PackageCompiler.create_library` function also likes to receive a header fil
 
 ### Struct types
 
-As the manual says on [Struct Type Correspondences](https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/#Struct-Type-Correspondences). Structs can be passed. Fixed size arrays in c/c++ map onto the `NTuple` in Julia.
+As the manual says in the section ["Struct Type Correspondences"](https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/#Struct-Type-Correspondences) you can pass structs. Fixed size arrays in c/c++ map onto the `NTuple` in Julia.
+
+> Warning! Be absolutely certain that the Julia struct definition matches the c struct definition!
 
 Nested structs work just fine:
 ```julia

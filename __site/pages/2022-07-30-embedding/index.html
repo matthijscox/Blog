@@ -67,7 +67,7 @@ content to avoid any CSS collisions with our real content. -->
 </ul>
 <p>I&#39;ll explain how I did these steps and especially touch upon the Julia-C interface functions and types.</p>
 <h2 id="compiling_c"><a href="#compiling_c" class="header-anchor">Compiling C&#43;&#43;</a></h2>
-<p>I will compile C&#43;&#43; on Windows. It&#39;s notoriously difficult on Windows to find the right compiler. I got burned once on some generic MinGW compiler, creating all kinds of wrong string conversions, took us days to find out. So far the MinGW x86<em>64-8.1.0-posix-seh-rt</em>v6-rev0 is working fine on my personal system. You can also use the <a href="https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view&#61;msvc-170">Microsoft Visual C&#43;&#43; compiler tools</a>, you can download the command line tools separate from the Visual Studio IDE. Make sure the right tool is added to your windows path. Use <code>where g&#43;&#43;</code> or <code>where gcc</code> to find out which one you are using.</p>
+<p>I will compile C&#43;&#43; on Windows. It&#39;s notoriously difficult on Windows to find the right compiler. I got burned once on some generic MinGW compiler, creating all kinds of wrong string conversions, took us days to find out. So far the MinGW <code>x86_64-8.1.0-posix-seh-rt_v6-rev0</code> version is working fine on my personal system. You can also use the <a href="https://docs.microsoft.com/en-us/cpp/build/building-on-the-command-line?view&#61;msvc-170">Microsoft Visual C&#43;&#43; compiler tools</a>, you can download the command line tools separate from the Visual Studio IDE. Make sure the right tool is added to your windows path. Use <code>where g&#43;&#43;</code> or <code>where gcc</code> to find out which one you are using.</p>
 <p>Let&#39;s start at the real basics. So make a file called example.cpp.</p>
 <pre><code class="language-cpp">#include &lt;iostream&gt;
 
@@ -97,12 +97,12 @@ int main&#40;&#41;
 <li><p><code>-l&#91;library-name&#93;</code> &#40;Link option&#41;.</p>
 </li>
 </ul>
-<p>Link in the specified library. See above. &#40;Link option&#41;.</p>
+<p>Link in the specified library, for example <code>-ljulia</code> for libjulia.dll.</p>
 <ul>
 <li><p><code>-L&#91;/path/to/shared-libraries&#93; -l&#91;library-name&#93;</code> &#40;Link option&#41;.</p>
 </li>
 </ul>
-<p>Link in the specified library, like julia.dll, from a given folder.</p>
+<p>Link in the specified library from a given folder.</p>
 <h2 id="create_a_julia_package"><a href="#create_a_julia_package" class="header-anchor">Create a Julia package</a></h2>
 <p>I assume you have basic Julia knowledge, including package development. Julia libraries are created from a package, so go ahead and make one in a folder. Simply run:</p>
 <pre><code class="language-julia">julia&gt; cd&#40;&quot;my/desired/package/path&quot;&#41;
@@ -121,7 +121,7 @@ julia&gt; import Pkg; Pkg.generate&#40;&quot;MyLibPackage&quot;&#41;</code></pre
 <li><p>Run the Makefile. Uh oh...</p>
 </li>
 </ul>
-<p>OK, running the Makefile on Windows isn&#39;t trivial either. <a href="https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows">StackOverflow provides some answers</a>. My c/c&#43;&#43; mingw installation comes with <code>mingw32-make</code>, but that doesn&#39;t work with this specific Makefile, see this <a href="https://github.com/simonbyrne/libcg/issues/21">issue</a>. Advise is to install Cygwin with make, because they use a lot of shell scripting which doesn&#39;t work on Windows.</p>
+<p>OK, running the Makefile on Windows isn&#39;t trivial either. <a href="https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows">StackOverflow provides some answers</a>. My c/c&#43;&#43; mingw installation comes with <code>mingw32-make</code>, but that doesn&#39;t work with this specific Makefile, see this <a href="https://github.com/simonbyrne/libcg/issues/21">issue</a>. Advise is to install Cygwin together with <code>make</code>, because the examples repositories use a lot of shell scripting which doesn&#39;t work on Windows.</p>
 <p>OK, so this example is not so simple on Windows. In the end I decided to write my own Windows Makefile for my own c&#43;&#43; code and run it with <code>mingw32-make</code>.</p>
 <p>You can find my personal examples in this <a href="https://github.com/matthijscox/embedjuliainc/">repository called embedjuliainc</a>.</p>
 <h3 id="interlude_makefiles"><a href="#interlude_makefiles" class="header-anchor">Interlude: Makefiles?</a></h3>
@@ -170,7 +170,10 @@ test_int64&#40;myInt64&#41;;</code></pre>
 <h3 id="header_file"><a href="#header_file" class="header-anchor">Header file</a></h3>
 <p>The <code>PackageCompiler.create_library</code> function also likes to receive a header file. So please write all your c/c&#43;&#43; interface types and functions inside this header file. I wonder if this header file could be created automatically from all the <code>Base.@ccallable</code> function signatures? Now you have to manually keep the Julia source code and the header file in sync.</p>
 <h3 id="struct_types"><a href="#struct_types" class="header-anchor">Struct types</a></h3>
-<p>As the manual says on <a href="https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/#Struct-Type-Correspondences">Struct Type Correspondences</a>. Structs can be passed. Fixed size arrays in c/c&#43;&#43; map onto the <code>NTuple</code> in Julia.</p>
+<p>As the manual says in the section <a href="https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/#Struct-Type-Correspondences">&quot;Struct Type Correspondences&quot;</a> you can pass structs. Fixed size arrays in c/c&#43;&#43; map onto the <code>NTuple</code> in Julia.</p>
+<blockquote>
+<p>Warning&#33; Be absolutely certain that the Julia struct definition matches the c struct definition&#33;</p>
+</blockquote>
 <p>Nested structs work just fine:</p>
 <pre><code class="language-julia">struct ChildStruct
     ChildStructId::Cint
