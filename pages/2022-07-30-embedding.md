@@ -7,6 +7,8 @@
 
 # Advanced Julia: Embedding libraries in C++
 
+![EmbedJulia](/img/EmbedJulia.jpg)
+
 Embedding compiled Julia libraries inside a foreign environment with a C-callable interface is an advanced topic on the border of my expertise. It's somewhat underdocumented and non-trivial, so I've made this tutorial by writing down the steps I followed myself.
 
 The fundamentals are explained in the [Embedding section](https://docs.julialang.org/en/v1/manual/embedding/) in the Julia manual. For the datatypes that can be passed between C and Julia, see [calling-c-and-fortran-code](https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/).
