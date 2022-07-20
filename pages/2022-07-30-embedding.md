@@ -1,17 +1,17 @@
 @def published = Date(2022, 07, 30)
 @def hascode = true
-@def title = "Advanced Julia: Embedding in C++"
+@def title = "Advanced Julia: Embedding libraries in C++"
 @def authors = """Matthijs"""
-@def rss = "Embedding Julia in C++ the hard way"
+@def rss = "Embedding Julia libraries in C++ on Windows"
 @def tags = ["julia", "code"]
 
-# Advanced Julia: Embedding in C/C++
+# Advanced Julia: Embedding libraries in C++
 
-Embedding compiled Julia libraries inside a foreign environment with a C-callable interface is an advanced topic on the border of my expertise. It's somewhat underdocumented and non-trivial, I'm writing down the steps I followed in this tutorial.
+Embedding compiled Julia libraries inside a foreign environment with a C-callable interface is an advanced topic on the border of my expertise. It's somewhat underdocumented and non-trivial, so I've made this tutorial by writing down the steps I followed myself.
 
 The fundamentals are explained in the [Embedding section](https://docs.julialang.org/en/v1/manual/embedding/) in the Julia manual. For the datatypes that can be passed between C and Julia, see [calling-c-and-fortran-code](https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/).
 
-I will make things hard for myself and compile on Windows. Also note that I am using c++ instead of c, while most currently available Julia embedding examples use pure c.
+I will make things hard for myself and compile on Windows. Also note that I am using c++ instead of c, but most steps will be similar for c.
 
 High level the steps involved are:
 * Setup a c/c++ compiler
@@ -53,17 +53,22 @@ Link in the specified library. See above. (Link option).
 * `-L[/path/to/shared-libraries] -l[library-name]` (Link option).
 Link in the specified library, like julia.dll, from a given folder.
 
+## Create a Julia package
+
+I assume you have basic Julia knowledge, including package development. Julia libraries are created from a package, so go ahead and make one in a folder. Simply run:
+
+```julia
+julia> cd("my/desired/package/path")
+julia> import Pkg; Pkg.generate("MyLibPackage")
+```
+
 ## Compiling Julia
 
 [PackageCompiler.jl](https://github.com/JuliaLang/PackageCompiler.jl) is your primary friend and documentation is improving rapidly. Perhaps in the future we will have an incredible [StaticCompiler.jl](https://github.com/tshort/StaticCompiler.jl), but that's for another time.
 
 PackageCompiler does take a few minutes to compile any Julia code, even a simple hello world. That's because all of Julia base is included, regardless of whether actually need all base functionality or not.
 
-We will be using the [create_library](https://julialang.github.io/PackageCompiler.jl/stable/libs.html) functionality of PackageCompiler.
-
-## Create a Julia package
-
-I assume you have basic Julia knowledge. Julia libraries are created from a package, so go ahead and make one in a folder with `Pkg.generate("MyLibrary")`.
+We will be using the [create_library](https://julialang.github.io/PackageCompiler.jl/stable/libs.html) functionality of PackageCompiler. The easiest way is to find some example build scripts from others and add those to your package, so let's go find one.
 
 ## Existing examples?
 
@@ -75,9 +80,11 @@ Steps:
 * Clone the repository in a folder. You know: `git clone https://github.com/simonbyrne/libcg.git`.
 * Run the Makefile. Uh oh...
 
-OK, running Makefile on Windows isn't trivial either. [StackOverflow provides some answers](https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows). My c/c++ mingw installation comes with `mingw32-make`, but that doesn't work with this Makefile, see this [issue](https://github.com/simonbyrne/libcg/issues/21). Advise is to install Cygwin with make, because they use a lot of shell scripting which doesn't work on Windows.
+OK, running the Makefile on Windows isn't trivial either. [StackOverflow provides some answers](https://stackoverflow.com/questions/2532234/how-to-run-a-makefile-in-windows). My c/c++ mingw installation comes with `mingw32-make`, but that doesn't work with this specific Makefile, see this [issue](https://github.com/simonbyrne/libcg/issues/21). Advise is to install Cygwin with make, because they use a lot of shell scripting which doesn't work on Windows.
 
-OK, so this example is not so simple on Windows. In the end I decided to write my own Windows Makefile for my own c++ code and compile it with `mingw32-make`.
+OK, so this example is not so simple on Windows. In the end I decided to write my own Windows Makefile for my own c++ code and run it with `mingw32-make`.
+
+You can find my personal examples in this [repository called embedjuliainc](https://github.com/matthijscox/embedjuliainc/).
 
 ### Interlude: Makefiles?
 
@@ -169,8 +176,6 @@ struct ParentStruct
 ParentStruct test_nested_structs(ParentStruct myParentStruct);
 ```
 
-Be careful with placing variable-sized arrays inside structs (this includes strings). You will have to somehow pass along the array size and manually unwrap such complexity. I still have to write a complex example for this, for example with a struct with an array of nested structs with strings inside.
-
 ### Passing by reference
 
 If you want to avoid any copying and additional memory allocation, you will have to pass the data by reference as a pointer. A typical example is to pass an array by reference. In the example code I pass an `Array{Cint}`. Note that you also need to pass the dimensions of the array, in this case only the length, since we assume it's a vector.
@@ -196,6 +201,25 @@ end
 
 For arrays you can first `unsafe_wrap` like in the section above. Or you can immediately `unsafe_store!` on an individual element. As always be very careful with these operations.
 
+### Nested variable sized structs
+
+Be careful with placing variable-sized arrays inside structs (this includes strings). You will have to somehow pass along the array size and manually unwrap such complexity. I still have to write a complex example for this. The Julia manual has a very minimal example in the ["Calling C and Fortran"](https://docs.julialang.org/en/v1/manual/calling-c-and-fortran-code/#Struct-Type-Correspondences) section.
+
+For example, I would like to pass such a structure by reference:
+```julia
+struct VarSizedStruct
+    len::Cint
+    varArray::Array{Cdouble}
+    string::Cstring
+end
+struct NestedVarStruct
+    len::Cint
+    varArray::Array{VarSizedStruct}
+end
+```
+
+I don't know if it is a smart thing to do. You'll have to manually interpret the bytes...
+
 ## Garbage Collector
 
 The manual is clear on [memory management](https://docs.julialang.org/en/v1/manual/embedding/#Memory-Management) from within c/c++. You can even disable the garbage collector if you want.
@@ -213,9 +237,24 @@ GC.@preserve arr test_array(arr_pointer, len_arr)
 
 ## Error handling
 
-A typical old C way of error handling is to always return an integer on the C interface. The Julia code is then responsible for catching errors and returning the corresponding error integer. Any other desired output arguments are passed as mutable input parameters on the C interface. I've added an example with an [ExceptionHandler.jl](https://github.com/matthijscox/embedjuliainc/tree/main/exceptions) package for this case to my repository. If you want the error messages as well, you could also pass along a struct with the error code/type and a Cstring with the error message.
+A typical old C way of error handling is to always return an integer on the C interface. The Julia code is then responsible for catching errors and returning the corresponding error integer. Any other desired output arguments are passed as mutable input parameters on the C interface. If you want the error messages as well, you could also pass along a struct with the error code/type and a Cstring with the error message. I've added an example with an [ExceptionHandler.jl](https://github.com/matthijscox/embedjuliainc/tree/main/exceptions) package for this case to my repository.
 
-But that is not what I was looking for. I want a way to catch Julia exceptions inside c++. The Julia manual [embedding section on exceptions](https://docs.julialang.org/en/v1/manual/embedding/#Exceptions) is not clear on how to do this for native `Base.@ccallable` functions. Through experimentation I found out that exceptions cannot be caught by a regular try/catch block inside the c++ code wrapping around the julia library call.
+Here's a simple example:
+```julia
+error_code(::Exception)::Cint = 2
+
+Base.@ccallable function something(inputPtr::Ptr{Cint}, outputPtr::Ptr{Cint})::Status
+    resultCode::Cint = 0
+    try
+        # do stuff
+    catch e
+        resultCode = error_code(e)
+    end
+    return resultCode
+end
+```
+
+But that is not what I am looking for. I want a way to catch Julia exceptions inside c++. The Julia manual [embedding section on exceptions](https://docs.julialang.org/en/v1/manual/embedding/#Exceptions) is not clear on how to do this for native `Base.@ccallable` functions. Through experimentation I found out that exceptions cannot be caught by a regular try/catch block inside the c++ code wrapping around the julia library call.
 
 Let's say we have a function that throws errors on the c-interface:
 ```julia
@@ -271,9 +310,15 @@ JL_CATCH {
 
 To print the error type and message, you will have to use functions directly from the Julia runtime. We did not yet find a nice and easy way to convert the Julia exception into a c++ exception.
 
+## Outlook
+
+The package [CBinding.jl](https://github.com/analytech-solutions/CBinding.jl) can automatically generate the Julia types from a c header file. There is a lot of knowledge in that package, so I should investigate it better. I also wonder if it's possible to do the opposite: to generate a c header from Julia types and functions.
+
+Other interesting packages are [Cxx.jl](https://github.com/JuliaInterop/Cxx.jl) and [CxxWrap.jl](https://github.com/JuliaInterop/CxxWrap.jl). These packages focus on embedding c++ (libraries) inside Julia, but again contain a lot of knowledge and some examples on embedding Julia inside c/c++.
+
 ## Conclusion
 
-Embedding in c/c++ is non-trivial. If you can avoid embedding Julia and using c-native interface in your project, then I advise you to avoid it. For example setup a server with a REST API or something similar. If you have to embed and don't care too much about performance and want to send complex nested structures with variable-sized arrays, then consider using a simpler interface, like (de)serialize to JSON via a Cstring or something. In the special case that you really need to send native c types to c/c++ then you can use what I wrote in this blog post. I do not guarantee all my examples are safe and robust, this simple tutorial is far from complete. If you have to embed with native c-types, try to keep the interface types as simple as possible. Good luck!
+Embedding in c/c++ is non-trivial. I advise to avoid embedding if you can ;) If you cannot avoid embedding, then use the examples from this post, but I do not guarantee that all my examples are safe and robust. I did not yet create examples with complicated nested variable sized structures and arrays, that's for another time. For now I'd advise to keep the c-interface as simple as possible. Good luck!
 
 ## Acknowledgements
 
