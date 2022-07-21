@@ -3,7 +3,7 @@
 @def title = "Julia Developer Tips"
 @def authors = """Matthijs"""
 @def rss = "Tips and tricks for new Julia developers"
-@def tags = ["code", "Julia"]
+@def tags = ["code", "julia"]
 
 # Julia Developer Tips
 
