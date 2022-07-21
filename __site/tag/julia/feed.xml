@@ -31,7 +31,64 @@
     <![CDATA[  Tips and tricks for new Julia developers  ]]>
   </description>  
     
-  <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Advanced Julia: Embedding libraries in C&#43;&#43;  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2022-07-21-embedding/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2022-07-21-embedding/index.html </guid>
+  <description>
+    <![CDATA[  Embedding Julia libraries in C&#43;&#43; on Windows  ]]>
+  </description>  
+    
+  <pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Julia Data Modeling: A Pointy Example  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2022-01-04-julia-data-modeling/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2022-01-04-julia-data-modeling/index.html </guid>
+  <description>
+    <![CDATA[  Julia Data Modeling: A Pointy Example  ]]>
+  </description>  
+    
+  <pubDate>Tue, 04 Jan 2022 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Julia Encapsulation  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2021-07-02-julia-encapsulation/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2021-07-02-julia-encapsulation/index.html </guid>
+  <description>
+    <![CDATA[  Reflections on encapsulation in the Julia language  ]]>
+  </description>  
+    
+  <pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
