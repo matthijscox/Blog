@@ -1,4 +1,4 @@
-@def published = Date(2022, 07, 30)
+@def published = Date(2022, 09, 07)
 @def hascode = true
 @def title = "Why we still recommend Julia"
 @def authors = """Matthijs"""
