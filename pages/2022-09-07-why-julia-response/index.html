@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/poole_lanyon.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+
+   <title>Functional Noise</title>  
+</head>
+<body>
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Functional Noise</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item " href="/">Home</a>
+    <a class="sidebar-nav-item " href="/about/">About</a>
+    <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a>
+  </nav>
+  <div class="sidebar-item">
+    <p>&copy; Matthijs Cox.</p>
+  </div>
+</div>
+
+<!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+content to avoid any CSS collisions with our real content. -->
+<div class="wrap">
+  <div class="masthead">
+    <div class="container">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Functional Noise</a>
+        <small>Regularize Your Mind</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="container content">
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="why_we_still_recommend_julia"><a href="#why_we_still_recommend_julia" class="header-anchor">Why we still recommend Julia</a></h1>
+<p>Co-written with Jorge Vieyra.</p>
+<p>This is a response to the article from Yury Vishnevy <a href="https://yuri.is/not-julia/">&quot;Why I no longer recommend Julia&quot;</a>. The primary argument revolves around &quot;correctness&quot; and the perception that the Julia ecosystem introduces significantly more bugs than other languages. A response was written by <a href="https://huijzer.xyz/posts/recommend/">Rik Huijzer</a> and while we like that post, it did not address the core argument of Yury.</p>
+<p>TL;DR;</p>
+<ul>
+<li><p>Some valid concerns and the community is taking them seriously.</p>
+</li>
+<li><p>Mostly an ecosystem problem that is slowly being addressed.</p>
+</li>
+<li><p>Formalizing Abstract Interfaces will solve this problem.</p>
+</li>
+<li><p>With Julia you can shoot yourself in the foot … as with any other programming language.</p>
+</li>
+<li><p>We need to improve documentation.</p>
+</li>
+<li><p>Every Julia release is tested against all registered packages, need some help for &quot;correctness&quot; that can be easily addressed.</p>
+</li>
+</ul>
+<p>The article is written by Yury who has spent a long time working with Julia and is perceived by the community to be a competent programmer. As such the Julia community is taking his concerns/feedback very seriously, see the <a href="https://discourse.julialang.org/t/discussion-on-why-i-no-longer-recommend-julia-by-yuri-vishnevsky/81151">Julia Forum</a>. All of the issues mentioned by Yury seem to be closed or have a solution ready.</p>
+<p>As mentioned by Keno Fischer &#40;JC CTO for compilers&#41; on the <a href="https://news.ycombinator.com/item?id&#61;31396861">HackerNews discussion</a>, he points out that most of the problems that Yury describes are ecosystem related &#40;except for one bug in Core&#41;. This tells us that the open source ecosystem is having some growing pains that need to be addressed.</p>
+<p>This is not dissimilar to what happens in other open source languages, e.g. Python. That&#39;s why in Python there exist several packages doing the same thing, some of them kind of working, some of them abandoned, and a few working correctly. The difference is that Python is a language that has been around for 30 years as a general purpose language and roughly 15 years as a &quot;scientific computing&quot; language and has had more time to work these things out.</p>
+<p>This problem that Yury is pointing out is not inherent to the language &#40;except for the missing feature below&#41;, but related to original community that got involved with. In the case of Julia, mostly written by academia, as was originally the case for MATLAB, Python and R.</p>
+<p>From our personal point of view what Yury points out is that the composability of the language drives most of the package developers where there are little assurances on what the &quot;abstract interfaces&quot; allow you. This is one of the major concerns and perhaps our top request to enhance in the language, that is having formal abstract interfaces. Some first ideas for abstract interfaces are in <a href="https://github.com/tk3369/BinaryTraits.jl">BinaryTraits.jl</a> and this <a href="https://github.com/JuliaLang/julia/issues/6975">issue</a>. Main problem is that once you use an AbstractSomething you don&#39;t really know what you are committing to and what are your &quot;obligations&quot;. As such it is hard to fully fulfill your &quot;promises&quot; and &quot;obligations&quot; and that is what is happening on the ecosystem. Many Julia package developers realized this and they are paying extra attention to this and even rewriting several of the packages, e.g. Flux and Zygote, both mentioned in the blog post.</p>
+<p>This problem is very obvious with the <code>OffsetArrays</code> packages, one of the promises that AbstractArrays expects is that elements are accessed by indexes and that bounds will be checked. However, you can use the <code>@inbounds</code> macro as a &quot;promise&quot; to the compiler that you were not going to access indexes outside bounds in order to speed things up. This creates two conflicting promises &#40;<code>OffsetArrays</code> promises one thing, and <code>@inbounds</code> another&#41; and things go bad as mentioned in the blog.</p>
+<p>As a side note, <code>OffsetArrays</code> is a very peculiar package for a niche group of users who don&#39;t like the default array indexing. We would never advise to deploy <code>OffsetArrays</code> into production. In general we advise to carefully review every package and dependency you introduce into your production environment.</p>
+<p>To continue, the Julia authors didn&#39;t consider that <code>@inbounds</code> could be used to screw things up. A way to solve it what is done on the <code>CUDA</code> package with a warning, e.g.</p>
+<pre><code class="language-julia">julia&gt; using CUDA
+julia&gt; x &#61; rand&#40;10&#41;;
+julia&gt; cux &#61; CuVector&#40;x&#41;;
+julia&gt; cux&#91;1&#93;
+┌ Warning: Performing scalar indexing on task Task &#40;runnable&#41; @0x000000000b123080.
+│ Invocation of getindex resulted in scalar indexing of a GPU array.
+│ This is typically caused by calling an iterating implementation of a method.
+│ Such implementations *do not* execute on the GPU, but very slowly on the CPU,
+│ and therefore are only permitted from the REPL for prototyping purposes.
+│ If you did intend to index this array, annotate the caller with @allowscalar.
+└ @ GPUArrays C:\Users\jvieyras\.julia\packages\GPUArrays\Zecv7\src\host\indexing.jl:56
+0.5820401314176449</code></pre>
+<p>The problem with the <code>@inbounds</code> macro is not a Julia specific thing, in Cython that is an option that the developer can disable to speed things up and in C … it is not even there, you can always index and array out of bounds. The fact that in Julia you can easily disable bounds is not unique to Julia … Half of the complaint was that the official documentation had this one wrong <code>@inbounds</code> example.</p>
+<p>The alternative to not having abstract interfaces is testing more and better. Invenia has a good blog post on <a href="https://invenia.github.io/blog/2020/11/06/interfacetesting/">interface testing</a>. Their proposal is to define interface packages together with explicit interface test suites. We think this test driven approach is a good direction until we can enforce abstract interfaces explicitly.</p>
+<p>We personally like the Julia community because EVERY day they run all the unit tests of ALL upstream registered packages. If there is a regression they often fix that either on a Julia release or with the package developer or both. Let me reiterate that they do this <a href="https://github.com/JuliaCI/NanosoldierReports/tree/master/pkgeval/by_date">EVERY day</a>. We typically don&#39;t do that level of rigorous testing inside the companies we worked for. If &quot;correctness&quot; is a issue for something, it is a matter of better testing and we can learn from the Julia community.</p>
+<p>The focus on the Julia community has been on speed and composability, whereas now they are starting to focus on growth pains, in this case correctness is worrisome, but it is definitely something that can be addressed. On the other hand Python now has the opposite problem, most of PyData presentations are on Python scalability and ways to speed it up. Adding speed &quot;after the fact&quot; is more difficult than fixing incorrect results. Moving forward, we still believe the language foundations are a strength.</p>
+<p>Thanks to Mosè Giordano, Dheepak Krishnamurthy, Martijn Bennebroek and Rik Huijzer for proof-reading and providing insightful comments.</p>
+    <script src="https://utteranc.es/client.js"
+        repo="matthijscox/Blog"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Matthijs Cox. Last modified: September 07, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+      </div>  <!-- div: content container -->
+    </div> <!-- wrap -->
+    
+    
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+    
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  </body>
+</html>
