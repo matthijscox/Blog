@@ -60,6 +60,6 @@ We personally like the Julia community because EVERY day they run all the unit t
 
 The focus on the Julia community has been on speed and composability, whereas now they are starting to focus on growth pains, in this case correctness is worrisome, but it is definitely something that can be addressed. On the other hand Python now has the opposite problem, most of PyData presentations are on Python scalability and ways to speed it up. Adding speed "after the fact" is more difficult than fixing incorrect results. Moving forward, we still believe the language foundations are a strength.
 
-Thanks to Mosè Giordano, Dheepak Krishnamurthy and Rik Huijzer for proof-reading and providing insightful comments.
+Thanks to Mosè Giordano, Dheepak Krishnamurthy, Martijn Bennebroek and Rik Huijzer for proof-reading and providing insightful comments.
 
 {{ addcomments }}
