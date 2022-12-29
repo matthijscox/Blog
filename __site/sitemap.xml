@@ -51,7 +51,7 @@
 </url>
 <url>
     <loc>https://www.functionalnoise.com\pages\2022-09-07-why-julia-response\index.html</loc>
-    <lastmod>2022-09-07</lastmod>
+    <lastmod>2022-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
@@ -100,6 +100,12 @@
 <url>
     <loc>https://www.functionalnoise.com\404\index.html</loc>
     <lastmod>2020-11-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://www.functionalnoise.com\pages\2022-12-29-org-refactor\index.html</loc>
+    <lastmod>2022-12-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>

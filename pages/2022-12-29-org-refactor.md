@@ -36,8 +36,9 @@ Actually, what I believe is missing from the Theory of Constraints, is that the 
 ## Possible solutions
 
 Let’s say you find yourself in an organization that’s suboptimal. We have two options available to us:
-1.	either accept the current structure, [find](https://fortelabs.com/theory-of-constraints-107-identifying-the-constraint-29c7922a69d4) and [elevate](https://fortelabs.com/blog/theory-of-constraints-110-elevating-the-constraint/) the main constraint. Then repeat.
-2.	or refactor the organizational structure for optimal flow (see for example [Team Topologies]( https://teamtopologies.com/)).
+
+1. either accept the current structure, [find](https://fortelabs.com/theory-of-constraints-107-identifying-the-constraint-29c7922a69d4) and [elevate](https://fortelabs.com/blog/theory-of-constraints-110-elevating-the-constraint/) the main constraint. Then repeat.
+2. or refactor the organizational structure for optimal flow (see for example [Team Topologies]( https://teamtopologies.com/)).
 
 The first option seems easier as it can be done in small increments. Though there are long-range effects, since you may have to convince people in the surrounding teams to become less efficient (just read the [TOC blog](https://fortelabs.com/blog/theory-of-constraints-109-the-psychology-of-subordination/), alright). I am very curious if the second option, organizational refactoring, can also be done in small increments, rather than big re-organizations as is typically attempted. Let’s have a look at that.
 
@@ -54,9 +55,10 @@ An interesting people aspect of such a team is that members are free to learn th
 Personally I am most interested in moving ideas from research to production, primarily in the field of numerical computing. This is my day job, so consider the following a case study based on my on-the-grounds experience.
 
 The general issue is that the time from research to production is loooong, often spanning multiple years per project, and growing longer over time. Some common smaller issues we see arising in many of our projects:
-1.	Unreproducible, unexplainable scripts or notebooks in research
-2.	Effort to translate from one technology to another
-3.	Difficulty optimizing the idea for direct product integration
+
+1. Unreproducible, unexplainable scripts or notebooks in research
+2. Effort to translate from one technology to another
+3. Difficulty optimizing the idea for direct product integration
 
 One typical constraint problem we observed is the following. The researchers quickly write a prototype, management wants it turned into a product, the software engineers then spend ages deciphering the prototype and converting it for the production systems. Because the researchers are not the bottleneck they continue tinkering with the prototype and bothering the software engineers with new insights, which further reduces the overall efficiency. Meanwhile other researchers find new prototypes and hand them over to these software engineering teams. This can result in a never ending cycle of downwards productivity.
 
@@ -84,27 +86,32 @@ Note that Julia can never be the only tool. A scientific developer must be profi
 
 ## Overcoming Resistance
 
-When trying to move a system out of a local optimum towards a more global optimum, you will encounter an energy barrier. In human organizations this means an active resistance to change. This resistance comes in many forms. People will not believe your solution is the optimum and ignore your refactoring initiative, or actively try to thwart it. Some people will believe in the solution, but do not have the ability to overcome the energy barrier, often they have no slack to take a temporary hit in their efficiency, maybe out of fear for losing a promotion or being fired.
+When trying to move a system out of a local optimum towards a more global optimum, you will encounter an energy barrier. In human organizations this means an active resistance to change. This resistance comes in many forms. People will not believe your solution is the optimum and ignore your refactoring initiative, or actively try to thwart it. Some don't want to leave the comfort of their local optimum. Some people will believe in the solution, but do not have the power to overcome the energy barrier, often they have no slack to take a temporary hit in their efficiency, maybe out of fear for losing a promotion or being fired.
 
-![Organizational Annealing](/img/org-refactor/annealing-post.png)
+~~~
+<div class=figure>
+  <img src="/img/org-refactor/annealing-post.png" style="width:70%;padding-left:30%;margin-bottom:5">
+</div>
+~~~
 
-I’ve succesfully joked on LinkedIn that we should ‘anneal’ the organization, a numerical optimization technique to find the global optimum, a term derived from metallurgy that involves heating and controlled cooling to change the microstructure of a material. I do fear in reality you need some more active work to pursuade people to cross the energy barrier.
+I’ve succesfully joked on LinkedIn that we should ‘anneal’ the organization, a numerical optimization technique to find the global optimum, or actually a term derived from metallurgy that involves heating and controlled cooling to change the microstructure of a material. It's a funny view, but I do fear in reality you need some more active work to pursuade people to cross the energy barrier.
 
 Some ways to overcome the resistance are:
-•	First find the motivated individuals, the high energy particles so to speak
-•	Having higher management support helps
-•	Teaching people the right skills lowers the threshold
-•	Setting up easy infrastructure ahead of time
-•	Starting with smaller examples you can later to refer to
+
+* First find the motivated individuals, the high energy particles so to speak
+* Having higher management support helps
+* Teaching people the right skills lowers the threshold
+* Setting up easy infrastructure ahead of time
+* Starting with smaller examples you can later to refer to
 
 New projects can be an easier place to start, instead of refactoring old legacy code bases. It helps to decouple the organizational refactoring from the codebase refactoring, but it's not always possible.
 
 ## Failure modes
 
 You can learn from our failures and complexities. I can identify at least a few:
-•	Spend all your time arguing
-•	Rather than merging, spawn a 3rd culture
-•	Refactoring across a political power line
+* Spend all your time arguing
+* Rather than merging, spawn a 3rd culture
+* Refactoring across a political power line
 
 ### Talking too much
 
@@ -128,7 +135,7 @@ In general, you’ll need great persuasion skills and cooperative assistance (ei
 
 ## Conclusion
 
-This turned into a much longer blog post than I imagined, but I enjoyed summarizing my thoughts on the matter. I fear the engineers in my audience will find this story rather fluffy. I know my past self would also be surprised that I am involved with such seemingly irrational, non-scientific, business management, magical thinking. Perhaps I crossed fully into [meta-rationality](https://metarationality.com/introduction) now, which is an evolved state of a rational thinker.
+This turned into a much longer blog post than I imagined, but I enjoyed summarizing my thoughts on the matter. I fear the engineers in my audience will find this story rather fluffy. I know my past self would also be surprised that I am involved with such seemingly irrational, non-scientific, business management, magical thinking. Perhaps I crossed fully into [meta-rationality](https://metarationality.com/introduction) now, which is a possible evolved state of a rational thinker.
 
 I do hope more engineering leaders join me in organizational refactoring. I can't say the work is always enjoyable, but it's important. Those who deeply understand [Conway's law](https://en.wikipedia.org/wiki/Conway%27s_law), know it is necessary for succesful technological designs. To keep you inspired, I will end this post similar to my other [magical thinking piece](https://www.functionalnoise.com/pages/2021-05-04-developer-freedom/): refactoring organizations is just like refactoring code, only a little less rigorous and a lot more nebulous.
 
