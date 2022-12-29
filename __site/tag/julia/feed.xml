@@ -31,7 +31,26 @@
     <![CDATA[  Why we still recommend Julia  ]]>
   </description>  
     
-  <pubDate>Wed, 07 Sep 2022 00:00:00 +0000</pubDate>  
+  <pubDate>Thu, 29 Dec 2022 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Organizational Refactoring  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2022-12-29-org-refactor/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2022-12-29-org-refactor/index.html </guid>
+  <description>
+    <![CDATA[  Organizational Refactoring  ]]>
+  </description>  
+    
+  <pubDate>Thu, 29 Dec 2022 00:00:00 +0000</pubDate>  
   
   
   <atom:author>

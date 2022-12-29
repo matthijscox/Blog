@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/poole_lanyon.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+
+   <title>Functional Noise</title>  
+</head>
+<body>
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Functional Noise</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item " href="/">Home</a>
+    <a class="sidebar-nav-item " href="/about/">About</a>
+    <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a>
+  </nav>
+  <div class="sidebar-item">
+    <p>&copy; Matthijs Cox.</p>
+  </div>
+</div>
+
+<!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+content to avoid any CSS collisions with our real content. -->
+<div class="wrap">
+  <div class="masthead">
+    <div class="container">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Functional Noise</a>
+        <small>Regularize Your Mind</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="container content">
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="organizational_refactoring"><a href="#organizational_refactoring" class="header-anchor">Organizational Refactoring</a></h1>
+<p>Most institutions are deeply inefficient, they barely act according to their stated purpose, surviving merely because competitors are even less efficient or non-existent. Or so <a href="https://en.wikipedia.org/wiki/The_Elephant_in_the_Brain">they</a> <a href="https://samoburja.com/gft/">say</a>. Thankfully I am an optimist who accepts this knowledge as an opportunity to improve matters. So let&#39;s go do that&#33; I see institutions as dynamic forms of information systems, much like evolving code bases. Since software engineering has learned how to refactor large legacy codebases while keeping their function intact, so too can we learn to refactor large human organizations and improve their performance.</p>
+<p>I’ll start this post about how people organize themselves, or rather how they separate themselves into local optima. Then I’ll share some mental tools to refactor towards a global optimum and finalize with my own lessons learned in organization refactoring.</p>
+<h2 id="social_emulsion"><a href="#social_emulsion" class="header-anchor">Social emulsion</a></h2>
+<p>Humans are pretty good at large scale coordination, at least better than the other species on the planet. However, we still have a tendency to segregate into energetically favorable subgroups. It’s almost like we are an emulsion that will separate automatically unless some agent keeps it mixed and coordinated. In an organization that does requires multiple tasks to be done, some people prefer task A and some people prefer task B. The people who prefer task A really like talking to each other about A and begin to seek out the other A people, and voila, separation begins.</p>
+<p>Let’s imagine growing a new company or team. At first when we start, we need people with multiple competences, we need both people who can build products and people who can sell them. So we are forced to work together. When the team is successful it will grow and we can no longer collaborate with everyone at once. The team will split, either naturally or via management decree. How do we split? The easiest split is along a line where people work together effortlessly. So we create a marketing department, a development department, a research department. Even if early management foresaw this problem and splits with end-to-end development effectiveness in mind, at some point the departments become big and internal segregation into subcultures begins.</p>
+<p><img src="/img/org-refactor/separation.png" alt="Separate those humans" /></p>
+<p>This simple model assumes some kind of interpersonal friction exists, which is reduced in the presence of shared interest among people. Another type of friction comes from using different tools and languages, which make it harder to collaborate. Why are different tools being used? Either people are doing different tasks, solving different problems, which really need different tools. Or people start out independent from one another and accidentally use different tools and languages. Note that I am not advocating for tool uniformity. You should use the best tool for the job. But if separate people use separate tools and this makes the job harder, than we have to admit our mistake.</p>
+<p>The best results are achieved when we have diversity in ideas, while having a common goal and the least amount of cognitive load from using different tools. We want the brainpower to focus on what matters in business: creating valuable products and services for our customers.</p>
+<h2 id="whats_the_big_problem"><a href="#whats_the_big_problem" class="header-anchor">What’s the big problem?</a></h2>
+<p>You might still ask: so what? So what if people organize into separate clusters and throw work over the fence? Work in each cluster will benefit from highly specialized people who can do the job very efficiently. Unfortunately, this is not guaranteed to improve the overall performance. You may be falling for the false believe that optimizing the parts of a system will also optimize the whole. What happens instead is that you will create local optima and one of them is going to be the primary bottleneck. This is nicely described by the <a href="https://fortelabs.com/blog/theory-of-constraints-102-local-optima/">Theory of Constraints</a> &#40;TOC&#41;.</p>
+<p>Let’s say a succesful product moves from an idea in marketing to research to design to engineering to sales. It doesn’t matter if you can imagine multiple paths, the theory works fine on complex graphs as well. Each group/team/cluster/culture/department is uniform and highly optimized for their specific task. However, one group will be the limiting factor in the flow due to some reason. This is the toy model described in Theory of Constraints.</p>
+<p>Actually, what I believe is missing from the Theory of Constraints, is that the handover from one group to another is typically the bottleneck in knowledge work. People do not understand each other, so information is lost in translation and frustration. Therefore you’ll find a bottleneck somewhere, either because one group is the slowest in the flow, or more likely because one handover is the least efficient.</p>
+<p><img src="/img/org-refactor/TOC.png" alt="TOC" /></p>
+<h2 id="possible_solutions"><a href="#possible_solutions" class="header-anchor">Possible solutions</a></h2>
+<p>Let’s say you find yourself in an organization that’s suboptimal. We have two options available to us:</p>
+<ol>
+<li><p>either accept the current structure, <a href="https://fortelabs.com/theory-of-constraints-107-identifying-the-constraint-29c7922a69d4">find</a> and <a href="https://fortelabs.com/blog/theory-of-constraints-110-elevating-the-constraint/">elevate</a> the main constraint. Then repeat.</p>
+</li>
+<li><p>or refactor the organizational structure for optimal flow &#40;see for example <a href=" https://teamtopologies.com/">Team Topologies</a>&#41;.</p>
+</li>
+</ol>
+<p>The first option seems easier as it can be done in small increments. Though there are long-range effects, since you may have to convince people in the surrounding teams to become less efficient &#40;just read the <a href="https://fortelabs.com/blog/theory-of-constraints-109-the-psychology-of-subordination/">TOC blog</a>, alright&#41;. I am very curious if the second option, organizational refactoring, can also be done in small increments, rather than big re-organizations as is typically attempted. Let’s have a look at that.</p>
+<p>Personally I believe refactoring the organization is best for finding the global optimum. Ideally you have cross-functional teams that can take ideas as far as possible, from inception all the way to the customer. But you can start by making cross-functional teams at the primary handover bottleneck. Such a team needs to have people from both competences and should have the best tools for the job. The team can then locally optimize again, but now it has the capabilities to resolve the bottleneck internally.</p>
+<p><img src="/img/org-refactor/TOC-refactor.png" alt="TOC Refactored" /></p>
+<p>I definitely advise to read the book Team Topologies where such teams are called ‘stream-aligned teams’. In other management frameworks, such teams are called ‘cross-functional teams’ or ‘full feature teams’ or otherwise. It doesn’t matter how you call them, what matters is to optimize the flow, which is ideally done locally within a team if possible. When you begin refactoring towards the ideal team topology, it’s best to start at a handover bottleneck to see immediate results.</p>
+<p>An interesting people aspect of such a team is that members are free to learn the competencies they are best at. Some people prefer to learn multiple competencies, which results in ‘hybrid’ skillsets and provides a new kind of personal growth path. Others may learn adjacent competencies shallowly, which will result in so called T-shaped individuals; people with a primary competence, but with enough external expertise to smoothen the knowledge transfer between individuals. Both are excellent improvements if they elevate the constraint, improve flow and add future flexibility.</p>
+<h2 id="research_and_development_refactor"><a href="#research_and_development_refactor" class="header-anchor">Research and development refactor</a></h2>
+<p>Personally I am most interested in moving ideas from research to production, primarily in the field of numerical computing. This is my day job, so consider the following a case study based on my on-the-grounds experience.</p>
+<p>The general issue is that the time from research to production is loooong, often spanning multiple years per project, and growing longer over time. Some common smaller issues we see arising in many of our projects:</p>
+<ol>
+<li><p>Unreproducible, unexplainable scripts or notebooks in research</p>
+</li>
+<li><p>Effort to translate from one technology to another</p>
+</li>
+<li><p>Difficulty optimizing the idea for direct product integration</p>
+</li>
+</ol>
+<p>One typical constraint problem we observed is the following. The researchers quickly write a prototype, management wants it turned into a product, the software engineers then spend ages deciphering the prototype and converting it for the production systems. Because the researchers are not the bottleneck they continue tinkering with the prototype and bothering the software engineers with new insights, which further reduces the overall efficiency. Meanwhile other researchers find new prototypes and hand them over to these software engineering teams. This can result in a never ending cycle of downwards productivity.</p>
+<p>While many improvements in this scenario are needed and possible, we decided to focus on one main area which attracted lots of interest from the engineers and engineering managers: the technology differences. For many years it was taken for granted that we need different tools in the separate phases between research and product development. For quick research and exploration you use an easy to use programming language, for example Python. For high performance, reliable, scalable production environments, you use a language like C&#43;&#43;, sacrificing ease-of-use in favor of these important utilities. This two language problem immediately creates a bottleneck in handing over ideas smoothly for development.</p>
+<p>The “two language problem” was globally accepted for several decades. Until one day it was challenged by the <a href="https://julialang.org/blog/2012/02/why-we-created-julia/">Julia language</a>, a programming language that promises both speed and ease of use. Together with several allies I went on a mission to adopt this new technology at work, and remove the bottleneck.</p>
+<p>While we had initial success and attention, we quickly stumbled into resistance from the existing groups of researchers/scientists and developers. Over time I have named this the “two culture problem”. For a while I didn’t see the cultures consciously, which limited our success. I was too focused on the technological problem itself. However, as you may notice, most of the blog so far has been about this organizational challenge, which I learned the hard way.</p>
+<p><img src="/img/org-refactor/two-cultures.png" alt="Two Cultures" /></p>
+<p>I will refer to the two cultures as “scientists” versus “developers”. However, the “scientists” group generalizes to anyone who codes quick and dirty to explore, such as domain experts, data analysts and others like that. I do hope everyone is doing their exploration somewhat scientifically, so the generalization should makes sense. The benefit of these two names is that I can call the middle ground “scientific developers”, which is the kind of people I have in mind to form the bridge between these two cultures.</p>
+<h2 id="rise_of_the_scientific_developer"><a href="#rise_of_the_scientific_developer" class="header-anchor">Rise of the Scientific Developer</a></h2>
+<p>People who walk between cultures feel the friction, yet see both the problems and the opportunities. Often an individual can become immensely valuable by learning the skills that people stuck in their cultural ivory tower are unwilling to pick up. &#40;Remember: they are valuable since they can single-handedly elevate the constraint.&#41; I’ve also been inspired by the DevOps movement which tries to address the aspects that help move products faster from development to operations. To better move ideas from science to development, I will call these people “scientific developers”, perhaps SciDev as a field and SciDevOps for those who can go all the way.</p>
+<p><img src="/img/org-refactor/two-cultures-bridged.png" alt="Two Cultures Bridged" /></p>
+<p>Turns out we are trying to engineer a new group with new tools right there in the gap. The people on the outer edges of the other groups are attracted by this opportunity and are the prime candidates as members of this group of scientific developers. This is the starting point for our organizational refactoring.</p>
+<p>The Julia language is one perfect tool for scientific developers, designed for their needs, though not necessarily available to use in their current organization which may force upon them the tools of the dominant cultures. I have spoken with many who see this bottleneck, but are frustrated that they are not allowed to solve it. This is a good sign&#33; There is a desire for bottom-up change.</p>
+<p>Note that Julia can never be the only tool. A scientific developer must be proficient in the scientific principles and relevant domain knowledge next to the craftmanship of software engineering. For a scientist this involves learning many professional software engineering techniques such as version control &#40;GIT&#41;, test-driven development, distributing reproducible environments and packages, documenting your code, proper interface design and much more. The software engineers will have to learn all the specific domain knowledge from the ‘scientists’.</p>
+<h2 id="overcoming_resistance"><a href="#overcoming_resistance" class="header-anchor">Overcoming Resistance</a></h2>
+<p>When trying to move a system out of a local optimum towards a more global optimum, you will encounter an energy barrier. In human organizations this means an active resistance to change. This resistance comes in many forms. People will not believe your solution is the optimum and ignore your refactoring initiative, or actively try to thwart it. Some don&#39;t want to leave the comfort of their local optimum. Some people will believe in the solution, but do not have the power to overcome the energy barrier, often they have no slack to take a temporary hit in their efficiency, maybe out of fear for losing a promotion or being fired.</p>
+
+<div class=figure>
+  <img src="/img/org-refactor/annealing-post.png" style="width:70%;padding-left:30%;margin-bottom:5">
+</div>
+
+<p>I’ve succesfully joked on LinkedIn that we should ‘anneal’ the organization, a numerical optimization technique to find the global optimum, or actually a term derived from metallurgy that involves heating and controlled cooling to change the microstructure of a material. It&#39;s a funny view, but I do fear in reality you need some more active work to pursuade people to cross the energy barrier.</p>
+<p>Some ways to overcome the resistance are:</p>
+<ul>
+<li><p>First find the motivated individuals, the high energy particles so to speak</p>
+</li>
+<li><p>Having higher management support helps</p>
+</li>
+<li><p>Teaching people the right skills lowers the threshold</p>
+</li>
+<li><p>Setting up easy infrastructure ahead of time</p>
+</li>
+<li><p>Starting with smaller examples you can later to refer to</p>
+</li>
+</ul>
+<p>New projects can be an easier place to start, instead of refactoring old legacy code bases. It helps to decouple the organizational refactoring from the codebase refactoring, but it&#39;s not always possible.</p>
+<h2 id="failure_modes"><a href="#failure_modes" class="header-anchor">Failure modes</a></h2>
+<p>You can learn from our failures and complexities. I can identify at least a few:</p>
+<ul>
+<li><p>Spend all your time arguing</p>
+</li>
+<li><p>Rather than merging, spawn a 3rd culture</p>
+</li>
+<li><p>Refactoring across a political power line</p>
+</li>
+</ul>
+<h3 id="talking_too_much"><a href="#talking_too_much" class="header-anchor">Talking too much</a></h3>
+<p>Sometimes people think that persuasion involves only talking. While you need to have a captivating story, the best way your adversaries can derail your refactoring is to lure you into endless arguments. &#40;Beware false allies who only talk.&#41; You can learn from good criticism, but if you have proof of the constraint, you should spend most time finding allies and running experiments, for example by starting a new team with your allies. The best arguments are real proof points.</p>
+<h3 id="spawn_another_culture"><a href="#spawn_another_culture" class="header-anchor">Spawn another culture</a></h3>
+<p>The purpose of our refactoring is to remove a bottleneck and replace it with a more optimal end-to-end team. An acceptable intermediate state consists of some teams in the old configuration and some in the new experimental configuration. This allows gradual refactoring and is actually great for comparison. The state you do not want to end up in, is by introducing a 3rd intermediate team, where you risk similar handover bottlenecks and a longer process to move from start to end. I’ve seen the latter configuration proposed several times by managers, as it seems easier due to less internal resistance in the original teams, but you are only creating more local optima.</p>
+<p><img src="/img/org-refactor/refactor-options.png" alt="How to refactor" /></p>
+<h3 id="power_divides"><a href="#power_divides" class="header-anchor">Power divides</a></h3>
+<p>So you might have identified two teams &#40;or some other unit in the flow&#41; that you want to refactor into one. Now assuming you are a naïve junior organizational architect like me, you may be unaware of the greater power structures at play. Basically I got lucky and the research and development teams existed in the same department where I work, so I got full support to start a new experimental team to do both at once. This worked out wonderfully.</p>
+<p><img src="/img/org-refactor/departments.png" alt="Where is my power" /></p>
+<p>However, others got less lucky, where the teams worked in separate departments. Each department was mostly homogenous with multiple teams performing a single task in the flow. This can be tough. It may be the separate department managers &#40;or whoever is in control&#41; are allied and willing to cooperate. That gives you a chance. It may also be that the bottleneck is there on purpose as a defense mechanism against political competition, or the local optima are serving the existing power base in some other manner. That’s bad luck. Your refactoring needs support from a higher level, which you may not have at the moment. Even if you are the higher manager, or have higher management support, the mid-level managers may simply be too powerful to change.</p>
+<p>In general, you’ll need great persuasion skills and cooperative assistance &#40;either a big alliance, or management support&#41; to succeed. This can be a tough pill to swallow for engineers who like refactoring information systems for efficiency reasons. However, I remain optimistic about organizational refactoring, since technological leaders seem more willing to set aside their ego and look at the system objectively.</p>
+<h2 id="conclusion"><a href="#conclusion" class="header-anchor">Conclusion</a></h2>
+<p>This turned into a much longer blog post than I imagined, but I enjoyed summarizing my thoughts on the matter. I fear the engineers in my audience will find this story rather fluffy. I know my past self would also be surprised that I am involved with such seemingly irrational, non-scientific, business management, magical thinking. Perhaps I crossed fully into <a href="https://metarationality.com/introduction">meta-rationality</a> now, which is a possible evolved state of a rational thinker.</p>
+<p>I do hope more engineering leaders join me in organizational refactoring. I can&#39;t say the work is always enjoyable, but it&#39;s important. Those who deeply understand <a href="https://en.wikipedia.org/wiki/Conway&#37;27s_law">Conway&#39;s law</a>, know it is necessary for succesful technological designs. To keep you inspired, I will end this post similar to my other <a href="https://www.functionalnoise.com/pages/2021-05-04-developer-freedom/">magical thinking piece</a>: refactoring organizations is just like refactoring code, only a little less rigorous and a lot more nebulous.</p>
+    <script src="https://utteranc.es/client.js"
+        repo="matthijscox/Blog"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Matthijs Cox. Last modified: December 29, 2022. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+      </div>  <!-- div: content container -->
+    </div> <!-- wrap -->
+    
+    
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+    
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  </body>
+</html>
