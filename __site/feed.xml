@@ -23,15 +23,15 @@
 
 <item>
   <title>
-    <![CDATA[  Why we still recommend Julia  ]]>
+    <![CDATA[  Organizational Refactoring  ]]>
   </title>
-  <link> https://www.functionalnoise.com\pages/2022-09-07-why-julia-response/index.html </link>
-  <guid> https://www.functionalnoise.com\pages/2022-09-07-why-julia-response/index.html </guid>
+  <link> https://www.functionalnoise.com\pages/2022-12-29-org-refactor/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2022-12-29-org-refactor/index.html </guid>
   <description>
-    <![CDATA[  Why we still recommend Julia  ]]>
+    <![CDATA[  Organizational Refactoring  ]]>
   </description>  
     
-  <pubDate>Thu, 29 Dec 2022 00:00:00 +0000</pubDate>  
+  <pubDate>Wed, 04 Jan 2023 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
@@ -42,12 +42,12 @@
 
 <item>
   <title>
-    <![CDATA[  Organizational Refactoring  ]]>
+    <![CDATA[  Why we still recommend Julia  ]]>
   </title>
-  <link> https://www.functionalnoise.com\pages/2022-12-29-org-refactor/index.html </link>
-  <guid> https://www.functionalnoise.com\pages/2022-12-29-org-refactor/index.html </guid>
+  <link> https://www.functionalnoise.com\pages/2022-09-07-why-julia-response/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2022-09-07-why-julia-response/index.html </guid>
   <description>
-    <![CDATA[  Organizational Refactoring  ]]>
+    <![CDATA[  Why we still recommend Julia  ]]>
   </description>  
     
   <pubDate>Thu, 29 Dec 2022 00:00:00 +0000</pubDate>  
@@ -165,25 +165,6 @@
   </description>  
     
   <pubDate>Mon, 12 Jul 2021 00:00:00 +0000</pubDate>  
-  
-  
-  <atom:author>
-    <atom:name>Matthijs Cox</atom:name>
-  </atom:author>
-        
-</item>
-
-<item>
-  <title>
-    <![CDATA[  The Urge  ]]>
-  </title>
-  <link> https://www.functionalnoise.com\pages/2021-06-22-urge/index.html </link>
-  <guid> https://www.functionalnoise.com\pages/2021-06-22-urge/index.html </guid>
-  <description>
-    <![CDATA[  More reporting on my crappy mood.  ]]>
-  </description>  
-    
-  <pubDate>Tue, 22 Jun 2021 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
