@@ -13,13 +13,32 @@
     </title>
     <link> https://www.functionalnoise.com </link>
     <description>
-      <![CDATA[  Regularize Your Mind  ]]>
+      <![CDATA[  Generalize Your Mind  ]]>
     </description>
     <atom:link
       href="https://www.functionalnoise.com\feed.xml"
       rel="self"
       type="application/rss+xml" />
 
+
+<item>
+  <title>
+    <![CDATA[  Functional Noise  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2023-02-07-functional-noise/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2023-02-07-functional-noise/index.html </guid>
+  <description>
+    <![CDATA[  Functional Noise  ]]>
+  </description>  
+    
+  <pubDate>Tue, 07 Feb 2023 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
 
 <item>
   <title>
