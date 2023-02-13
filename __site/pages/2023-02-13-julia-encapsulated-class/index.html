@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/poole_lanyon.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+
+   <title>Functional Noise</title>  
+</head>
+<body>
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Functional Noise</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item " href="/">Home</a>
+    <a class="sidebar-nav-item " href="/about/">About</a>
+    <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a>
+  </nav>
+  <div class="sidebar-item">
+    <p>&copy; Matthijs Cox.</p>
+  </div>
+</div>
+
+<!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+content to avoid any CSS collisions with our real content. -->
+<div class="wrap">
+  <div class="masthead">
+    <div class="container">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Functional Noise</a>
+        <small>Generalize Your Mind</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="container content">
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="julia_encapsulated_class_example"><a href="#julia_encapsulated_class_example" class="header-anchor">Julia Encapsulated Class Example</a></h1>
+<p>This post is for educational purposes only.</p>
+<p>Bonus post as combination of my previous posts on <a href="https://www.functionalnoise.com/pages/2023-01-31-julia-class/">Julia Classes</a> &amp; <a href="https://www.functionalnoise.com/pages/2021-07-02-julia-encapsulation/">Julia Encapsulation</a>. Again I do not encourage this behavior in Julia, but it&#39;s interesting to explore the pattern.</p>
+<p>A typical pattern that conventional OO people like is to hide/encapsulate some private variables. There&#39;s multiple ways of achieving this, but let&#39;s make a working example. Here I will do it by defining a special class for the private variables. I&#39;ll stick to the complex example of mutating one of the private variables.</p>
+<p>As explained in the <a href="https://www.functionalnoise.com/pages/2021-07-02-julia-encapsulation/">Julia Encapsulation</a> blog, I am using a function with a local object to hide the private variables. Except this time it is defined inside the type/class definition.</p>
+<pre><code class="language-julia">module MyModule
+
+  #&#61;
+  The private data for our class
+  this example has a mutable and an immutable variable
+  note: using &#96;const&#96; from Julia 1.8
+  &#61;#
+  mutable struct _MyPrivateClass
+    myInt::Int
+    const name::String
+  end
+
+  struct MyClass
+
+    # the methods of the class
+    get_int::Function
+    set_int&#33;::Function
+    get_name::Function
+
+    # this function constructs the private data object
+    # and returns a function to retrieve this private object
+    function get_data_handle&#40;args...&#41;
+      private &#61; _MyPrivateClass&#40;args...&#41;
+      return &#40;&#41;-&gt;private
+    end
+
+    function get_int&#40;get_private_data::Function&#41;
+      private &#61; get_private_data&#40;&#41;
+      return private.myInt
+    end
+
+    function set_int&#33;&#40;get_private_data::Function, new_int::Int&#41;
+      private &#61; get_private_data&#40;&#41;
+      private.myInt &#61; new_int
+      return nothing
+    end
+
+    function get_name&#40;get_private_data::Function&#41;
+      private &#61; get_private_data&#40;&#41;
+      return private.name
+    end
+
+    function MyClass&#40;int::Int, name::String&#61;&quot;unknown&quot;&#41;
+      private_data_getter &#61; get_data_handle&#40;int, name&#41;
+      obj &#61; new&#40;
+        &#40;&#41;-&gt;get_int&#40;private_data_getter&#41;,
+        &#40;new_int,&#41;-&gt;set_int&#33;&#40;private_data_getter, new_int&#41;,
+        &#40;&#41;-&gt;get_name&#40;private_data_getter&#41;,
+      &#41;
+      return obj
+    end
+  end
+
+  # to make the REPL display better
+  function Base.show&#40;io::IO, obj::MyClass&#41;
+    print&#40;io, &quot;&#36;&#40;typeof&#40;obj&#41;&#41;&#40;&#36;&#40;obj.get_int&#40;&#41;&#41;,\&quot;&#36;&#40;obj.get_name&#40;&#41;&#41;\&quot;&#41;&quot;&#41;
+  end
+end</code></pre>
+<p>This works and all the data is completely hidden in your <code>MyClass</code>. Users are forced to go through the embedded methods. And to prove we are not accidentally accessing the same global variable I construct two instances and mutate one.</p>
+<pre><code class="language-julia">julia&gt; obj &#61; MyModule.MyClass&#40;5, &quot;foo&quot;&#41;
+Main.MyModule.MyClass&#40;5,&quot;foo&quot;&#41;
+
+julia&gt; obj2 &#61; MyModule.MyClass&#40;6, &quot;bar&quot;&#41;
+Main.MyModule.MyClass&#40;6,&quot;bar&quot;&#41;
+
+julia&gt; obj.set_int&#33;&#40;12&#41;
+
+julia&gt; obj.get_int&#40;&#41;
+12
+
+julia&gt; obj2.get_int&#40;&#41; # proof that obj2 is not mutated
+6</code></pre>
+<h3 id="hide_more"><a href="#hide_more" class="header-anchor">Hide more</a></h3>
+<p>Yes, in this example the user can just create an instance of <code>_MyPrivateClass</code> and work with that. We&#39;d also have to hide that somehow. I cannot place a struct definition inside a function. Maybe we can put it inside a <code>let</code> block.</p>
+<p>Or we could use <a href="https://docs.julialang.org/en/v1/base/c/#Core.Ref">Ref</a>&#39;s to variables defined locally inside the <code>get_data_handle</code> function, instead of placing them inside this <code>_MyPrivateClass</code>. Or define a separate handle/reference for each variable. For example you can define these instead of <code>get_data_handle</code>:</p>
+<pre><code class="language-julia">function private_int_handle&#40;int::Int&#61;0&#41;
+  ref &#61; Ref&#40;int&#41;
+  return &#40;&#41;-&gt;ref
+end
+
+function private_string_handle&#40;name::String&#41;
+  ref &#61; Ref&#40;name&#41;
+  return &#40;&#41;-&gt;ref
+end</code></pre>
+<p>These references can be accessed via the <code>getindex</code>/<code>setindex&#33;</code> or <code>&#91;&#93;</code>.</p>
+<pre><code class="language-julia">julia&gt; handle &#61; private_int_handle&#40;&#41;;
+
+julia&gt; ref &#61; handle&#40;&#41;
+Base.RefValue&#123;Int64&#125;&#40;0&#41;
+
+julia&gt; ref&#91;&#93; &#61; 5
+5
+
+julia&gt; ref&#91;&#93;
+5
+
+julia&gt; handle&#40;&#41;
+Base.RefValue&#123;Int64&#125;&#40;5&#41;</code></pre>
+<p>Now there is no way to accidentally create an object with the private variables.</p>
+<h3 id="macro_everything_away"><a href="#macro_everything_away" class="header-anchor">Macro everything away</a></h3>
+<p>Next to that, all of these coding patterns could be simplified with some macros. For example, I can imagine the following user experience:</p>
+<pre><code class="language-julia">module MyModule
+  @class struct MyClass
+    myInt::Int
+    const name::String
+
+    @getter get_int&#40;self&#41; &#61; self.myInt
+    @getter get_name&#40;self&#41; &#61; self.name
+
+    @setter function set_int&#33;&#40;self, new_int::Int&#41;
+      self.myInt &#61; new_int
+    end
+  end
+end</code></pre>
+<p>That would be an interesting excercise left to the reader. <a href="https://docs.julialang.org/en/v1/manual/metaprogramming/">Metaprogramming</a> in Julia is a whole field on its own.</p>
+<p>To repeat: I wrote this code for educational purposes only. I would not advise to use such coding patterns in large scale Julia code bases. Please stick to simple types and independent methods. But perhaps this post can help you better understand Julia, especially if you have only been exposed to strictly class-based object oriented programming styles.</p>
+    <script src="https://utteranc.es/client.js"
+        repo="matthijscox/Blog"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Matthijs Cox. Last modified: February 13, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+      </div>  <!-- div: content container -->
+    </div> <!-- wrap -->
+    
+    
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+    
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  </body>
+</html>
