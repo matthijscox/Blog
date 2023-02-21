@@ -116,6 +116,12 @@
     <priority>0.5</priority>
 </url>
 <url>
+    <loc>https://www.functionalnoise.com\pages\2023-02-21-modularity\index.html</loc>
+    <lastmod>2023-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
     <loc>https://www.functionalnoise.com\404\index.html</loc>
     <lastmod>2020-11-03</lastmod>
     <changefreq>monthly</changefreq>
@@ -147,7 +153,7 @@
 </url>
 <url>
     <loc>https://www.functionalnoise.com\pages\2023-02-13-julia-encapsulated-class\index.html</loc>
-    <lastmod>2023-02-13</lastmod>
+    <lastmod>2023-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>

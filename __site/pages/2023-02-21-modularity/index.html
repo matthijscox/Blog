@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/poole_lanyon.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+
+   <title>Functional Noise</title>  
+</head>
+<body>
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Functional Noise</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item " href="/">Home</a>
+    <a class="sidebar-nav-item " href="/about/">About</a>
+    <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a>
+  </nav>
+  <div class="sidebar-item">
+    <p>&copy; Matthijs Cox.</p>
+  </div>
+</div>
+
+<!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+content to avoid any CSS collisions with our real content. -->
+<div class="wrap">
+  <div class="masthead">
+    <div class="container">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Functional Noise</a>
+        <small>Generalize Your Mind</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="container content">
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="modularity"><a href="#modularity" class="header-anchor">Modularity</a></h1>
+<p>After you&#39;ve spend some time in software development, you&#39;ll have encountered the term modularity, either it was explained to you or you learned through osmosis or by failing a lot. I&#39;m going to write down some aspects that were never explained to me and fall in the latter categories.</p>
+<h2 id="what_is_a_module"><a href="#what_is_a_module" class="header-anchor">What is a module?</a></h2>
+<p>In software a module is pretty abstract and can refer to several things. You can read wikipedia on <a href="https://en.wikipedia.org/wiki/Modularity">Modularity</a> and <a href="https://en.wikipedia.org/wiki/Modular_programming">Modular Programming</a>. Basically a &#39;system&#39; can be broken down into parts or &#39;subsystems&#39; or &#39;components&#39; or &#39;modules&#39;, which ideally have little dependency on each other. It&#39;s all about <a href="https://en.wikipedia.org/wiki/Loose_coupling">loose coupling</a>.</p>
+<p>Little dependency has the advantages that you can replace the parts more easily, parts can be re-used in multiple places and humans can understand these simpler parts without always having to understand the whole. So it&#39;s about upgrade, reuse, and easier development.</p>
+<h2 id="design_versus_production"><a href="#design_versus_production" class="header-anchor">Design versus production</a></h2>
+<p>A lot of modularity talk I encountered was about the design and development of the software source code. Something that was hardly explained to me explicitly is how this is different from the &#39;modules&#39; running in production.</p>
+<p>It might be intuitively clear to compiled language programmers, like in C/C&#43;&#43;, with enough experience compiling, linking and deploying multiple libraries. But if you have spend all your time writing Python or Java, then I don&#39;t think it&#39;s always obvious.</p>
+<p>You can write highly modular, decoupled code. And then dump it all into one single production module. This &#39;production module&#39; can be one of many things, ranging from a compiled library to a virtual machine.</p>
+<p>So I like to separate into three different scenarios:</p>
+<ul>
+<li><p>monolith source code, monolith product</p>
+</li>
+<li><p>modular source code, monolith product</p>
+</li>
+<li><p>modular source code, modular product</p>
+</li>
+</ul>
+
+<div class=figure>
+  <img src="/img/Modularity.jpg" style="width:100%;padding-left:0%;margin-bottom:0">
+</div>
+
+<p>When you start out with a little project, all by yourself or with a few people, then unless you take some time to think, you&#39;ll probably start with a full monolith. It&#39;s just easy.</p>
+<p>The middle path is often chosen by starting projects that have to deploy to multiple environments. For example a startup with an embedded hardware device and a cloud application. You probably don&#39;t want to deploy all your application code onto your little hardware device, so you&#39;ll be forced to separate it. But in each production environment, you are the only one deploying something, so it&#39;s fine to keep everything there as one coupled entity. The main reason to switch to multiple production modules, will be for upgrading for example the UI while the backend keeps running, but often you can get away with upgrading everything at once for a while.</p>
+<p>The final path, modularity on both sides, is more likely at larger organizations that want to upgrade different parts of the system at different times, instead of taking down the entire system for long times to replace a part.</p>
+<p>Modularity in the design mostly benefits the development effectiveness. It&#39;s all about minimizing communication between people and minimizing their cognitive load, so they can change the code more easily.</p>
+<p>Modularity in production mostly benefits the software system itself. Parts can run independent from each others. Parts can be re-used. Parts can be swapped independent from others. It does help people as well, because they can deliver parts independent from other people, but this can also be tackled in the source code delivery.</p>
+<p>Obviously an organization can apply all these options all at once, where different teams work with different levels of modularity.</p>
+<p><img src="/img/ModularityTeams.jpg" alt="team development" /></p>
+    <script src="https://utteranc.es/client.js"
+        repo="matthijscox/Blog"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Matthijs Cox. Last modified: February 21, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+      </div>  <!-- div: content container -->
+    </div> <!-- wrap -->
+    
+    
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+    
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  </body>
+</html>
