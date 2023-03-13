@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+   <link rel="stylesheet" href="/libs/highlight/github.min.css">
+   
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/poole_lanyon.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+
+   <title>Functional Noise</title>  
+</head>
+<body>
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Functional Noise</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item " href="/">Home</a>
+    <a class="sidebar-nav-item " href="/about/">About</a>
+    <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a>
+  </nav>
+  <div class="sidebar-item">
+    <p>&copy; Matthijs Cox.</p>
+  </div>
+</div>
+
+<!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+content to avoid any CSS collisions with our real content. -->
+<div class="wrap">
+  <div class="masthead">
+    <div class="container">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Functional Noise</a>
+        <small>Generalize Your Mind</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="container content">
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="modularity"><a href="#modularity" class="header-anchor">Modularity</a></h1>
+<p>After you&#39;ve spend some time in software development, you&#39;ll have encountered the term modularity. Either modularity was explained to you, or you learned about modularity through experience, or by feeling the pain of non-modular software. I&#39;m going to write down some aspects that were never explained to me and fall in the latter two categories.</p>
+<h2 id="what_is_a_module"><a href="#what_is_a_module" class="header-anchor">What is a module?</a></h2>
+<p>A module is a part of a system that&#39;s as independent as possible.</p>
+<p>You can read wikipedia on <a href="https://en.wikipedia.org/wiki/Modularity">Modularity</a> and <a href="https://en.wikipedia.org/wiki/Modular_programming">Modular Programming</a>. Basically a &#39;system&#39; can be broken down into parts or &#39;subsystems&#39; or &#39;components&#39; or &#39;modules&#39;, which ideally have little dependency on each other. It&#39;s all about <a href="https://en.wikipedia.org/wiki/Loose_coupling">loose coupling</a>.</p>
+<p>Low dependency between parts has the advantages that you can replace the parts more easily, parts can be re-used in multiple places and humans/agents can understand these simpler parts without always having to understand the whole. So it&#39;s about upgrade, reuse, and easier development.</p>
+
+<div class=figure>
+  <img src="/img/Modules.jpg" style="width:80%;padding-left:10%;margin-bottom:0">
+  <p>All modules are imaginary. We define them to make sense of the system for ease of manipulation.</p>
+</div>
+
+<p>This is all very abstract. How do you make people <em>feel</em> the need for modularity?</p>
+<h2 id="design_versus_production"><a href="#design_versus_production" class="header-anchor">Design versus production</a></h2>
+<p>A lot of modularity talk I encountered was about the design and development of the software source code. Something that was hardly explained to me is how this is different from the &#39;modules&#39; running in production.</p>
+<p>It might be intuitively clear to compiled language programmers, like in C/C&#43;&#43;, with enough experience compiling, linking and deploying multiple libraries. But if you have spend all your time writing Python or Java, then I don&#39;t think the concept is always obvious.</p>
+<p>You can write highly modular, decoupled code. And then dump it all into one single production module. This &#39;production module&#39; can be one of many things, ranging from a compiled library to a virtual machine. Note that if you have a microservice architecture, but you couple all the microservices together, then they may still form one single intertwined module. The point is not what technology you use for the &#39;module&#39;.</p>
+<p>So I like to separate into three different scenarios:</p>
+<ul>
+<li><p>monolith source code, monolith product</p>
+</li>
+<li><p>modular source code, monolith product</p>
+</li>
+<li><p>modular source code, modular product</p>
+</li>
+</ul>
+
+<div class=figure>
+  <img src="/img/Modularity.jpg" style="width:100%;padding-left:0%;margin-bottom:0">
+</div>
+
+<p>When you start out with a little project, all by yourself or with a few people, then unless you take some time to think, you&#39;ll probably start with a full monolith. It&#39;s just <em>easy</em>.</p>
+<p>The middle path is often chosen by projects that have to deploy to multiple environments. For example a startup with an embedded hardware device and a cloud application. You probably don&#39;t want to deploy all your application code onto your little hardware device, so you&#39;ll be forced to separate it. But in both production environments &#40;cloud and device&#41;, you are the only one deploying something, so it&#39;s fine to keep everything there as one coupled entity. The main reason to switch to multiple production modules, might be to upgrade for example the UI while the backend keeps running, but often you can get away with upgrading everything at once for a while.</p>
+<p>The final path, modularity on both sides, is more likely at larger organizations that want to upgrade different parts of the system at different times by different people, instead of taking down the entire system for longer times to replace a small part.</p>
+<p>Modularity in the design phase mostly benefits the development effectiveness. It&#39;s all about minimizing communication between people and minimizing their cognitive load, so they can change the code more easily.</p>
+<p>Modularity in production mostly benefits the software system itself. Parts can run independent from each others. Parts can be re-used. Parts can be swapped independent from others. It does help people as well, because they can deliver parts independent from other people, but this can also be tackled in the source code delivery.</p>
+<p><img src="/img/ModularityTeams.jpg" alt="team development" /></p>
+<p>An organization can apply all these options all at once, where different teams work with different levels of modularity. Let&#39;s call the modules deployed in production &quot;artifacts&quot;, that&#39;s a typical name. &#40;Naming things has a weird power and is a strange art, this needs another blog post.&#41;</p>
+<p>One team can have a monolith codebase, deploy one artifact to production, but it runs next to other artifacts. Another team might be delivering a code module to another team, which deploys that together with their own code modules into one or more artifacts. And yet another team might have a modular codebase deploying multiple artifacts to multiple production environments, one of which it controls entirely and so it chooses to deploy a monolith artifact there. Anything goes in software development as long as you are succesful.</p>
+<h2 id="excercises"><a href="#excercises" class="header-anchor">Excercises</a></h2>
+<p>While writing this post I realize all this modularity talk is very abstract. This is a typical risk I see with software architecture; it becomes so generic that it loses any concrete value. Complaints about software architects often involve their inability to design and create pragmatic systems. They lose touch with the struggles of the software developers. I&#39;ve heard the term &quot;astronaut architect&quot; to describe this ivory tower behavior.</p>
+<p>Let&#39;s define a more concrete playful excercise. Take any idea you have, or write some dummy code, and define the following client-server architecture:</p>
+<ul>
+<li><p>Write one module that will act as a server, for example a Python REST server.</p>
+</li>
+<li><p>Write two modules in a compiled language that can link separately compiled libraries. If you can, make one library the client towards the server.</p>
+</li>
+</ul>
+<p>Deploy all into a virtual machine, or your own laptop.</p>
+<p>Try swapping parts.</p>
+<ul>
+<li><p>Update one compiled library component and re-link it.</p>
+</li>
+<li><p>Update &#40;a part of&#41; the server.</p>
+</li>
+</ul>
+<p>Can you do all this while the system is running? Can you easily add a new part to the system?</p>
+<p>What if multiple people or teams would be working on these components. How would you setup the development environment for them? How would you distribute the components over them? How will you test that the behavior of each component is correct? How will the developers know how the components should communicate with each other &#40;what are the APIs&#41;? How will you change the system if the requirements change? How will you change the development organisation in parallel with system changes?</p>
+<p>All enterprise software innovation seems to revolve around being able to update and migrate code effectively, while letting hundreds or thousands of software developers work together all at once. And the software system must keep functioning optimally and correctly.</p>
+<p>Another analogy: how to write a book with hundreds of people? The book may be millions of pages, so you cannot solve this problem by giving the work to the best writer. How will you distribute the work, while still maintaining a coherent narrative? Some of the technology will be about the binding and distributing of the books, but most effort will go into solving this parallel human coordination problem.</p>
+<p>Large scale software development is all about people and our cognitive limitations. Modularity helps to manage our cognitive load. In this form modularity benefits many concrete systems in our world. Manipulating the concept of &#39;modularity&#39; itself however remains an arcane art.</p>
+    <script src="https://utteranc.es/client.js"
+        repo="matthijscox/Blog"
+        issue-term="pathname"
+        label="Comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Matthijs Cox. Last modified: March 13, 2023. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+      </div>  <!-- div: content container -->
+    </div> <!-- wrap -->
+    
+    
+        <script src="/libs/highlight/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();hljs.configure({tabReplace: '    '});</script>
+
+    
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  </body>
+</html>
