@@ -23,6 +23,44 @@
 
 <item>
   <title>
+    <![CDATA[  Modularity  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2023-03-13-modularity/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2023-03-13-modularity/index.html </guid>
+  <description>
+    <![CDATA[  Modularity  ]]>
+  </description>  
+    
+  <pubDate>Mon, 13 Mar 2023 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
+    <![CDATA[  Julia Encapsulated Class  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2023-02-13-julia-encapsulated-class/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2023-02-13-julia-encapsulated-class/index.html </guid>
+  <description>
+    <![CDATA[  Julia Encapsulated Class  ]]>
+  </description>  
+    
+  <pubDate>Tue, 21 Feb 2023 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
     <![CDATA[  Julia Classes  ]]>
   </title>
   <link> https://www.functionalnoise.com\pages/2023-01-31-julia-class/index.html </link>
@@ -48,25 +86,6 @@
   <guid> https://www.functionalnoise.com\pages/2023-02-07-functional-noise/index.html </guid>
   <description>
     <![CDATA[  Functional Noise  ]]>
-  </description>  
-    
-  <pubDate>Mon, 13 Feb 2023 00:00:00 +0000</pubDate>  
-  
-  
-  <atom:author>
-    <atom:name>Matthijs Cox</atom:name>
-  </atom:author>
-        
-</item>
-
-<item>
-  <title>
-    <![CDATA[  Julia Encapsulated Class  ]]>
-  </title>
-  <link> https://www.functionalnoise.com\pages/2023-02-13-julia-encapsulated-class/index.html </link>
-  <guid> https://www.functionalnoise.com\pages/2023-02-13-julia-encapsulated-class/index.html </guid>
-  <description>
-    <![CDATA[  Julia Encapsulated Class  ]]>
   </description>  
     
   <pubDate>Mon, 13 Feb 2023 00:00:00 +0000</pubDate>  
