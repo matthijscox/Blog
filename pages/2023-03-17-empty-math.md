@@ -1,4 +1,4 @@
-@def published = Date(2023, 03, 16)
+@def published = Date(2023, 03, 17)
 @def hascode = true
 @def title = "The Mathematics of Emptiness"
 @def authors = """Matthijs"""
@@ -7,9 +7,11 @@
 
 # The Mathematics of Emptiness
 
-My current hobby is exploring my own perception. To understand the universe and to figure out happiness for everyone. I'm running some interesting experiments, like [symmetrifying myself](https://www.functionalnoise.com/pages/2023-01-06-symmetrify-yourself/). The safest, well-documented tool for exploring perception is meditation. As you read more about meditation, you encounter the Buddhists, who have been doing this for a while. But they often like to use lots of flowery poetic language. Time to demystify some. One interesting Buddhist concept is Emptiness. Generally it refers to the absence of inherent existence. They say you have to experience it to understand it. It's ineffable.
+My current hobby is exploring my own perception. To understand the universe and to figure out happiness for everyone. I'm running some interesting experiments, like [symmetrifying myself](https://www.functionalnoise.com/pages/2023-01-06-symmetrify-yourself/). The safest, well-documented tool for exploring perception is meditation. As you read more about meditation, you encounter the Buddhists, who have been meditating for a while. But they often use flowery poetic language. Time to demystify some, we need a crisp language of phenomenology. One interesting Buddhist concept is Emptiness. Generally it refers to the absence of inherent existence. They say you have to experience it to understand it. It's ineffable.
 
 Now this feels like a good challenge. A few thousand years have passed and we sharpened our analytical tools. Let's describe emptiness with math. We need enlightened mathematicians. So I will stubbornly attempt to make the ineffable effable and run happily off this cliff.
+
+![The fractal is the most surprising ego death image according to Aella](/img/EgoDeathFractal.jpg)
 
 Warning: I am a physicist, not a mathematician, so I do everything handwavy. Mathematics is a [language of our perception](https://perceptualoriginsofmath.wordpress.com/chapter-1/). Emptiness relates to our perception, so we should be able to describe some of the concepts somewhat with math. I am looking for the fundamental concepts to kickstart some math. Don't take it too seriously, I will probably fail. Let's have some fun.
 
@@ -78,6 +80,13 @@ You can see your mind scrambling to classify concepts on this image. Is it a duc
 
 Concepts or objects typically feel like they have other concepts inside as parts. This is a weird kind of holographic property of space. Let me elaborate.
 
+~~~
+<div class=figure>
+  <img src="/img/CarHologram.jpg" style="width:70%;padding-left:20%;margin-bottom:0">
+  <p>Do you experience a car? Or some compositional hologram of a car? This is just a picture.</p>
+</div>
+~~~
+
 You look at a car. The car fills a part of space. You look at its wheel. It feels like the wheel fills a part of the space where the car concept is. So now you have two concepts laying on top of each other in space. The wheel will consists of many parts; a rubber tire, nuts and bolts and more. In those you perceive parts as well, down to atoms or lower. So concepts can overlay recursively inside the same space. It is as if a lot of holograms cover the same space.
 
 The car concept itself is not actually made of the compositional concepts. This follows from the [Ship of Theseus](https://en.wikipedia.org/wiki/Ship_of_Theseus) reasoning, or the [Sevenfold reasoning of the chariot](https://www.rigpawiki.org/index.php?title=Sevenfold_reasoning_of_the_chariot). The car concept doesn't really stand on its own, but neither is the sum of its parts. That means it doesn't really exist, it's empty, it may vanish at any moment.
@@ -86,7 +95,7 @@ The parts that you consider as part of the car will vary over time. The more you
 
 Qualia make up the lowest level of concepts. The quantums of our experience. Like the 'redness' of red. Some parts in the space of the car will be red, some will be black. Everything else is projected on top of these qualia. If the qualia suddenly vanish, then you typically feel like the concept vanishes too. This is not always true though, if you look at a car, then close your eyes, many people can still feel the car concept. Because we predicted the qualia to vanish (temporarily) we can mentally keep the concept in place. Feeling the concept without the qualia, might be defined as [amodal perception](https://perceptualoriginsofmath.wordpress.com/chapter-3/).
 
-### Programming language impact
+## Programming language impact
 
 Programming languages typically model compositional objects as fixed. As if we somehow know all the parts of a car. All the way down to a primitive type that the computer can understand (like an integer), which can then be turned into a linear memory layout of bits.
 
@@ -98,7 +107,21 @@ struct Car
 end
 ```
 
+Programming languages struggle to explain the concept of not-ness and nothingness. Many languages try to objectify nothingness into different types, like `nothing`, `missing`, `null`, `NaN`. You can say that a type can be a union of such a nothing-type and a dog, like `Union{Nothing, Dog}`, but you cannot proclaim every type to be inherently empty.
+
 I just explained that humans can experience changing the parts in the car, while still experiencing the car itself. How would you change the composition, while keeping the car concept constant? The emptiness of concepts is impossible to include in programming languages, they are even more rigid than typical human languages. Unless perhaps we find a logical, mathematical description that we can explain to a compiler.
+
+## Artificial Intelligence
+
+Supervised classification algorithms, such as typical neural networks to classify cats and dogs in images, have a fixed set of concepts. The AI is unaware of any emptiness, since the concepts cannot leave their model of reality. As supervisors we enforce the concepts onto them.
+
+![Artificial Neural Network](/img/ANN.jpg)
+
+Other unsupervised neural network architectures, like auto-encoders, have a kind of arbitrary compression layer, a latent space, an encoding, where the AI may choose its own concepts. This may be the closest concept of emptiness in computer science? Do note that the AI may only have impermanence during the learning phase, where the concepts change. During inference the concepts are fixed. If we can make the AI aware of its own encoded data, perhaps it will encode the emptiness of its own encoding?
+
+![Auto-encoder Neural Network](/img/AutoEncoder.jpg)
+
+You could say that this encoding layer has no 'real concepts', no 'qualia', since it's just a bunch of floating point numbers. Please remember that your sensory qualia from the outside will also look like abstract electromagnetic signals somewhere in your brain (unless you believe there is something more than just physics).
 
 ## Further study material
 
@@ -123,9 +146,10 @@ This describes my mood right now. We seem to have a bit of a mathematical conund
 ## Disclaimers
 
 If you wish to talk to me about this or try stuff yourself, some disclaimers:
+* Experience stuff yourself first. Report the stuff as phenomenologically as possible.
 * Please only share verifiable experiments I can try in my perception. I am not interested in your personal ideologies.
 * Meditation is well studied, but not without possible side effects. See for example the [Color Control Experience](https://qualiacomputing.com/2020/05/28/fire-kasina-color-control-experience-report-by-daniel-ingram/.). You are playing with your own mind at your own risk.
 * Other perception altering techniques may have even higher risks, don't do them if you have important responsibilities in life, such as kids to take care of.
-* I'm not a professional meditator, nor a cognitive scientist. I don't know what I am doing.
+* I'm not a professional meditation coach, nor a cognitive scientist. I don't know what I am doing. I merely study my own conciousness.
 
 {{ addcomments }}
