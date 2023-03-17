@@ -3,7 +3,7 @@
 @def title = "The Mathematics of Emptiness"
 @def authors = """Matthijs"""
 @def rss = "The Mathematics of Emptiness"
-@def tags = ["philosophy", "meditation"]
+@def tags = ["philosophy", "meditation", "conciousness"]
 
 # The Mathematics of Emptiness
 
@@ -80,12 +80,7 @@ You can see your mind scrambling to classify concepts on this image. Is it a duc
 
 Concepts or objects typically feel like they have other concepts inside as parts. This is a weird kind of holographic property of space. Let me elaborate.
 
-~~~
-<div class=figure>
-  <img src="/img/CarHologram.jpg" style="width:70%;padding-left:20%;margin-bottom:0">
-  <p>Do you experience a car? Or some compositional hologram of a car? This is just a picture.</p>
-</div>
-~~~
+![a car](/img/CarHologram.jpg)
 
 You look at a car. The car fills a part of space. You look at its wheel. It feels like the wheel fills a part of the space where the car concept is. So now you have two concepts laying on top of each other in space. The wheel will consists of many parts; a rubber tire, nuts and bolts and more. In those you perceive parts as well, down to atoms or lower. So concepts can overlay recursively inside the same space. It is as if a lot of holograms cover the same space.
 
