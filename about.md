@@ -11,6 +11,7 @@ This website belongs to Matthijs Cox. I write whatever I want on it. All views e
 I'm a human, father, physicist. I learn about everything in the universe. As they say; [keep your identity small](http://www.paulgraham.com/identity.html).
 
 If you want, you can follow me on:
+* [The Scientific Coder](https://scientificcoder.com/)
 * [Linkedin](https://nl.linkedin.com/in/matthijscox)
 * [Twitter](https://twitter.com/matthijscox)
 * [Github](https://github.com/matthijscox)
