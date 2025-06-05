@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  
+  <link rel="stylesheet" href="/css/franklin.css">
+<link rel="stylesheet" href="/css/poole_lanyon.css">
+<link rel="stylesheet" href="/css/adjust.css">
+<link rel="icon" href="/assets/favicon.png">
+
+   <title>Functional Noise</title>  
+</head>
+<body>
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>Functional Noise</p>
+  </div>
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item " href="/">Home</a>
+    <a class="sidebar-nav-item " href="/about/">About</a>
+    <a class="sidebar-nav-item " href="/blogroll/">Blogroll</a>
+  </nav>
+  <div class="sidebar-item">
+    <p>&copy; Matthijs Cox.</p>
+  </div>
+</div>
+
+<!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+content to avoid any CSS collisions with our real content. -->
+<div class="wrap">
+  <div class="masthead">
+    <div class="container">
+      <h3 class="masthead-title">
+        <a href="/" title="Home">Functional Noise</a>
+        <small>Generalize Your Mind</small>
+      </h3>
+    </div>
+  </div>
+
+  <div class="container content">
+
+<!-- Content appended here -->
+<div class="franklin-content"><h1 id="assumptions"><a href="#assumptions" class="header-anchor">Assumptions</a></h1>
+<p>In my years in engineering, one piece of advice echos loudly: &quot;Never Assume Anything&quot;. It sounds wise, cautious even, but is it really practical? I&#39;ve heard this advice in various flavours from different senior engineers. I know why it is given, but I think it&#39;s a gross oversimplication, so let&#39;s dive deeper into it. I&#39;m writing this to clear my thoughts about this particular piece of advice and have my thoughts available as a future reference.</p>
+<p>Why should you never assume anything? This is pretty simple: any assumption that is wrong can carry a big risk and derail your work. The most recent example I heard was from a software engineer who made a simple mistake. He was designing a fix for a bug. He estimated that it was going to be a big project, needing lots of work. In the middle of the project a new engineer joins. The bug is fixed in a day. Huh? What went wrong? Turns out that the senior engineer thought a function named <code>read_from_database</code> did what it said, and designed their solution around that. Except the function was wrong. It was doing something else. I don&#39;t remember the details, but that&#39;s not the point. The point is that the senior engineer assumed something &#40;functions do what they say&#41; and they got punished for it &#40;weeks of self-inflicted pointless work and annoying managers asking why it was so costly&#41;.</p>
+<p>I have heard many of these cases over the years in all forms of engineering work &#40;and also outside engineering&#41;. So comes the advice: Never assume anything&#33; Verify everything&#33;</p>
+<p>This advice is well intentioned. It&#39;s a good warning sign for others. It is also utterly silly. You can&#39;t check everything&#33; You have to make assumptions&#33; If you check everything then you&#39;ll spend all your time in &quot;analysis paralysis&quot;, never getting anything done. Some things can&#39;t even be verified; <em>I accept my mathematical axioms</em>. And sometimes I just accept the risk; <em>I don&#39;t know if the world still exist tomorrow, but I assume so for my projects</em>. Often assumptions are even required to start a project, they are like a hypothesis; <em>if we solve this problem, then our customers will pay for the solution</em>.</p>
+<p>So the advice is more nuanced: check some of your assumptions&#33; But which assumptions? In what order? That&#39;s the real advice I&#39;m looking for. Yet this advice is never given to me.</p>
+<p>What I&#39;ve done in the past is an &quot;assumption assessment&quot;. Like a risk assessment, but for assumptions. It&#39;s very simple, you take an hour &#40;by yourself or together with others&#41; and write down all assumptions you can think for your project. They can be technical or organizational or philosophical. They can be very broad or very specific. They can feel risky or safe. Anything goes.</p>
+<p>So you&#39;ll get a list of assumptions as statements you can falsify. This is very scientific, we&#39;re just generating hypotheses based on our current world view:</p>
+<ul>
+<li><p>Our customers want this product</p>
+<ul>
+<li><p>Why? List all reasons as assumptions.</p>
+</li>
+</ul>
+</li>
+<li><p>Customers normally do this other thing instead and they dont like it</p>
+</li>
+<li><p>Our managers agree and will fund this project for the next year</p>
+</li>
+<li><p>Our tech/code is used in this way</p>
+</li>
+<li><p>We have these problems to solve</p>
+<ul>
+<li><p>List problems</p>
+</li>
+</ul>
+</li>
+<li><p>We can fix all of these problems with this solution</p>
+<ul>
+<li><p>Or list a solution per problem</p>
+</li>
+</ul>
+</li>
+<li><p>We cannot fix this other problem, just gotta accept it</p>
+</li>
+<li><p>Our functions do what they say</p>
+<ul>
+<li><p>List of functions you can think of</p>
+</li>
+</ul>
+</li>
+<li><p>We have no other important assumptions hiding somewhere</p>
+</li>
+<li><p>...</p>
+</li>
+</ul>
+<p>In the next step, you can start finding the main assumptions to verify. Or you find a way to prioritize your assumptions. This can be done for a variety of reasons:</p>
+<ul>
+<li><p>High risk assumptions that can derail your project.</p>
+</li>
+<li><p>Assumptions you feel very uncertain about. Assumptions that are very certain &#40;tomorrow the sun will rise&#41; can be ignored.</p>
+</li>
+<li><p>Assumptions that are outside of your influence. For example, as junior engineer you might not influence the funding of the project.</p>
+</li>
+<li><p>Assumptions that take a lot of work to verify. &#40;This is a tricky one, but if building the product is less effort than verifying the assumption, then building the product IS the way to verify the assumption.&#41;</p>
+</li>
+<li><p>... other reasons, just write them down.</p>
+</li>
+</ul>
+<p>Note these are all meta-assumptions about your assumptions and can be included in your list of assumptions, but don&#39;t take it too far.</p>
+<p>Now you can start verifying or falsifying your assumptions to make sure you build the right thing in the right way. Go for those high risk, high uncertain items first. Or you can just accept them all, but at least you are doing so conciously now.</p>
+<p>So the advice is not &quot;never assume anything&quot;. The advice is more like &quot;verify assumptions like a scientist&quot;. Or maybe like an engineer. Because scientists verify assumptions for the sake of learning, while engineers verify for the sake of building. So be a professional: assess, prioritize, and verify your assumptions with intent. That&#39;s how you build with confidence.</p>
+<div class="page-foot">
+  <div class="copyright">
+    &copy; Matthijs Cox. Last modified: June 05, 2025. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and <a href="https://julialang.org">Julia</a>.
+  </div>
+</div>
+</div><!-- CONTENT ENDS HERE -->
+      </div>  <!-- div: content container -->
+    </div> <!-- wrap -->
+    
+    
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+  </body>
+</html>

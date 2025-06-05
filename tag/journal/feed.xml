@@ -23,95 +23,40 @@
 
 <item>
   <title>
+    <![CDATA[  Never Assume Anything  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2025-06-05-never-assume/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2025-06-05-never-assume/index.html </guid>
+  <description>
+    <![CDATA[  Assumptions  ]]>
+  </description>  
+    
+  <pubDate>Thu, 05 Jun 2025 00:00:00 +0000</pubDate>  
+  
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
+
+<item>
+  <title>
     <![CDATA[  Insanity  ]]>
   </title>
   <link> https://www.functionalnoise.com\pages/2024-04-24-insanity/index.html </link>
   <guid> https://www.functionalnoise.com\pages/2024-04-24-insanity/index.html </guid>
   <description>
     <![CDATA[  Insanity  ]]>
-  </description>
-
-  
-  
-
-  
-  <pubDate>Thu, 20 Jun 2024 00:00:00 +0000</pubDate>
-
-  
+  </description>  
+    
+  <pubDate>Thu, 05 Jun 2025 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
     <atom:name>Matthijs Cox</atom:name>
   </atom:author>
-  
-
-  
-
-  
-
-  
-</item>
-
-<item>
-  <title>
-    <![CDATA[  My Whys  ]]>
-  </title>
-  <link> https://www.functionalnoise.com\pages/2022-06-30-whys/index.html </link>
-  <guid> https://www.functionalnoise.com\pages/2022-06-30-whys/index.html </guid>
-  <description>
-    <![CDATA[  My Whys. Finding my personal reasons.  ]]>
-  </description>
-
-  
-  
-
-  
-  <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>
-
-  
-  
-  
-  <atom:author>
-    <atom:name>Matthijs Cox</atom:name>
-  </atom:author>
-  
-
-  
-
-  
-
-  
-</item>
-
-<item>
-  <title>
-    <![CDATA[  Catharsis  ]]>
-  </title>
-  <link> https://www.functionalnoise.com\pages/2022-06-21-catharsis/index.html </link>
-  <guid> https://www.functionalnoise.com\pages/2022-06-21-catharsis/index.html </guid>
-  <description>
-    <![CDATA[  Catharsis. Reflections on a year of mental darkness.  ]]>
-  </description>
-
-  
-  
-
-  
-  <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>
-
-  
-  
-  
-  <atom:author>
-    <atom:name>Matthijs Cox</atom:name>
-  </atom:author>
-  
-
-  
-
-  
-
-  
+        
 </item>
 
 <item>
@@ -122,26 +67,52 @@
   <guid> https://www.functionalnoise.com\pages/2023-05-19-energy-burst/index.html </guid>
   <description>
     <![CDATA[  Energy Burst  ]]>
-  </description>
-
-  
-  
-
-  
-  <pubDate>Tue, 20 Feb 2024 00:00:00 +0000</pubDate>
-
-  
+  </description>  
+    
+  <pubDate>Wed, 24 Apr 2024 00:00:00 +0000</pubDate>  
   
   
   <atom:author>
     <atom:name>Matthijs Cox</atom:name>
   </atom:author>
-  
+        
+</item>
 
+<item>
+  <title>
+    <![CDATA[  My Whys  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2022-06-30-whys/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2022-06-30-whys/index.html </guid>
+  <description>
+    <![CDATA[  My Whys. Finding my personal reasons.  ]]>
+  </description>  
+    
+  <pubDate>Mon, 11 Jul 2022 00:00:00 +0000</pubDate>  
   
+  
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
+</item>
 
+<item>
+  <title>
+    <![CDATA[  Catharsis  ]]>
+  </title>
+  <link> https://www.functionalnoise.com\pages/2022-06-21-catharsis/index.html </link>
+  <guid> https://www.functionalnoise.com\pages/2022-06-21-catharsis/index.html </guid>
+  <description>
+    <![CDATA[  Catharsis. Reflections on a year of mental darkness.  ]]>
+  </description>  
+    
+  <pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate>  
   
-
   
+  <atom:author>
+    <atom:name>Matthijs Cox</atom:name>
+  </atom:author>
+        
 </item>
 </channel></rss>
