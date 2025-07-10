@@ -7,17 +7,17 @@
 
 # Breakdown
 
-I broke down last year. In a way that was way different, yet way worse, than my [mind decay](./2021-06-04-mind-decay.md) period in 2021. I don't really want to share the exact details this time, who knows how that impacts my future employability. It was weird. Oddly it felt really good at first, so I leaned into it, but then it became bad, very very bad. Yet even without going into details, I do want to reflect on it, journal about this episode somewhere for future reference. Because in the end it was one of those major milestones in my life.
+I broke down last year. In a way that was way different, yet way worse, than my [mind decay](../2021-06-04-mind-decay) period in 2021. I don't really want to share the exact details this time, who knows how that impacts my future employability. It was weird. Oddly it felt really good at first, so I leaned into it, but then it became bad, very very bad. Yet even without going into details, I do want to reflect on it, journal about this episode somewhere for future reference. Because in the end it was one of those major milestones in my life.
 
 Right now, almost 6 months after being declared "recovered" do I begin to feel somewhat recovered, feeling a little like my old self. Yet I am still 'smoldering', don't feel like I am back at my peak self yet. Maybe I shouldn't even try to get there, go someplace else, go someplace more calm and nourishing. I'm considering to find a therapist, but that's a longer journey, in the mean time I have myself and my conversations with others.
 
 We can't even figure out what triggered it. I have had plenty of potentially traumatic events in life, but I thought I was dealing well with those, nothing special happened right before my breakdown.
 
-I'm reading my old blog posts, trying to see if I was too harsh on myself, if perhaps in all my desire for self improvement, there was some lingering self-hatred or avoidance. Yet in my 2022 [catharsis post](./2022-06-21-catharsis.md) I seemed to be pretty self-aware and compassionate towards everything that was going on.
+I'm reading my old blog posts, trying to see if I was too harsh on myself, if perhaps in all my desire for self improvement, there was some lingering self-hatred or avoidance. Yet in my 2022 [catharsis post](../2022-06-21-catharsis) I seemed to be pretty self-aware and compassionate towards everything that was going on.
 
 My father suffered from two burn-outs in his life, roughly around my age, so I guess I was prepared for something like that, monitoring myself for such signs, taking as much rest as possible. I wasn't prepared for this other thing that happened to me.
 
-I do see plenty of posts that hint at my changes in mood, from lows to highs to lows and onwards. I was trying to learn from that, yet somehow thinking it could make me 'antifragile' to life's perturbations. Embracing my [inner weirdness](./2023-02-07-functional-noise.md), indulging my obsession during high energy periods, instead of seeking tranquility and stability of mind. Or at least not truly focusing on more equanimity.
+I do see plenty of posts that hint at my changes in mood, from lows to highs to lows and onwards. I was trying to learn from that, yet somehow thinking it could make me 'antifragile' to life's perturbations. Embracing my [inner weirdness](../2023-02-07-functional-noise), indulging my obsession during high energy periods, instead of seeking tranquility and stability of mind. Or at least not truly focusing on more equanimity.
 
 I worry that you can see the shadow in this blog and deduce what happened. Yet no recruiter or manager of mine ever read my blog, except if I very explicitly pointed them to it. So I am probably the only future reader.
 
