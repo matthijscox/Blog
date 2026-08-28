@@ -9,16 +9,20 @@
 
 I follow [Clearer Thinking](https://www.clearerthinking.org/) by Spencer Greenberg, who is clearly a rationalist, but I especially enjoy his nuanced views. A while ago he published a blog on [Rarely noticed choices that shape your debates](https://www.clearerthinking.org/post/the-hidden-nuances-of-definitions). This blog is deeply philosophical, because in order to improve your debates you have to figure out exactly what your underlying definitions are, including your axiomatic beliefs about basically everything. I encourage you to read the blog and maybe sign up for the newsletter, I enjoy getting bits of nuanced rationality in my inbox.
 
-Turns out that for every discussion that includes a 'definition' (God, love, science, conciousness) you have to first figure out which choices you (unconciously) made about that definition. Otherwise, you'll just talk past each other. To dive further there's a [Learn Your Philosophical Beliefs](https://programs.clearerthinking.org/philosophical_beliefs.html) tool. Here I want to document my own thoughts as I filled out these survey/tool questions, especially the ones where I struggle.
+Turns out that for every discussion that includes a 'definition' (God, love, science, conciousness) you have to first figure out which choices you (unconciously) made about that definition. Otherwise, you'll just talk past each other. To dive further there's a [Learn Your Philosophical Beliefs](https://programs.clearerthinking.org/philosophical_beliefs.html) survey. Here I want to document my own thoughts as I filled out these survey questions, especially the ones where I struggle.
 
 ## Beliefs
 
 >_Question #1: Do abstract objects exist?_
 
+The full question: _Philosophers debate whether abstract objects exist – things like numbers. They are not physical objects, but some argue they are also more than just a thought or idea in people's minds. They are supposed to be a third kind of thing that is neither physical nor mental._
+
 Clear NO for me. I'm not a platonist. [Math is something minds do](https://perceptualoriginsofmath.wordpress.com/chapter-1/). Numbers do not exist outside of minds.
 Though it seems most people disagree, abstract objects like numbers do exist separately. 
 
-I'm even a non-dualist about physical objects, somewhat described in my [empty math](../2023-03-17-empty-math) post. While I believe there's physical matter/energy/stuff, the universe itself does not carve itself into separate objects. It's our mind that evolved the ability to classify; to create a duality between a thing and the rest of the universe.
+I'm even a non-dualist about physical objects, somewhat described in my [empty math](../2023-03-17-empty-math) post. While I believe there's physical matter/energy/stuff, the universe itself does not carve itself into separate objects. The physical universe doesn't care about the difference between atoms inside an apple or outside (it doesnt even care about our definition of atoms). It's our mind that evolved the ability to classify sensate patterns into objects; our mind creates the duality between a thing (apple) and the rest of the universe (¬apple).
+
+Note that this question actually asks whether you believe there's more than the physical and mental. I don't believe that either.
 
 >_Question #2: Is beauty subjective?_
 
